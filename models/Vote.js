@@ -1,24 +1,14 @@
-// INCLUDE COMMENTS ON GAMES IF NO CHAT
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Comment extends Model { }
+class Vote extends Model { }
 
-Comment.init(
+Vote.init(
     {
-        // columns will go here
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
-        },
-        comment_text: {
-            type: DataTypes.TEXT,
-            allowNull: false,
-            validate: {
-                len: (1)
-            }
-
         },
         user_id: {
             type: DataTypes.INTEGER,
@@ -27,22 +17,24 @@ Comment.init(
                 model: 'user',
                 key: 'id'
             }
+            
         },
         games_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: 'games',
+                model: 'game',
                 key: 'id'
             }
         }
     },
     {
         sequelize,
+        timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: 'comment'
+        modelName: 'vote'
     }
 );
 
-module.exports = Comment;
+module.exports = Vote;
