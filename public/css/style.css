@@ -86,6 +86,7 @@ footer {
 }
 nav {
     padding: .5rem 1rem;
+    border-top: 4px solid var(--green);
 }
 .carousel-indicators [data-bs-target] {
     height: 5px;
