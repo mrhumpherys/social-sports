@@ -11,7 +11,7 @@ class Games extends Model {
             user_id: body.user_id,
             games_id: body.games_id
         }).then(() => {
-            return games.findOne({
+            return Games.findOne({
                 where: {
                     id: body.games_id
                 },
@@ -46,13 +46,13 @@ Games.init(
             allowNull: true,
             unique: true,
         },
-        user_id: {
-            type: DataTypes.INTEGER,
-            references: {
-                model: 'user',
-                key: 'id'
-            }
-        }
+        // user_id: {
+        //     type: DataTypes.INTEGER,
+        //     references: {
+        //         model: 'user',
+        //         key: 'id'
+        //     }
+        // }
     },
     {
         sequelize,

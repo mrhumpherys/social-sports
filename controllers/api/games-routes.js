@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const sequelize = require('../../config/connection');
 const { Games, User, Comment, Vote } = require('../../models');
 
 
@@ -36,8 +37,12 @@ router.get('/', (req, res) => {
     attributes: [
       'id',
       'game_id',
-      'user_id',
+      
       'created_at',
+      [
+        sequelize.literal('(SELECT COUNT(*) FROM vote WHERE games.id = vote.games_id)'),
+        'vote_count'
+    ]
     ],
     include: [
       {
@@ -65,7 +70,7 @@ router.get('/:id', (req, res) => {
     attributes: [
       'id',
       'game_id',
-      'user_id',
+      
       'created_at',
     ],
     include: [
@@ -103,6 +108,17 @@ router.post('/', (req, res) => {
       console.log(err);
       res.status(500).json(err);
     });
+});
+
+router.put('/upvote',  (req, res) => {
+  // custom static method created in models/Post.js
+
+  Games.upvote({ ...req.body, user_id: req.session.user_id }, { Vote, Comment, User })
+      .then(updatedVoteData => res.json(updatedVoteData))
+      .catch(err => {
+          console.log(err);
+          res.status(500).json(err);
+      });
 });
 
 router.put('/:id', (req, res) => {
