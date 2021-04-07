@@ -1,0 +1,43 @@
+:root {
+    --blue: #1e90ff;
+    --white: #d9d9d9;
+  }
+
+html, body {
+    background:#212427;
+    font-family: 'Barlow', sans-serif;
+    color: #f3f3f3;
+}
+
+.carousel.slide {
+    background: #15181A;
+    border-radius: 4px;
+    padding: 2.5rem;
+}
+
+.post-date {
+    display: block;
+    color: #9f9f9f;
+    padding-top: .5rem;
+}
+.page-title {
+    padding: 2rem 0;
+}
+
+.carousel-indicators {
+    left: auto;
+    margin-right: 5%;
+}
+a {
+    transition: all ease .3s;
+}
+.subnav {
+    font-size: 1.2rem;
+    font-weight: 600;
+    font-style: italic;
+    padding: 1rem 0;
+}
+.subnav a {
+    color: var(--white);
+    text-decoration: none;
+}
