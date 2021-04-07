@@ -66,7 +66,11 @@ class NBA {
                     game_id: el.GameID
                 }
             })
-            Games.bulkCreate(data);
+            // CREATE THE RECORDS IN BULK, DB WONT ALLOW DUPLICATES BUT CATCH THE ERROR
+            Games.bulkCreate(data).catch(e =>{
+                console.log(e)
+                return;
+            });
 
         } catch (e) {
             if (e.errno == -4058) {
