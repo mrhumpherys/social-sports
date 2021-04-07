@@ -1,8 +1,9 @@
 const router = require('express').Router();
 
 const apiRoutes = require('./api');
-const homeRoutes = require('./home-routes')
-const dashboardRoutes = require('./dashboard-routes');
+// TURN ON LATER AFTER TESTING
+// const homeRoutes = require('./home-routes')
+// const dashboardRoutes = require('./dashboard-routes');
 
 router.use('/api', apiRoutes);
 // TURN ON LATER FOR HOME PAGE AND USER DASHBOARD
