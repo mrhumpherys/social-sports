@@ -43,7 +43,7 @@ Games.init(
         },
         game_id: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: true,
             unique: true,
         },
         user_id: {
