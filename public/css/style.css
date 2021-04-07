@@ -1,6 +1,9 @@
 :root {
     --blue: #1e90ff;
     --white: #d9d9d9;
+    --darkbg: #15181A;
+    --bradius: 4px;
+    --green: #4edc16;
   }
 
 html, body {
@@ -10,8 +13,8 @@ html, body {
 }
 
 .carousel.slide {
-    background: #15181A;
-    border-radius: 4px;
+    background: var(--darkbg);
+    border-radius: var(--bradius);
     padding: 2.5rem;
 }
 
@@ -30,14 +33,24 @@ html, body {
 }
 a {
     transition: all ease .3s;
+    color: var(--white);
+    text-decoration: none;
+}
+a:hover {
+    color: var(--green);
 }
 .subnav {
     font-size: 1.2rem;
-    font-weight: 600;
-    font-style: italic;
+    font-weight: 200;
     padding: 1rem 0;
 }
-.subnav a {
-    color: var(--white);
-    text-decoration: none;
+
+.game-card {
+    background: var(--darkbg);
+    border-radius: var(--bradius);
+    padding: 2rem;
+    cursor: pointer;
+}
+footer {
+    margin-top: 3rem;
 }
