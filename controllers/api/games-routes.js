@@ -4,15 +4,32 @@ const { Games, User, Comment, Vote } = require('../../models');
 
 
 router.get('/', (req, res) => {
+
   const NBA = require('../../nba');
   const moment = require('moment');
-  // CHECK IF WE HAVE GAME DATA
   let date = (moment(new Date()).format("YYYY-MM-DD"));
-  // new NBA().needGames();
-  new NBA().createGames(date);
+  // CHECK IF WE HAVE GAME DATA
+  // ==========================
+  async function create() {
+    // check for game data
+    data = new NBA().needGames();
 
+    console.log("CREATE GAMES?", data)
+    // if no game data, run api call and create games in database
+    if (data === false) {
 
+      return
 
+    } else {
+
+      new NBA().createGames(date);
+
+    }
+  }
+
+  create()
+
+  // AFTER CHECKING DATA GET GAMES FROM DATABASE
 
   //console.log('=============');
   Games.findAll({
@@ -88,7 +105,7 @@ router.post('/', (req, res) => {
     });
 });
 
-router.put('/:id',  (req, res) => {
+router.put('/:id', (req, res) => {
   Games.update(
     req.body,
     {
@@ -110,7 +127,7 @@ router.put('/:id',  (req, res) => {
     });
 });
 
-router.delete('/:id',  (req, res) => {
+router.delete('/:id', (req, res) => {
   Games.destroy({
     where: {
       id: req.params.id

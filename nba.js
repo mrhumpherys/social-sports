@@ -53,74 +53,87 @@ class NBA {
     };
 
 
-
+    // MAIN FUNCTION TO CREATE INSTANCES OF THE GAME IN THE DATABASE FROM DATA IN OUR DATA FILE FOLDER WHERE THE GAME DATA FOR EACH DAY WILL BE
     async createGames(date) {
-        let games;
-       
-        // let date = (moment(new Date()).format("YYYY-MM-DD"));
+
         try {
             let response = JSON.parse(fs.readFileSync(`./data/games-${date}.json`, 'utf8',));
-            games = (response)
+            let games = (response)
             console.log(games)
 
-            // console.log(data)
-           let data = await games.map(el => {
+            let data = await games.map(el => {
                 return {
                     game_id: el.GameID
                 }
             })
-
             Games.bulkCreate(data);
 
         } catch (e) {
-            if (e.errno === -4058) {
+            if (e.errno == -4058) {
                 console.log("FILE NOT FOUND CREATING GAMES!");
-
-                try{
-                   let response = await new NBA().getGames()
-                   return response
-                }catch (e){
-                    console.log("This broke while attempting to run the get games check inside the catch error", e)
+                // IF FILE NOT FOUND ERROR, GET GAMES- GET GAMES WILL FETCH THE API AND WRITE THE JSON TO A FILE IN THE DATA FOLDER
+                try {
+                    let response = await new NBA().getGames()
+                    return response
+                } 
+                catch (e) {
+                    console.log("This broke while attempting to run the get games inside the create game function inside the catch error", e)
                 }
-                finally{
+                finally {
+                    // IF THE GET GAMES COMES BACK WITH OUT ERROR, RUN CREATE GAMES AGAIN TO LOAD THE DB 
                     let date1 = (moment(new Date()).format("YYYY-MM-DD"));
                     new NBA().createGames(date1)
                 }
-                
 
             } else {
+                // AN ERROR NOT RELATED TO NOT FINDING THE FILE
                 console.log("THIS BROKE WHILE CREATING GAMES IN createGames() ", e)
             }
-
-        } 
-
-
-
-
-    }
-
-    async needGames() {
-
-        try {
-            let date = (moment(new Date()).format("YYYY-MM-DD"));
-            let games = await new NBA().getGamesDb(date)
-            if (!games) {
-                const game = new NBA().getGames();
-                return game;
-            } else {
-                return
-            }
-        } catch (e) {
-            console.log("THIS BROKE WHILE CHECKING FOR THE NEED TO CREATE THE GAME", e)
         }
-
-
     }
+
+
+    needGames() {
+        
+            let date = (moment(new Date()).format("YYYY-MM-DD"));
+            // RAN IT WITH TRY/CATCH TO CATCH THE ERROR WHEN THE FILE IS NOT FOUND
+            try{
+                let games = JSON.parse(fs.readFileSync(`./data/games-${date}.json`, 'utf8', (e) => {
+                    if (e.errno == -4058) {
+                        console.log("FILE NOT FOUND CREATING GAMES!");
+                        // IF FILE NOT FOUND ERROR, GET GAMES- GET GAMES WILL FETCH THE API AND WRITE THE JSON TO A FILE IN THE DATA FOLDER
+                        return true
+                    } else {
+                        console.log("Error while checking for games", e)
+                        return true
+                    }
+                }));
+                if (!games) {
+                    return true
+                } else {
+                    return false
+                }
+            }
+            catch (e){
+                if (e.errno == -4058) {
+                    console.log("FILE NOT FOUND CREATING GAMES!");
+                    // IF FILE NOT FOUND ERROR, GET GAMES- GET GAMES WILL FETCH THE API AND WRITE THE JSON TO A FILE IN THE DATA FOLDER
+                    return true
+                } else {
+                    console.log("Error while checking for games", e)
+                    return true
+                }
+            }
+            
+    }
+
 
 
 }
+
+
 //Games.bulkCreate(data)
-new NBA().createGames();
+// new NBA().createGames();
 module.exports = NBA
 
 
