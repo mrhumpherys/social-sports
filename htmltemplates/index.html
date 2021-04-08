@@ -17,80 +17,137 @@
         href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,400;0,800;1,100;1,400;1,800&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="../public/css/style.css">
-    <title>Hello, world!</title>
+    <title>Welcome to Sports Buzz</title>
 </head>
 
 <body>
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-trans">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand logo" href="#"><img src="images/logo.png"></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">DASHBOARD</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            SPORTS
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">NBA</a></li>
-                            <li><a class="dropdown-item" href="#">NFL</a></li>
-                            <li><a class="dropdown-item" href="#">MLB</a></li>
-                            <li><a class="dropdown-item" href="#">NHL</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            LOGIN
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">ACCOUT</a></li>
-                            <li><a class="dropdown-item" href="#">LOGOUT</a></li>
-                        </ul>
-                    </li>
+          <a class="navbar-brand" href="#"><img src="images/logo.png"></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">DASHBOARD</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  SPORTS
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="#">NBA</a></li>
+                  <li><a class="dropdown-item" href="#">NFL</a></li>
+                  <li><a class="dropdown-item" href="#">MLB</a></li>
+                  <li><a class="dropdown-item" href="#">NHL</a></li>
                 </ul>
-            </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  LOGIN
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="profile.html">PROFILE</a></li>
+                  <li><a class="dropdown-item" href="p">LOGOUT</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
         </div>
-    </nav>
+      </nav>
     <main>
-        <div class="hero">
-            <div class="over-hero text-right">
-                <h1>Welcome to Comics Explained</h1>
-                <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, sunt sapiente. Deleniti
-                    voluptate voluptatibus ipsam possimus nostrum vel!</h2>
-                <a href="" class="btn btn-primary">click here</a>
+        <div class="c">
+            <div class="hero row g-0">
+                <div class="col-md-5 col-sm-12">
+                    <img src="images/herobg.png" class="img-fluid">
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <div class="hero-text text-right">
+                        <h1>Welcome to Sports Buzz</h1>
+                        <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, sunt sapiente. Deleniti
+                            voluptate voluptatibus ipsam possimus nostrum vel!</h2>
+                        <a href="" class="btn btn-primary btn-lg">Login</a>
+                        <a href="" class="btn btn-outline btn-lg">Sign Up</a>
+                    </div>
+                </div>
             </div>
-            <img src="images/herobg.png">
         </div>
+        
         <div class="container">
             <div class="row d-flex justify-content-center">
                 <div class="col">
                     <div class="row">
+                        <div class="col-12">
+                            <h1 class="section-title">FEATURE GAME</h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                        <div class="feature-game game-card">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col col-sm-5 team-content text-center">
+                                            <img src="https://upload.wikimedia.org/wikipedia/en/0/02/Washington_Wizards_logo.svg"
+                                                alt="" class="img-fluid">
+                                                <h3 class="text-center  pt-2">HOME TEAM</h3>
+                                        </div>
+                                        <div class="col-sm-2 col-md-1 game-detail text-center d-flex justify-content-center align-items-center">
+                                            <h3 class="small">VS</h3>
+                                            
+                                        </div>
+                                        <div class="col col-sm-5 team-content text-center">
+                                            <img src="https://upload.wikimedia.org/wikipedia/en/0/02/Washington_Wizards_logo.svg"
+                                                alt="" class="img-fluid">
+                                                <h3 class="text-center pt-2">AWAY TEAM</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col col-sm-5 home-team-stats text-center">
+                                            <h2>WIZARDS</h2>
+                                            <h3>106</h3>
+                                        </div>
+                                        <div class="col col-sm-2 game-stats text-center d-flex justify-content-center align-items-center">
+                                            <h2>Q1</h2>
+                                        </div>
+                                        <div class="col col-sm-5 home-team-stats text-center">
+                                            <h2>WIZARDS</h2>
+                                            <h3>106</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <!--
+                    <div class="row">
+                        <div class="col sports-filter-nav">
+                            <ul class="list-inline subnav">
+                                <li class="list-inline-item"><a href="">NBA</a></li>
+                                <li class="list-divider list-inline-item"> | </li>
+                                <li class="list-inline-item"><a href="">NFL</a></li>
+                                <li class="list-divider list-inline-item"> | </li>
+                                <li class="list-inline-item"><a href="">NHL</a></li>
+                                <li class="list-divider list-inline-item"> | </li>
+                                <li class="list-inline-item"><a href="">MLB</a></li>
+                                <li class="list-divider list-inline-item"> | </li>
+                                <li class="list-inline-item"><a href="">NBA</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    -->
+                    <div class="row pt-5">
                         <div class="col-md-8">
-                            
                             <div class="row">
                                 <div class="col-12">
-                                    
-                                    <ul class="list-inline subnav">
-                                        <li class="list-inline-item"><h1 class="section-title">GAMES</h1></li>
-                                        <li class="list-inline-item"><a href="">NBA</a></li>
-                                        <li class="list-divider list-inline-item"> | </li>
-                                        <li class="list-inline-item"><a href="">NFL</a></li>
-                                        <li class="list-divider list-inline-item"> | </li>
-                                        <li class="list-inline-item"><a href="">NHL</a></li>
-                                        <li class="list-divider list-inline-item"> | </li>
-                                        <li class="list-inline-item"><a href="">MLB</a></li>
-                                        <li class="list-divider list-inline-item"> | </li>
-                                        <li class="list-inline-item"><a href="">NBA</a></li>
-                                    </ul>
+                                    <h1 class="section-title">GAMES</h1>
                                 </div>
                             </div>
                             <div class="row">
@@ -192,7 +249,7 @@
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <h1 class="section-title">NEWS</h1>
+                            <h1 class="section-title">ALL SPORTS NEWS</h1>
                             <div class="news-container">
                                 <div class="news-article">
                                     <div class="news-body">
@@ -235,7 +292,7 @@
 
     </main>
     <footer>
-        <div class="container">
+        <div class="container text-center">
             <p>&copy; 2021 Social Sports. All Rights Reserved.</p>
         </div>
 

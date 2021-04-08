@@ -1,0 +1,242 @@
+:root {
+  --blue: #1e90ff;
+  --white: #d9d9d9;
+  --darkbg: #1b1b1b;
+  --bradius: 6px;
+  --green: #4edc16;
+}
+
+.btn-primary {
+  background: var(--green);
+  border-color: #45c014;
+  padding: 0.5rem 2rem;
+}
+.btn-primary:hover {
+  background-color: #2e8a0a;
+  border-color: #45c014;
+}
+.btn-outline {
+  border-color: var(--green);
+  color: #fff;
+}
+.btn-outline:hover {
+  background-color: var(--green);
+}
+html,
+body {
+  background: #151515;
+  font-family: "Barlow", sans-serif;
+  color: #f3f3f3;
+}
+
+.carousel.slide {
+  background: var(--darkbg);
+  border-radius: var(--bradius);
+}
+
+.post-date {
+  display: block;
+  color: #9f9f9f;
+  padding-top: 0.5rem;
+}
+.section-title {
+  padding: 1rem 0;
+  margin-bottom: 0;
+}
+
+.carousel-indicators {
+  left: auto;
+  margin-right: 5%;
+}
+
+a {
+  transition: all ease 0.3s;
+  color: var(--white);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--green);
+}
+
+/* .subnav {
+    font-size: 1.2rem;
+    font-weight: 200;
+    margin-bottom: 0; 
+} */
+
+.navbar-dark .navbar-nav .nav-link {
+  border-top: 3px solid rgba(0, 0, 0, 0);
+}
+.navbar-dark .navbar-nav .nav-link:focus,
+.navbar-dark .navbar-nav .nav-link:hover {
+  color: var(--green);
+  border-top: 3px solid var(--green);
+}
+footer {
+  margin-top: 3rem;
+}
+
+.navbar-brand img {
+  max-width: 50px;
+}
+nav {
+  padding: 0.5rem 1rem;
+  border-top: 4px solid var(--green);
+}
+/* ========================================================================= */
+/* styles for card container */
+html,
+body {
+  background-color: rgba(0, 0, 0, 0.589);
+  height: 100%;
+}
+
+p {
+  font-size: 12px;
+}
+
+.container {
+  height: 100%;
+  align-content: center;
+}
+
+.sign-up-form {
+  padding-top: 150px;
+}
+
+.card {
+  height: 375px;
+  margin-top: auto;
+  margin-bottom: auto;
+  width: 475px;
+  align-content: center;
+  background-color: rgba(0, 0, 0, 0.5) !important;
+  /* background-color: rgb(67 104 95 / 27%) !important; */
+}
+/* social media icons */
+.social_icon span {
+  font-size: 60px;
+  margin-left: 10px;
+  color: #4cd14c;
+}
+
+.social_icon span:hover {
+  color: #389238;
+  cursor: pointer;
+}
+
+.card-header {
+  border-bottom: 2px solid rgb(18 120 66 / 57%);
+}
+
+.card-header h3 {
+  color: white;
+}
+
+.card-footer {
+  border-top: 2px solid rgb(18 120 66 / 57%);
+}
+
+.social_icon {
+  position: absolute;
+  right: 20px;
+  top: -45px;
+}
+/* input fields */
+.input-group-prepend span {
+  width: 50px;
+  background-color: #46aa46 !important;
+  color: rgba(255, 255, 255, 0.836);
+  border: 0 !important;
+}
+
+.form-control:hover {
+  background-color: rgba(0, 0, 0, 0.589) !important;
+}
+
+input.form-control {
+  color: rgb(255, 251, 238) !important;
+  background-color: rgb(29, 32, 33) !important;
+  border-color: rgb(82, 89, 94) !important;
+}
+/* remember me button */
+.remember {
+  color: rgba(255, 255, 255, 0.836);
+}
+
+.remember input {
+  width: 20px;
+  height: 20px;
+  margin-left: 15px;
+  margin-right: 5px;
+}
+/* login button */
+.login_btn {
+  color: rgba(255, 255, 255, 0.836);
+  background-color: #46aa46;
+  width: 100px;
+}
+
+.card {
+  background-color: var(--black);
+  border: 2px solid var(--grey);
+  border-radius: 25px;
+  padding: 10px;
+  margin: 10px;
+}
+
+.input-group-text {
+  padding: 0.65rem 1rem;
+}
+.input-group {
+  padding: 4px 0px 8px 0px;
+}
+
+#style-login {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  color: #46aa46;
+  font-weight: bold;
+  margin-top: 145px;
+}
+
+#sign-up-card {
+  height: 420px;
+  background: var(--darkbg);
+  padding: 2rem;
+  cursor: pointer;
+  transition: all ease 0.3s;
+  border: 1px solid rgba(0, 0, 0, 0);
+}
+
+#sign-up-card:hover {
+  border: 1px solid rgba(78, 220, 22, 0.35);
+  -webkit-box-shadow: 0px 0px 15px -3px rgba(78, 220, 22, 0.3);
+  box-shadow: 0px 0px 15px -3px rgba(78, 220, 22, 0.3);
+}
+
+#login-card {
+  height: 400px;
+  background: var(--darkbg);
+  padding: 2rem;
+  cursor: pointer;
+  transition: all ease 0.3s;
+  border: 1px solid rgba(0, 0, 0, 0);
+}
+
+#login-card:hover {
+  border: 1px solid rgba(78, 220, 22, 0.35);
+  -webkit-box-shadow: 0px 0px 15px -3px rgba(78, 220, 22, 0.3);
+  box-shadow: 0px 0px 15px -3px rgba(78, 220, 22, 0.3);
+}
+
+.card {
+  box-shadow: 0 0.46875rem 2.1875rem rgba(4, 9, 20, 0.03),
+    0 0.9375rem 1.40625rem rgba(4, 9, 20, 0.03),
+    0 0.25rem 0.53125rem rgba(4, 9, 20, 0.05),
+    0 0.125rem 0.1875rem rgba(4, 9, 20, 0.03);
+  border-width: 0;
+  transition: all 0.2s;
+}
