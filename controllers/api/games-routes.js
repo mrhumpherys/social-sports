@@ -20,23 +20,6 @@ router.get('/', (req, res) => {
 
   // CHECK FOR LIVE GAMES
   new NBA().isLive()
-    .then(inProgress => {
-      if (inProgress.length > 0) {
-        console.log('============================================================================================');
-        console.log('LIVE GAMES FOUND! UPDATING GAMES!')
-        console.log('============================================================================================');
-        new NBA().getGames();
-        new NBA().updateGames();
-      } else {
-        console.log('============================================================================================');
-        console.log('NO GAMES ARE CURRENTLY LIVE!')
-        console.log('============================================================================================');
-      }
-    }).catch(e => {
-      console.log(e)
-      return
-    })
-
 
   // CHECK IF WE HAVE GAME DATA
   // ==========================
@@ -96,9 +79,9 @@ router.get('/', (req, res) => {
     ]
   })
     .then(dbPostData => {
-      
+
       res.json(dbPostData)
-    
+      console.log('============================================================================================');
     })
     .catch(err => {
       console.log(err);
