@@ -60,6 +60,8 @@ async function create() {
 }
 
 create()
+
+
 // DONT TURN THIS ON YET I NEED TO WRITE LOGIC TO ONLY RUN THIS WHEN THERE ARE GAMES IN PROGRESS- ANTHONY
 // ======================================================================================================
 let timer
