@@ -6,6 +6,7 @@ const exphbs = require('express-handlebars');
 const NBA = require('./nba')
 const moment = require('moment');
 const Games = require('./models/Games')
+const deleteFiles = require('./json-file-maintenance')
 
 
 //IMPORT SESSIONS
@@ -22,6 +23,7 @@ const sess = {
     })
 };
 const helpers = require('./utils/helpers');
+const { time } = require('console');
 const hbs = exphbs.create({ helpers });
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -62,21 +64,57 @@ async function create() {
     }
 }
 
+
+
+deleteFiles()
 create()
 
 new NBA().isLive()
     .then(inProgress => {
-        if (inProgress.length > 0) {
-            console.log('============================================================================================');
-            console.log('LIVE GAMES FOUND! UPDATING GAMES!')
-            console.log('============================================================================================');
-            new NBA().getGames();
-            new NBA().updateGames();
-        } else {
-            console.log('============================================================================================');
-            console.log('NO GAMES ARE CURRENTLY LIVE!')
-            console.log('============================================================================================');
-        }
+
+        inProgress.map(el => {
+            let status = el.status
+            let homeTeam = el.home_team;
+            let awayTeam = el.away_team;
+            let dateTimes = moment(el.date_time).format()
+            let format = dateTimes.split('T')[1]
+            let hours = format.split(":")[0]
+            let minutes = format.split(":")[1]
+            // let times = dateTimes.split('T')[1]
+            // let gameTime = times
+
+            if (dateTimes <= moment(new Date())) {
+                if(status ==='InProgress'){
+                    console.log('============================================================================================');
+                    console.log(`The ${homeTeam} vs. ${awayTeam} GAME IS LIVE! UPDATING SCORES!`)
+                    console.log('============================================================================================');
+                    new NBA().getGames();
+                    new NBA().updateGames();
+                    return true
+                } if(status ==="Final"){
+                    console.log('============================================================================================');
+                    console.log(`The ${homeTeam} vs. ${awayTeam} GAME IS OVER`)
+                    console.log('============================================================================================');
+                }
+            } else {
+                console.log('============================================================================================');
+                console.log(`The ${homeTeam} vs. ${awayTeam} GAME IS NOT LIVE! \nGAME TIME IS SCHEDULED AT ${hours}:${minutes}!`)
+                console.log('============================================================================================');
+                return false
+            }
+        })
+
+        // if (inProgress.length > 0) {
+        //     console.log('============================================================================================');
+        //     console.log('LIVE GAMES FOUND! UPDATING GAMES!')
+        //     console.log('============================================================================================');
+        //     new NBA().getGames();
+        //     new NBA().updateGames();
+        // } else {
+        //     console.log('============================================================================================');
+        //     console.log('NO GAMES ARE CURRENTLY LIVE!')
+        //     console.log('============================================================================================');
+        // }
     }).catch(e => {
         console.log(e)
         return

@@ -253,7 +253,7 @@ class NBA {
         // CHECK OUR CURRENT LIST OF GAMES, IF ANY GAME OF THE GAMES 'status' property or key shows a value === 'InProgress' then run the function to update the scores
 
         const inProgress = await Games.findAll({
-            where: { status: 'InProgress' }
+            
         })
 
         return inProgress
@@ -262,3 +262,7 @@ class NBA {
 }
 
 module.exports = NBA
+
+
+
+
