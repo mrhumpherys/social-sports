@@ -30,7 +30,7 @@ class NBA {
 
         } else {
             let date = (moment(new Date()).format("YYYY-MM-DD"))
-            new NBA().createGames(date);
+            return new NBA().createGames(date);
 
         }
     }
@@ -76,17 +76,17 @@ class NBA {
                     return response
                 }
                 catch (e) {
-                    console.log("This broke while attempting to run the get games inside the create game function inside the catch error", e)
+                    return console.log("This broke while attempting to run the get games inside the create game function inside the catch error", e)
                 }
                 finally {
                     // IF THE GET GAMES COMES BACK WITH OUT ERROR, RUN CREATE GAMES AGAIN TO LOAD THE DB 
                     let date1 = (moment(new Date()).format("YYYY-MM-DD"));
-                    new NBA().createGames(date1)
+                    return new NBA().createGames(date1)
                 }
 
             } else {
                 // AN ERROR NOT RELATED TO NOT FINDING THE FILE
-                console.log("THIS BROKE WHILE CREATING GAMES IN createGames() ", e)
+                return console.log("THIS BROKE WHILE CREATING GAMES IN createGames() ", e)
             }
         }
     }
@@ -107,9 +107,9 @@ class NBA {
                     const data = JSON.stringify(json);
                     fs.writeFileSync(`./data/games-${date1}.json`, data, 'utf8', (err) => {
                         if (err) {
-                            console.log(`Error writing file: ${err}`);
+                            return console.log(`Error writing file: ${err}`);
                         } else {
-                            console.log(`Game File is written successfully!`);
+                            return console.log(`Game File is written successfully!`);
                         }
                     });
                 });
@@ -253,17 +253,17 @@ class NBA {
                     return response
                 }
                 catch (e) {
-                    console.log("This broke while attempting to run the get games inside the create game function inside the catch error", e)
+                    return console.log("This broke while attempting to run the get games inside the create game function inside the catch error", e)
                 }
                 finally {
                     // IF THE GET GAMES COMES BACK WITH OUT ERROR, RUN CREATE GAMES AGAIN TO LOAD THE DB 
                     let date1 = (moment(new Date()).format("YYYY-MM-DD"));
-                    new NBA().updateGames(date1)
+                    return new NBA().updateGames(date1)
                 }
 
             } else {
                 // AN ERROR NOT RELATED TO NOT FINDING THE FILE
-                console.log("THIS BROKE WHILE CREATING GAMES IN createGames() ", e)
+                return console.log("THIS BROKE WHILE CREATING GAMES IN createGames() ", e)
             }
         }
     }
@@ -311,6 +311,7 @@ class NBA {
                                     console.log('============================================================================================');
                                     console.log(`The ${homeTeam1} vs. ${awayTeam1} GAME IS OVER`)
                                     console.log('============================================================================================');
+                                    return false
                                 }
                             })
                         })
