@@ -5,6 +5,12 @@
   --bradius: 6px;
   --green: #4edc16;
 }
+
+/* html,
+.game-background {
+background-color: rgba(0, 0, 0, 0.589)!important;
+} */
+
 .btn {
   text-transform: uppercase;
   font-weight: 400;
