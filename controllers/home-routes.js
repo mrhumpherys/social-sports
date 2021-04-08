@@ -100,6 +100,7 @@ router.get('/', (req, res) => {
                     // TO ACCESS INFO FOR HANDLEBARS USE game and news
                     // ==============================================
                     res.render('homepage', {
+                        // style: "style.css",
                         games, news,
                         loggedIn: req.session.loggedIn
                     });
@@ -113,6 +114,24 @@ router.get('/', (req, res) => {
           
         })
 
+});
+
+router.get("/login", (req, res) => {
+    if (req.session.loggedIn) {
+        res.redirect('/');
+        return;
+    }
+    
+    res.render('login', { layout: false});
+});
+
+router.get("/signup", (req, res) => {
+    if (req.session.loggedIn) {
+        res.redirect('/');
+        return;
+    }
+    
+    res.render('signup', { layout: false});
 });
 
 
