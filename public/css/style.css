@@ -6,6 +6,9 @@
     --green: #4edc16;
     
   }
+  .bg-dark {
+      background: var(--darkbg) !important;
+  }
   .btn {
       text-transform: uppercase;
       font-weight: 400;
@@ -14,7 +17,6 @@
 .btn-primary {
     background: var(--green);
     border-color: #45c014;
-    padding: .5rem 2rem;
 }
 .btn-primary:hover {
     background-color: #2e8a0a;
@@ -139,3 +141,78 @@ nav {
     padding: 0 1rem;
     background: var(--darkbg  );
 }
+.page-title {
+    display: flex;
+    padding-left: 0;
+}
+
+.bg-mid{
+    background: #222;
+}
+.page-section {
+    padding: 1.5rem;
+    border-radius: var(--bradius);
+}
+/*------------
+=============
+SINGLE GAME
+=============
+-------------*/
+.single-game {
+    background: var(--darkbg);
+    border-radius: var(--bradius);
+    padding: 2rem;
+    
+}
+
+h3.score {
+    font-size: 3rem;
+}
+.time {
+    font-size: 1.5rem;
+    padding: 0 1rem;
+}
+.comment {
+    background: #272727;
+    padding: 1.5rem;
+    border-radius: var(--bradius);
+    margin: 1rem 0;
+}
+.comment-meta {
+    margin-top: .5rem;
+}
+.comment-meta, .comment-meta a {
+    color: rgba(255,255,255, .3);
+}
+.comment-meta ul {
+    margin-bottom: 0;
+}
+.comment-meta li i{
+ padding-right: 5px;
+}
+.comment-img {
+    width: 50px;
+}
+
+/*------------
+=============
+PROFILE
+=============
+-------------*/
+.profile{
+
+}
+.profile-img {
+    background: #333;
+}
+.profile-data li span {
+    font-weight: 600;
+}
+
+/*------------
+=============
+SHOP
+=============
+-------------*/
+
+.item img {}
