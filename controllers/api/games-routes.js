@@ -6,23 +6,46 @@ const { Games, User, Comment, Vote } = require('../../models');
 
 router.get('/', (req, res) => {
 
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
-// +-----------------------------------------------------------------------------------+//
-// |MAIN LOGIC IN OF API CALLS AND RETURNING THE DATA FOR GAMES TO THE DATABASE DO NOT |//
-// |I REPEAT DO NOT F**K WITH ANYTHING IN HERE WITH OUT ASKING SOMEONE                 |//
-// +-----------------------------------------------------------------------------------+//
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
+  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
+  // +-----------------------------------------------------------------------------------+//
+  // |MAIN LOGIC IN OF API CALLS AND RETURNING THE DATA FOR GAMES TO THE DATABASE DO NOT |//
+  // |I REPEAT DO NOT F**K WITH ANYTHING IN HERE WITH OUT ASKING SOMEONE                 |//
+  // +-----------------------------------------------------------------------------------+//
+  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
 
   const NBA = require('../../nba');
   const moment = require('moment');
   let date = (moment(new Date()).format("YYYY-MM-DD"));
+
+
+  // CHECK FOR LIVE GAMES
+  new NBA().isLive()
+    .then(inProgress => {
+      if (inProgress.length > 0) {
+        console.log('============================================================================================');
+        console.log('LIVE GAMES FOUND! UPDATING GAMES!')
+        console.log('============================================================================================');
+        new NBA().getGames();
+        new NBA().updateGames();
+      } else {
+        console.log('============================================================================================');
+        console.log('NO GAMES ARE CURRENTLY LIVE!')
+        console.log('============================================================================================');
+      }
+    }).catch(e => {
+      console.log(e)
+      return
+    })
+
 
   // CHECK IF WE HAVE GAME DATA
   // ==========================
   async function create() {
     // check for game data
     data = new NBA().needGames();
+    console.log('============================================================================================');
     console.log("CREATE GAMES?", data)
+    console.log('============================================================================================');
     // if no game data, run api call and create games in database
     if (data === false) {
       return
@@ -33,8 +56,8 @@ router.get('/', (req, res) => {
   create()
   // AFTER CHECKING DATA GET GAMES FROM DATABASE
 
-  
-  console.log('================================================================================');
+
+
   Games.findAll({
     attributes: [
       'id',
@@ -72,7 +95,11 @@ router.get('/', (req, res) => {
       },
     ]
   })
-    .then(dbPostData => res.json(dbPostData))
+    .then(dbPostData => {
+      
+      res.json(dbPostData)
+    
+    })
     .catch(err => {
       console.log(err);
       res.status(500).json(err);

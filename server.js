@@ -3,8 +3,10 @@ const routes = require('./controllers/');
 const sequelize = require('./config/connection');
 const path = require('path');
 const exphbs = require('express-handlebars');
-const NBA = require ('./nba')
+const NBA = require('./nba')
 const moment = require('moment');
+const Games = require('./models/Games')
+
 
 //IMPORT SESSIONS
 const session = require('express-session');
@@ -45,8 +47,9 @@ sequelize.sync({ force: false }).then(() => {
 async function create() {
     // check for game data
     data = new NBA().needGames();
-
+    console.log('============================================================================================');
     console.log("CREATE GAMES?", data)
+    console.log('============================================================================================');
     // if no game data, run api call and create games in database
     if (data === false) {
 
@@ -61,23 +64,20 @@ async function create() {
 
 create()
 
-
-// DONT TURN THIS ON YET I NEED TO WRITE LOGIC TO ONLY RUN THIS WHEN THERE ARE GAMES IN PROGRESS- ANTHONY
-// ======================================================================================================
-let timer
-function startTimer() {
-     timer = setInterval(function () {
-        new NBA().getGames();
-        new NBA().updateGames();
-
-
-        console.log("Refreshing Scores");
-        app.get('/', (req, res) =>{
-            res.redirect('/')
-        })
-    }, 6000);
-}
-
-//  startTimer()
-
-// ======================================================================================================
+new NBA().isLive()
+    .then(inProgress => {
+        if (inProgress.length > 0) {
+            console.log('============================================================================================');
+            console.log('LIVE GAMES FOUND! UPDATING GAMES!')
+            console.log('============================================================================================');
+            new NBA().getGames();
+            new NBA().updateGames();
+        } else {
+            console.log('============================================================================================');
+            console.log('NO GAMES ARE CURRENTLY LIVE!')
+            console.log('============================================================================================');
+        }
+    }).catch(e => {
+        console.log(e)
+        return
+    })

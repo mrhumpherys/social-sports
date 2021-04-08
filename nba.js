@@ -247,6 +247,18 @@ class NBA {
             }
         }
     }
+
+    // IDEA FOR RUNNING TIMER ONLY WHEN GAMES ARE LIVE
+    async isLive() {
+        // CHECK OUR CURRENT LIST OF GAMES, IF ANY GAME OF THE GAMES 'status' property or key shows a value === 'InProgress' then run the function to update the scores
+
+        const inProgress = await Games.findAll({
+            where: { status: 'InProgress' }
+        })
+
+        return inProgress
+        // .then(dbPostData => res.json(dbPostData))
+    }
 }
 
 module.exports = NBA

@@ -15,12 +15,34 @@ router.get('/', (req, res) => {
     const moment = require('moment');
     let date = (moment(new Date()).format("YYYY-MM-DD"));
 
+
+    // CHECK FOR LIVE GAMES
+    new NBA().isLive()
+        .then(inProgress => {
+            if (inProgress.length > 0) {
+                console.log('============================================================================================');
+                console.log('LIVE GAMES FOUND! UPDATING GAMES!')
+                console.log('============================================================================================');
+                new NBA().getGames();
+                new NBA().updateGames();
+            } else {
+                console.log('============================================================================================');
+                console.log('NO GAMES ARE CURRENTLY LIVE!')
+                console.log('============================================================================================');
+            }
+        }).catch(e => {
+            console.log(e)
+            return
+        })
+
     // CHECK IF WE HAVE GAME DATA
     // ==========================
     async function create() {
         // check for game data
         data = new NBA().needGames();
+        console.log('============================================================================================');
         console.log("CREATE GAMES?", data)
+        console.log('============================================================================================');
         // if no game data, run api call and create games in database
         if (data === false) {
             return
@@ -29,8 +51,9 @@ router.get('/', (req, res) => {
         }
     }
     create()
-// GETS NEWS STORIES 
-// ===============================================
+
+    // GETS NEWS STORIES 
+    // ===============================================
     new NBA().getNews()
         .then(data => {
             const news = JSON.stringify(data)
@@ -72,6 +95,7 @@ router.get('/', (req, res) => {
                 ]
             })
                 .then(dbGamesData => {
+                    console.log('============================================================================================');
                     const games = dbGamesData.map(game => game.get({ plain: true }));
                     // TO ACCESS INFO FOR HANDLEBARS USE game and news
                     // ==============================================
@@ -86,12 +110,8 @@ router.get('/', (req, res) => {
                     console.log(err);
                     res.status(500).json(err);
                 });
-
+          
         })
-
-
-    
-    //console.log('=============');
 
 });
 
