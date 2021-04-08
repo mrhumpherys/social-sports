@@ -3,13 +3,16 @@ const routes = require('./controllers/');
 const sequelize = require('./config/connection');
 const path = require('path');
 const exphbs = require('express-handlebars');
+const NBA = require('./nba')
+const deleteFiles = require('./json-file-maintenance')
+
 
 //IMPORT SESSIONS
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const sess = {
     secret: process.env.SESSION_SECRET,
-    cookie: {maxAge:300000},
+    cookie: { maxAge: 300000 },
     resave: false,
     saveUninitialized: true,
     rolling: true,
@@ -26,7 +29,7 @@ app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session(sess));
 
@@ -37,3 +40,9 @@ app.use(routes);
 sequelize.sync({ force: false }).then(() => {
     app.listen(PORT, () => console.log(`Now listening on ${PORT}`));
 });
+
+// DO NOT REMOVE THE CODE BELOW IF YOU DONT UNDERSTAND WHAT IT DOES ASK! - ANTHONY
+deleteFiles()
+new NBA().create()
+new NBA().isLive()
+    
