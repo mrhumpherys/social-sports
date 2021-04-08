@@ -40,7 +40,7 @@ sequelize.sync({ force: false }).then(() => {
     app.listen(PORT, () => console.log(`Now listening on ${PORT}`));
 });
 
-// DO NOT REMOVE THE CODE BELOW IF YOU DONT UNDERSTAND WHAT IT DOES ASK!
+// DO NOT REMOVE THE CODE BELOW IF YOU DONT UNDERSTAND WHAT IT DOES ASK! - ANTHONY
 
 async function create() {
     // check for game data
@@ -60,7 +60,8 @@ async function create() {
 }
 
 create()
-
+// DONT TURN THIS ON YET I NEED TO WRITE LOGIC TO ONLY RUN THIS WHEN THERE ARE GAMES IN PROGRESS- ANTHONY
+// ======================================================================================================
 let timer
 function startTimer() {
      timer = setInterval(function () {
@@ -72,7 +73,9 @@ function startTimer() {
         app.get('/', (req, res) =>{
             res.redirect('/')
         })
-    }, 300000);
+    }, 6000);
 }
 
-startTimer()
+//  startTimer()
+
+// ======================================================================================================

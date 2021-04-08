@@ -4,8 +4,6 @@ const sequelize = require('../config/connection');
 
 // create our Post model
 class Games extends Model {
-    // MODIFIED THE VOTE MODEL TO TRACK VOTES ON THE GAMES
-    // ============================================================
     static upvote(body, models) {
         return models.Vote.create({
             user_id: body.user_id,
@@ -27,8 +25,7 @@ class Games extends Model {
             });
         });
     }
-    // ========================================================================================================
-    // MIGHT NEED TO BE RE-WORKED HAVE NOT YET TESTED
+
 }
 
 
@@ -50,22 +47,42 @@ Games.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
-        day:{
+        date_time:{
             type: DataTypes.DATE,
-            allowNull: false,
+            allowNull: true,
+        
         },
-        day_time:{
-            type: DataTypes.DATE,
-            allowNull: false,
-            defaultValue: Sequelize.NOW
-        },
-        updated:{
-            type: DataTypes.DATE,
+        status:{
+            type: DataTypes.STRING,
             allowNull: true,
         },
         quarter: {
             type: DataTypes.STRING,
             allowNull:true,
+        },
+        home_team_id: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+        },
+        home_team: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
+        home_team_score:{
+            type: DataTypes.INTEGER,
+            allowNull: true,
+        },
+        away_team_id: {
+            type: DataTypes.INTEGER,
+            allowNull: true
+        },
+        away_team: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        away_team_score:{
+            type: DataTypes.INTEGER,
+            allowNull: true,
         },
         time_remaining_minutes:{
             type: DataTypes.INTEGER,
@@ -76,32 +93,8 @@ Games.init(
             type: DataTypes.INTEGER,
             allowNull: true
         },
-        home_team: {
-            type: DataTypes.STRING,
-            allowNull: true,
-        },
-        home_team_id: {
-            type: DataTypes.INTEGER,
-            allowNull: true,
-        },
-        home_team_score:{
-            type: DataTypes.INTEGER,
-            allowNull: true,
-        },
-        away_team: {
-            type: DataTypes.STRING,
-            allowNull: true
-        },
-        away_team_id: {
-            type: DataTypes.INTEGER,
-            allowNull: true
-        },
-        away_team_score:{
-            type: DataTypes.INTEGER,
-            allowNull: true,
-        },
-        status:{
-            type: DataTypes.STRING,
+        updated:{
+            type: DataTypes.DATE,
             allowNull: true,
         },
         channel: {
@@ -111,15 +104,12 @@ Games.init(
         quarters: {
             type: DataTypes.JSON,
             allowNull:true,
+        },
+        new_record_number: {
+            type: DataTypes.BIGINT,
+            allowNull: true,
+            defaultValue: null,
         }
-
-        // user_id: {
-        //     type: DataTypes.INTEGER,
-        //     references: {
-        //         model: 'user',
-        //         key: 'id'
-        //     }
-        // }
     },
     {
         sequelize,

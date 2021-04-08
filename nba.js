@@ -4,8 +4,13 @@ const fetch = require('node-fetch');
 const moment = require('moment');
 const { Games } = require('./models');
 const path = require('path');
-const e = require('express');
 
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
+// +-----------------------------------------------------------------------------------+//
+// |MAIN LOGIC IN OF API CALLS AND RETURNING THE DATA FOR GAMES TO THE DATABASE DO NOT |//
+// |I REPEAT DO NOT F**K WITH ANYTHING IN HERE WITH OUT ASKING SOMEONE                 |//
+// +-----------------------------------------------------------------------------------+//
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
 class NBA {
     constructor() {
         this.data = [];
@@ -61,20 +66,22 @@ class NBA {
             let response = JSON.parse(fs.readFileSync(`./data/games-${date}.json`, 'utf8',));
             let games = (response)
             console.log(games)
-
             let data = await games.map(el => {
                 return {
                     game_id: el.GameID,
                     game_type: "basketball",
-                    day: el.Day,
-                    day_time: el.DayTime,
-                    updated: el.Updated,
+                    date_time: el.DateTime,
+                    status: el.Status,
                     quarter: el.Quarter,
+                    home_team_id: el.HomeTeamID,
+                    home_team: el.HomeTeam,
+                    home_team_score: el.HomeTeamScore,
+                    away_team_id: el.AwayTeamID,
+                    away_team: el.AwayTeam,
+                    away_team_score: el.AwayTeamScore,
                     time_remaining_minutes: el.TimeRemainingMinutes,
                     time_remaining_seconds: el.TimeRemainingSeconds,
-                    home_team_score: el.HomeTeamScore,
-                    away_team_score: el.AwayTeamScore,
-                    status: el.Status,
+                    updated: el.Updated,
                     channel: el.Channel,
                     quarters: el.Quarters,
                 }
@@ -84,7 +91,6 @@ class NBA {
                 console.log(e)
                 return;
             });
-
         } catch (e) {
             if (e.errno == -4058) {
                 console.log("FILE NOT FOUND CREATING GAMES!");
@@ -155,40 +161,69 @@ class NBA {
                 return {
                     game_id: el.GameID,
                     game_type: "basketball",
-                    day: el.Day,
-                    day_time: el.DayTime,
-                    updated: el.Updated,
+                    date_time: el.DateTime,
+                    status: el.Status,
                     quarter: el.Quarter,
+                    home_team_id: el.HomeTeamID,
+                    home_team: el.HomeTeam,
+                    home_team_score: el.HomeTeamScore,
+                    away_team_id: el.AwayTeamID,
+                    away_team: el.AwayTeam,
+                    away_team_score: el.AwayTeamScore,
                     time_remaining_minutes: el.TimeRemainingMinutes,
                     time_remaining_seconds: el.TimeRemainingSeconds,
-                    home_team: el.HomeTeam,
-                    home_team_id: el.HomeTeamID,
-                    home_team_score: el.HomeTeamScore,
-                    away_team: el.AwayTeam,
-                    away_team_id: el.AwayTeamID,
-                    away_team_score: el.AwayTeamScore,
-                    status: el.Status,
+                    updated: el.Updated,
                     channel: el.Channel,
                     quarters: el.Quarters,
+                    new_record_number: Date.now(),
                 }
             })
             console.log(data)
+
             // CREATE THE RECORDS IN BULK, DB WONT ALLOW DUPLICATES BUT CATCH THE ERROR
-            data.forEach(el => {
-                Games.update(el, {where: {id: el.game_id}}).then(updateGameData => {
-                    if (!updateGameData) {
-                       console.log(updateGameData)
-                    } else {
-                      console.log("SUCCESS")
-                    }
-
-                }).catch(e => {
-                    console.log(e)
+            Games.bulkCreate(data, {
+                fields: ['id',
+                    'game_id',
+                    'game_type',
+                    'date_time',
+                    "status",
+                    'quarter',
+                    'home_team_id',
+                    'home_team',
+                    "home_team_score",
+                    'away_team_id',
+                    'away_team',
+                    "away_team_score",
+                    'time_remaining_minutes',
+                    'time_remaining_seconds',
+                    "channel",
+                    "quarters",
+                    'created_at',
+                    'updated',
+                    'new_record_number',],
+                updateOnDuplicate: [
+                    "status",
+                    'quarter',
+                    "home_team_score",
+                    "away_team_score",
+                    'time_remaining_minutes',
+                    'time_remaining_seconds',
+                    "quarters",
+                    'updated',
+                    'new_record_number',]
+            }).then(updateGameData => {
+                if (!updateGameData) {
+                    // console.log(updateGameData)
+                    return
+                } else {
+                    console.log(updateGameData)
+                    console.log("SUCCESS")
                     return;
-                });
-            })
-
-
+                }
+            }).catch(e => {
+                console.log(e)
+                return;
+            });
         } catch (e) {
             if (e.errno == -4058) {
                 console.log("FILE NOT FOUND CREATING GAMES!");
@@ -212,45 +247,6 @@ class NBA {
             }
         }
     }
-
-    updateStats() {
-        let timer
-        function startTimer() {
-             timer = setInterval(function () {
-                new NBA().getGames();
-                new NBA().updateGames();
-
-
-                console.log("Refreshing Scores");
-                
-            }, 5000);
-        }
-
-        function stopTimer() {
-            console.log("Timer stopped");
-           
-            clearInterval(timer);
-
-        }
-
-        // startTimer();
-        // stopTimer();
-    }
-
-
-
 }
 
-
-//Games.bulkCreate(data)
-// new NBA().createGames();
 module.exports = NBA
-
-
-// const {teamData} = require('../../seeds/team-seeds')
-// // console.log(teamData)
-// let urlLogo=[];
-// teamData.map(data =>{
-//      urlLogo.push(data.WikipediaLogoUrl)
-// })
-// console.log(urlLogo)
