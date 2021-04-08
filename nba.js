@@ -93,6 +93,7 @@ class NBA {
 
     // RETURNS CURRENT API GAME DATA FOR TODAY'S DATE
     async getGames() {
+         // ALSO NEWS STORIES
         let date = (moment(new Date()).format("YYYY-MM-DD"));
         let response = await
             fetch(`https://fly.sportsdata.io/v3/nba/scores/json/GamesByDate/${date}`, {
@@ -113,6 +114,7 @@ class NBA {
                         }
                     });
                 });
+        new NBA().getNews();
         return response
     }
     // GETS THE NEWS STORIES FROM THE API
@@ -125,12 +127,23 @@ class NBA {
                 }
             })
                 .then(res => res.json())
+                .then(json => {
+                    let date1 = (moment(new Date()).format("YYYY-MM-DD"));
+                    const data = JSON.stringify(json);
+                    fs.writeFileSync(`./data/news-${date1}.json`, data, 'utf8', (err) => {
+                        if (err) {
+                            return console.log(`Error writing file: ${err}`);
+                        } else {
+                            return console.log(`Game File is written successfully!`);
+                        }
+                    });
+                });
         return response
     }
     // THIS ONE MIGHT BE EXTRA LEAVING FOR NOW
-    async getGamesDb(date) {
-        // let date = (moment(new Date()).format("YYYY-MM-DD"));
-        let response = await JSON.parse(fs.readFileSync(`./data/games-${date}.json`, 'utf8',));
+    async getNewsDb() {
+        let date2 = (moment(new Date()).format("YYYY-MM-DD"));
+        let response = await JSON.parse(fs.readFileSync(`./data/news-${date2}.json`, 'utf8',));
         return response;
     };
 
@@ -171,7 +184,7 @@ class NBA {
 
     // USED FOR UPDATING THE LIVE SCORES 
     async updateGames(date) {
-
+       
         try {
             let response = JSON.parse(fs.readFileSync(`./data/games-${date}.json`, 'utf8',));
             let games = (response)
