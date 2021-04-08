@@ -15,4 +15,5 @@ module.exports = {
   render_date: date_time => {
     return moment(date_time).format('h:mm A').toUpperCase();
   },
+  random_number: () => Math.floor(Math.random() * 10),
 };

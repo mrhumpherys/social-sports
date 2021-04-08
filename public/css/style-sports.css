@@ -1,0 +1,123 @@
+/* ================================================================================= */
+/* styles for chat */
+
+.mt-100 {
+  margin-top: 100px;
+}
+
+.card {
+  box-shadow: 0 0.46875rem 2.1875rem rgba(4, 9, 20, 0.03),
+    0 0.9375rem 1.40625rem rgba(4, 9, 20, 0.03),
+    0 0.25rem 0.53125rem rgba(4, 9, 20, 0.05),
+    0 0.125rem 0.1875rem rgba(4, 9, 20, 0.03);
+  border-width: 0;
+  transition: all 0.2s;
+}
+
+.card-header:first-child {
+  border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;
+}
+
+/* .card-header {
+      display: flex;
+      align-items: center;
+      border-bottom-width: 1px;
+      padding-top: 0;
+      padding-bottom: 0;
+      padding-right: .625rem;
+      height: 3.5rem;
+      text-transform: uppercase;
+      background-color: #fff;
+      border-bottom: 1px solid rgba(26, 54, 126, 0.125)
+  } */
+
+
+.card-body {
+  flex: 1 1 auto;
+  padding: 1.25rem;
+}
+
+.card-body p {
+  font-size: 13px;
+}
+
+a {
+  color: #e91e63;
+  text-decoration: none !important;
+  background-color: transparent;
+}
+
+.media img {
+  width: 40px;
+  height: auto;
+}
+
+#game-info {
+  height: 15vh;
+}
+
+/* #team-logo {
+  
+  } */
+/* 
+  #team-display {
+  
+  } */
+/* styles for chat END */
+/* ================================================================================= */
+
+
+.post-date {
+  display: block;
+  color: #9f9f9f;
+  padding-top: .5rem;
+}
+
+.carousel-indicators {
+  left: auto;
+  margin-right: 5%;
+}
+
+a {
+  transition: all ease .3s;
+  color: var(--white);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--green);
+}
+
+.subnav {
+  font-size: 1.2rem;
+  font-weight: 200;
+  padding: 1rem 0;
+}
+
+.game-card {
+  background: var(--darkbg);
+  border-radius: var(--bradius);
+  padding: 2rem;
+  cursor: pointer;
+}
+
+footer {
+  margin-top: 3rem;
+}
+
+
+.team-logo {
+  height: 100%;
+}
+
+.vs-card {
+  height: 100%;
+}
+
+.team-content {
+  height: 100%;
+}
+
+.home-away {
+  margin-top: 15%;
+}

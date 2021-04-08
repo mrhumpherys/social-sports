@@ -1,7 +1,9 @@
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style-sports.css">
 <!-- NAVBAR start -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Logo</a>
+    <a class="navbar-brand" href="#"><img src="images/logo.png" class="img-fluid"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -43,167 +45,106 @@
   <!-- <div class="container">
       <div class="row d-flex justify-content-center">
         <div>     -->
-  <div class="container-fluid">
-    <div class=" d-flex justify-content-center">
+  <div class="container mt-5">
+    <div class="row d-flex justify-content-center">
       <div class="col-md-10">
-        <div class="container">
-          <div class="row d-flex justify-content-start ">
-            <div class="col-md-12">
-              <!-- CONTAINER HEADER -->
-              <h1 class="page-title text-center mt-5 mb-5">
-                {{render_team_name game.HomeTeamID}} &nbsp;&nbsp;<span class="text-muted">-VS-</span>&nbsp;&nbsp;
-                {{render_team_name game.AwayTeamID}}
-              </h1>
+        <div class="row">
+          <div class="col-12 d-flex justify-content-between g-0">
+            <div>
+              <h1 class="page-title">{{render_team_name game.HomeTeamID}} &nbsp;&nbsp;<span
+                  class="text-muted">-VS-</span>&nbsp;&nbsp;
+                {{render_team_name game.AwayTeamID}}</h1>
             </div>
-            <!-- VOTE AND TEAM LOGO SECTION -->
+            <div><a href="#" class="btn btn-primary">upvote</a></div>
 
-            <!-- TEAM SELECT buttons -->
-            <div class="row col-md-12 mb-2">
-              <div class="col-md-3 mb-4">
-                <div class="btn-toolbar d-flex justify-content-center" role="toolbar"
-                  aria-label="Toolbar with button groups">
-                  <div class="row">
-                    <div class="col-md-12 team-btn btn-group mb-3" role="group" aria-label="First group">
-                      <button type="button" class="btn btn-primary btn-lg">Vote for the Home Team</button>
-                    </div>
-                    <!-- HOMETEAM LOGO -->
-                    <div class="game-card d-flex justify-content-center align-items-center">
-                      <div class="col-md-12 team-content">
-                        <img src="{{render_team_url game.HomeTeamID}}" alt="" class="img-fluid" />
+          </div>
+        </div>
+        <!-- VOTE AND TEAM LOGO SECTION -->
+
+        <!-- TEAM SELECT buttons -->
+        <div class="row">
+          <div class="col d-flex align-items-center justify-content-center">
+            <div class="text-center">
+              <img src="{{render_team_url game.HomeTeamID}}" class="img-fluid">
+              <h4 class="mt-2">20 - 14</h4>
+            </div>
+          </div>
+          <div class="col-5 text-center d-flex align-items-center justify-content-center">
+            <h3 class="score d-flex justify-content-center align-items-center">{{#if
+              HomeTeamScore}}{{HomeTeamScore}}{{else}}105{{/if}} <span class="time">Q4
+                3:30</span> {{#if AwayTeamScore}}{{AwayTeamScore}}{{else}}94{{/if}}</h3>
+          </div>
+          <div class="col d-flex align-items-center justify-content-center">
+            <div class="text-center">
+              <img src="{{render_team_url game.AwayTeamID}}" class="img-fluid">
+              <h4 class="mt-2">20 - 14</h4>
+            </div>
+          </div>
+        </div>
+        <!-- END  -->
+      </div>
+      <!-- GAME INFO DIV -->
+      <div class="row mt-5">
+        <div class="col-12">
+          <div class="page-section game-info bg-mid">
+            <h3>GAME INFO</h3>
+            <p>No info to show at this time, please check back again for an update.</p>
+          </div>
+        </div>
+      </div>
+      <!-- COMMENTS DIV -->
+      <div class="row mt-5">
+        <div class="col-12">
+          <div class="page-section game-info bg-mid">
+            <div class="row">
+              <div class="col d-flex justify-content-between">
+                <div>
+                  <h3>GAME CHATTER</h3>
+                </div>
+                <div>130 COMMENTS</div>
+              </div>
+
+            </div>
+            <div class="row">
+              <div class="col-12">
+                {{#each game.comments}}
+                <div class="comment">
+                  <div class="comment-body">
+                    <div class="d-flex">
+                      <div class="flex-shrink-0">
+                        <img src="https://bootdey.com/img/Content/avatar/avatar{{random_number}}.png" alt="..."
+                          class="comment-img">
+                      </div>
+                      <div class="flex-grow-1 ms-3 flex-column">
+                        {{comment_text}}
+                        <div class="comment-meta">
+                          <ul class="list-inline">
+                            <li class="list-inline-item"><i class="fas fa-user-alt"></i>{{user.username}}</li>
+                            <li class="list-inline-item"><i class="fas fa-calendar-alt"></i>Post Date</li>
+                            <li class="list-inline-item"><a href=""><i class="far fa-edit"></i>Edit</a></li>
+                            <li class="list-inline-item"><a href="#"><i class="far fa-trash-alt"></i>Delete</a>
+                            </li>
+                          </ul>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <!-- GAME CARD FOR DISPLAY TEAMS AND TIME -->
-              <div class="col-md-6 mb-4 d-flex justify-content-center align-items-center">
-                <div class="d-flex justify-content-center align-items-center home-away">
-                  <div class="row">
-                    <div class="team-content">
-                      <div class="col-md-12 game-detail text-center">
-                        <h3>{{render_team_name game.HomeTeamID}}</h3>
-                        <h5 class="text-muted">VS</h5>
-                        <h3>{{render_team_name game.AwayTeamID}}</h3>
-                        <h3 class="text-muted">{{render_date game.DateTime}}</h3>
-                      </div>
-                    </div>
+                {{/each}}
+                <!--end comment-->
+
+
+                <form action="">
+                  <div class="mb-3">
+                    <textarea class="form-control" rows="4"></textarea>
                   </div>
-                </div>
-              </div>
-              <!-- AWAY TEAM LOGO -->
-              <div class="col-md-3 mb-4">
-                <div class="btn-toolbar d-flex justify-content-center" role="toolbar"
-                  aria-label="Toolbar with button groups">
-                  <div class="row">
-                    <div class="col-md-12 team-btn btn-group mb-3" role="group" aria-label="First group">
-                      <button type="button" class="btn btn-primary btn-lg">Vote for the Home Team</button>
-                    </div>
-                    <!-- HOMETEAM LOGO -->
-                    <div class="game-card d-flex justify-content-center align-items-center">
-                      <div class="col-md-12 team-content">
-                        <img src="{{render_team_url game.AwayTeamID}}" alt="" class="img-fluid" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- END  -->
-            </div>
-            <!-- GAME INFO DIV -->
-            <div class="col-md-12 mb-4">
-              <div class="game-card d-flex justify-content-between">
-                <div class="row">
-                  <div class="col-md-6 game-detail text-center">
-                    <h3>GAME INFO</h3>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- COMMENTS DIV -->
-            <div class="col-md-12 mb-4">
-              <div class="game-card d-flex justify-content-between">
-                <div class="row">
-                  <div class="col-md-6 game-detail text-center">
-                    <h3>COMMENTS</h3>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- COMMENTS DIV -->
-            <div class="col-md-12 mb-4">
-              <div class="game-card d-flex justify-content-between">
-                <div class="row">
-                  <div class="col-md-6 game-detail text-center">
-                    <h3>COMMENTS</h3>
-                  </div>
-                </div>
+                  <button type="button" class="btn btn-primary">POST COMMENT</button>
+                </form>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-
-
-
-
-
-    <!---------------------------------------------------TEST TEST TEST-------------------------------------------------------------------->
-
-    <!---------------------------------------------------TEST TEST TEST-------------------------------------------------------------------->
-    <!-- CHAT header -->
-    <main role="main" class="chat container">
-      <div class="d-flex align-items-center p-3 my-3 bg-secondary bg-gradient text-white-50 bg-blue rounded box-shadow">
-        <img class="mr-3" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" width="48" height="48">
-        <div class="lh-100">
-          <h6 class="mb-0 text-white lh-100">John Doe</h6>
-          <small>Messages</small>
-        </div>
-      </div>
-      <!-- CHAT body -->
-      <div class="my-3 p-3 bg-secondary bg-gradient rounded box-shadow">
-        <h6 class="border-bottom border-gray pb-2 mb-0">Recent updates</h6>
-        <div class="media text-info pt-3">
-          <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="" class="mr-2 rounded" width="32"
-            height="32">
-          <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-            <strong class="d-block text-gray-dark">@username</strong>
-            Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor
-            mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-          </p>
-        </div>
-        <div class="media text-info pt-3">
-          <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="" class="mr-2 rounded" width="32"
-            height="32">
-          <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-            <strong class="d-block text-gray-dark">@username</strong>
-            Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor
-            mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-          </p>
-        </div>
-        <div class="media text-info pt-3">
-          <img src="https://bootdey.com/img/Content/avatar/avatar5.png" alt="" class="mr-2 rounded" width="32"
-            height="32">
-          <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-            <strong class="d-block text-gray-dark">@username</strong>
-            Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor
-            mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-          </p>
-        </div>
-        <div class="media text-info pt-3">
-          <img src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="" class="mr-2 rounded" width="32"
-            height="32">
-          <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-            <strong class="d-block text-gray-dark">@username</strong>
-            Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor
-            mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-          </p>
-        </div>
-        <small class="d-block text-right mt-3">
-          <a href="#">All messages</a>
-        </small>
-      </div>
-      <!-- CHAT end -->
-    </main>
-    <!-- end  -->
   </div>
+</main>

@@ -1,0 +1,62 @@
+{
+  "GameID": 16250,
+  "Season": 2021,
+  "SeasonType": 1,
+  "Status": "Scheduled",
+  "Day": "2021-04-07T00:00:00",
+  "DateTime": "2021-04-07T19:00:00",
+  "AwayTeam": "WAS",
+  "HomeTeam": "ORL",
+  "AwayTeamID": 1,
+  "HomeTeamID": 5,
+  "StadiumID": 5,
+  "Channel": "FSFL",
+  "Attendance": null,
+  "AwayTeamScore": null,
+  "HomeTeamScore": null,
+  "Updated": "2021-04-07T18:57:44",
+  "Quarter": null,
+  "TimeRemainingMinutes": null,
+  "TimeRemainingSeconds": null,
+  "PointSpread": 10.6,
+  "OverUnder": 361.8,
+  "AwayTeamMoneyLine": -304,
+  "HomeTeamMoneyLine": 252,
+  "GlobalGameID": 20016250,
+  "GlobalAwayTeamID": 20000001,
+  "GlobalHomeTeamID": 20000005,
+  "PointSpreadAwayTeamMoneyLine": -182,
+  "PointSpreadHomeTeamMoneyLine": -177,
+  "LastPlay": "Scrambled",
+  "IsClosed": false,
+  "GameEndDateTime": null,
+  "HomeRotationNumber": 891,
+  "AwayRotationNumber": 889,
+  "NeutralVenue": false,
+  "OverPayout": -184,
+  "UnderPayout": -177,
+  "Quarters": [],
+  "comments": [
+    {
+      "user_id": 1,
+      "comment_text": "the magic are never going to come back",
+      "user": {
+        "username": "kurt"
+      }
+    },
+    {
+      "user_id": 2,
+      "comment_text": "Go Wizards!",
+      "user": {
+        "username": "julius"
+      }
+    },
+    {
+      "user_id": 3,
+      "comment_text": "Nice Budweiser commercial!",
+      "user": {
+        "username": "john"
+      }
+    }
+  ]
+}
