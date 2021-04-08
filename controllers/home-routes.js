@@ -7,11 +7,15 @@ router.get('/', async (req, res) => {
   // games = games.map(game => game.get({ plain: true }));
   // console.log(games);
   let games = JSON.parse(fs.readFileSync('./data/games.json'));
-  let teams = JSON.parse(fs.readFileSync('./data/teams.json'));
-  let teamNameFromID = new Map();
-  a = teams.forEach(team => teamNameFromID.set(team.TeamID, team.Name));
-  console.log(a);
-  res.render('index', { games, teams });
+  res.render('index', { games });
+});
+
+router.get('/:id', async (req, res) => {
+  // let games = await Games.findAll();
+  // games = games.map(game => game.get({ plain: true }));
+  let games = JSON.parse(fs.readFileSync('./data/games.json'));
+  let game = games.filter(game => game.GameID == req.params.id)[0];
+  res.render('game', { game });
 });
 
 module.exports = router;
