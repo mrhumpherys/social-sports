@@ -216,3 +216,6 @@ SHOP
 -------------*/
 
 .item img {}
+#cart input[type=number] {
+    max-width: 50px;
+}
