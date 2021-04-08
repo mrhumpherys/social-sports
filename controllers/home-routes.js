@@ -82,7 +82,7 @@ router.get('/', (req, res) => {
                   
                     console.log('============================================================================================');
                     const games = dbGamesData.map(game => game.get({ plain: true }));
-                    console.log(news)
+                    
                     // TO ACCESS INFO FOR HANDLEBARS USE game and news
                     // ==============================================
                     res.render('homepage', {

@@ -301,12 +301,15 @@ class NBA {
                     let format = dateTimes.split('T')[1]
                     let hours = format.split(":")[0]
                     let minutes = format.split(":")[1]
-
-                    if (dateTimes <= moment(new Date())) {
+                    let current = new Date()
+                    let currentDate = moment(current).format()
+                    console.log("CURRENT DATE",currentDate)
+                    console.log ("GAME TIME",dateTimes)
+                    if (dateTimes <= currentDate) {
                         console.log('============================================================================================');
-                        console.log(`The ${homeTeam1} vs. ${awayTeam1} GAME IS LIVE! UPDATING SCORES!`)
+                        console.log(`The ${homeTeam} vs. ${awayTeam} GAME IS LIVE! UPDATING SCORES!`)
                         console.log('============================================================================================');
-                        new NBA.getGames()
+                        new NBA().getGames()
                         new NBA().updateGames().then(res => res.json()).then(data => {
                             data.map(el => {
                                 let status1 = el.status
