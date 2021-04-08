@@ -1,5 +1,5 @@
 //AKA POSTS
-const { Model, DataTypes } = require('sequelize');
+const { Model, DataTypes, Sequelize } = require('sequelize');
 const sequelize = require('../config/connection');
 
 // create our Post model
@@ -46,6 +46,73 @@ Games.init(
             allowNull: true,
             unique: true,
         },
+        game_type:{
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        day:{
+            type: DataTypes.DATE,
+            allowNull: false,
+        },
+        day_time:{
+            type: DataTypes.DATE,
+            allowNull: false,
+            defaultValue: Sequelize.NOW
+        },
+        updated:{
+            type: DataTypes.DATE,
+            allowNull: true,
+        },
+        quarter: {
+            type: DataTypes.STRING,
+            allowNull:true,
+        },
+        time_remaining_minutes:{
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            
+        },
+        time_remaining_seconds:{
+            type: DataTypes.INTEGER,
+            allowNull: true
+        },
+        home_team: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
+        home_team_id: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+        },
+        home_team_score:{
+            type: DataTypes.INTEGER,
+            allowNull: true,
+        },
+        away_team: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        away_team_id: {
+            type: DataTypes.INTEGER,
+            allowNull: true
+        },
+        away_team_score:{
+            type: DataTypes.INTEGER,
+            allowNull: true,
+        },
+        status:{
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
+        channel: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
+        quarters: {
+            type: DataTypes.JSON,
+            allowNull:true,
+        }
+
         // user_id: {
         //     type: DataTypes.INTEGER,
         //     references: {

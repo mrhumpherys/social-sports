@@ -4,6 +4,7 @@ const fetch = require('node-fetch');
 const moment = require('moment');
 const { Games } = require('./models');
 const path = require('path');
+const e = require('express');
 
 class NBA {
     constructor() {
@@ -63,11 +64,23 @@ class NBA {
 
             let data = await games.map(el => {
                 return {
-                    game_id: el.GameID
+                    game_id: el.GameID,
+                    game_type: "basketball",
+                    day: el.Day,
+                    day_time: el.DayTime,
+                    updated: el.Updated,
+                    quarter: el.Quarter,
+                    time_remaining_minutes: el.TimeRemainingMinutes,
+                    time_remaining_seconds: el.TimeRemainingSeconds,
+                    home_team_score: el.HomeTeamScore,
+                    away_team_score: el.AwayTeamScore,
+                    status: el.Status,
+                    channel: el.Channel,
+                    quarters: el.Quarters,
                 }
             })
             // CREATE THE RECORDS IN BULK, DB WONT ALLOW DUPLICATES BUT CATCH THE ERROR
-            Games.bulkCreate(data).catch(e =>{
+            Games.bulkCreate(data).catch(e => {
                 console.log(e)
                 return;
             });
@@ -79,7 +92,7 @@ class NBA {
                 try {
                     let response = await new NBA().getGames()
                     return response
-                } 
+                }
                 catch (e) {
                     console.log("This broke while attempting to run the get games inside the create game function inside the catch error", e)
                 }
@@ -98,27 +111,11 @@ class NBA {
 
 
     needGames() {
-        
-            let date = (moment(new Date()).format("YYYY-MM-DD"));
-            // RAN IT WITH TRY/CATCH TO CATCH THE ERROR WHEN THE FILE IS NOT FOUND
-            try{
-                let games = JSON.parse(fs.readFileSync(`./data/games-${date}.json`, 'utf8', (e) => {
-                    if (e.errno == -4058) {
-                        console.log("FILE NOT FOUND CREATING GAMES!");
-                        // IF FILE NOT FOUND ERROR, GET GAMES- GET GAMES WILL FETCH THE API AND WRITE THE JSON TO A FILE IN THE DATA FOLDER
-                        return true
-                    } else {
-                        console.log("Error while checking for games", e)
-                        return true
-                    }
-                }));
-                if (!games) {
-                    return true
-                } else {
-                    return false
-                }
-            }
-            catch (e){
+
+        let date = (moment(new Date()).format("YYYY-MM-DD"));
+        // RAN IT WITH TRY/CATCH TO CATCH THE ERROR WHEN THE FILE IS NOT FOUND
+        try {
+            let games = JSON.parse(fs.readFileSync(`./data/games-${date}.json`, 'utf8', (e) => {
                 if (e.errno == -4058) {
                     console.log("FILE NOT FOUND CREATING GAMES!");
                     // IF FILE NOT FOUND ERROR, GET GAMES- GET GAMES WILL FETCH THE API AND WRITE THE JSON TO A FILE IN THE DATA FOLDER
@@ -127,8 +124,117 @@ class NBA {
                     console.log("Error while checking for games", e)
                     return true
                 }
+            }));
+            if (!games) {
+                return true
+            } else {
+                return false
             }
-            
+        }
+        catch (e) {
+            if (e.errno == -4058) {
+                console.log("FILE NOT FOUND CREATING GAMES!");
+                // IF FILE NOT FOUND ERROR, GET GAMES- GET GAMES WILL FETCH THE API AND WRITE THE JSON TO A FILE IN THE DATA FOLDER
+                return true
+            } else {
+                console.log("Error while checking for games", e)
+                return true
+            }
+        }
+
+    }
+
+    async updateGames(date) {
+
+        try {
+            let response = JSON.parse(fs.readFileSync(`./data/games-${date}.json`, 'utf8',));
+            let games = (response)
+            // console.log(games)
+
+            let data = await games.map(el => {
+                return {
+                    game_id: el.GameID,
+                    game_type: "basketball",
+                    day: el.Day,
+                    day_time: el.DayTime,
+                    updated: el.Updated,
+                    quarter: el.Quarter,
+                    time_remaining_minutes: el.TimeRemainingMinutes,
+                    time_remaining_seconds: el.TimeRemainingSeconds,
+                    home_team: el.HomeTeam,
+                    home_team_id: el.HomeTeamID,
+                    home_team_score: el.HomeTeamScore,
+                    away_team: el.AwayTeam,
+                    away_team_id: el.AwayTeamID,
+                    away_team_score: el.AwayTeamScore,
+                    status: el.Status,
+                    channel: el.Channel,
+                    quarters: el.Quarters,
+                }
+            })
+            console.log(data)
+            // CREATE THE RECORDS IN BULK, DB WONT ALLOW DUPLICATES BUT CATCH THE ERROR
+            data.forEach(el => {
+                Games.update(el, {where: {id: el.game_id}}).then(updateGameData => {
+                    if (!updateGameData) {
+                       console.log(updateGameData)
+                    } else {
+                      console.log("SUCCESS")
+                    }
+
+                }).catch(e => {
+                    console.log(e)
+                    return;
+                });
+            })
+
+
+        } catch (e) {
+            if (e.errno == -4058) {
+                console.log("FILE NOT FOUND CREATING GAMES!");
+                // IF FILE NOT FOUND ERROR, GET GAMES- GET GAMES WILL FETCH THE API AND WRITE THE JSON TO A FILE IN THE DATA FOLDER
+                try {
+                    let response = await new NBA().getGames()
+                    return response
+                }
+                catch (e) {
+                    console.log("This broke while attempting to run the get games inside the create game function inside the catch error", e)
+                }
+                finally {
+                    // IF THE GET GAMES COMES BACK WITH OUT ERROR, RUN CREATE GAMES AGAIN TO LOAD THE DB 
+                    let date1 = (moment(new Date()).format("YYYY-MM-DD"));
+                    new NBA().updateGames(date1)
+                }
+
+            } else {
+                // AN ERROR NOT RELATED TO NOT FINDING THE FILE
+                console.log("THIS BROKE WHILE CREATING GAMES IN createGames() ", e)
+            }
+        }
+    }
+
+    updateStats() {
+        let timer
+        function startTimer() {
+             timer = setInterval(function () {
+                new NBA().getGames();
+                new NBA().updateGames();
+
+
+                console.log("Refreshing Scores");
+                
+            }, 5000);
+        }
+
+        function stopTimer() {
+            console.log("Timer stopped");
+           
+            clearInterval(timer);
+
+        }
+
+        // startTimer();
+        // stopTimer();
     }
 
 

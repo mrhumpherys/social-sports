@@ -6,29 +6,29 @@ const { Games, User, Comment, Vote } = require('../../models');
 
 router.get('/', (req, res) => {
 
-  const NBA = require('../../nba');
-  const moment = require('moment');
-  let date = (moment(new Date()).format("YYYY-MM-DD"));
-  // CHECK IF WE HAVE GAME DATA
-  // ==========================
-  async function create() {
-    // check for game data
-    data = new NBA().needGames();
+  // const NBA = require('../../nba');
+  // const moment = require('moment');
+  // let date = (moment(new Date()).format("YYYY-MM-DD"));
+  // // CHECK IF WE HAVE GAME DATA
+  // // ==========================
+  // async function create() {
+  //   // check for game data
+  //   data = new NBA().needGames();
 
-    console.log("CREATE GAMES?", data)
-    // if no game data, run api call and create games in database
-    if (data === false) {
+  //   console.log("CREATE GAMES?", data)
+  //   // if no game data, run api call and create games in database
+  //   if (data === false) {
 
-      return
+  //     return
 
-    } else {
+  //   } else {
 
-      new NBA().createGames(date);
+  //     new NBA().createGames(date);
 
-    }
-  }
+  //   }
+  // }
 
-  create()
+  // create()
 
   // AFTER CHECKING DATA GET GAMES FROM DATABASE
 
@@ -37,7 +37,20 @@ router.get('/', (req, res) => {
     attributes: [
       'id',
       'game_id',
-      
+      'game_type',
+      'day',
+      'day_time',
+      'updated',
+      'quarter',
+      'time_remaining_minutes',
+      'time_remaining_seconds',
+      'home_team',
+      'home_team_id',
+      "home_team_score",
+      "away_team_score",
+      "status",
+      "channel",
+      "quarters",
       'created_at',
       [
         sequelize.literal('(SELECT COUNT(*) FROM vote WHERE games.id = vote.games_id)'),
@@ -70,7 +83,20 @@ router.get('/:id', (req, res) => {
     attributes: [
       'id',
       'game_id',
-      
+      'game_type',
+      'day',
+      'day_time',
+      'updated',
+      'quarter',
+      'time_remaining_minutes',
+      'time_remaining_seconds',
+      'home_team',
+      'home_team_id',
+      "home_team_score",
+      "away_team_score",
+      "status",
+      "channel",
+      "quarters",
       'created_at',
     ],
     include: [

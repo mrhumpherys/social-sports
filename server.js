@@ -60,3 +60,19 @@ async function create() {
 }
 
 create()
+
+let timer
+function startTimer() {
+     timer = setInterval(function () {
+        new NBA().getGames();
+        new NBA().updateGames();
+
+
+        console.log("Refreshing Scores");
+        app.get('/', (req, res) =>{
+            res.redirect('/')
+        })
+    }, 300000);
+}
+
+startTimer()
