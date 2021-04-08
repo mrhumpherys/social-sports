@@ -90,7 +90,7 @@ router.get('/', (req, res) => {
         })
 
 
-    new NBA().updateStats()
+    
     //console.log('=============');
 
 });
