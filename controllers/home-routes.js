@@ -12,13 +12,8 @@ router.get('/', (req, res) => {
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
 
     const NBA = require('../nba');
-    const moment = require('moment');
-    let date = (moment(new Date()).format("YYYY-MM-DD"));
-
-    new NBA().getGames();
-    new NBA().updateGames(date);
-
-
+    new NBA().isLive()
+    
 
 
 
@@ -46,11 +41,12 @@ router.get('/', (req, res) => {
             const news = (data)
             Games.findAll({
                 // SOMETIMES THIS RETURNS DATA SOMETIMES IT JUST FRICKEN SPINS, TRIED TO CATCH IT AND STOP IT BUT I THINK THE CONNECTION TO MYSQL IS CRAP AND WE HAVE LIKE OVER 1K RECORDS BC OF THE LIVE UPDATES
-                // where:{status:{
-                //     or:{
-                //         [eq]:'InProgress',[eq]:'InProgress',[eq]:'Scheduled',[eq]:'Postponed'
-                //     }
-                // }},
+                where:{
+                    [Op.or]:
+                    
+                        [{status:'InProgress'},{status:'Scheduled'},{status:'Postponed'},]
+                    
+                },
                 attributes: [
                     'id',
                     'game_id',
@@ -91,7 +87,7 @@ router.get('/', (req, res) => {
                 
                     console.log('============================================================================================');
                     const games = dbGamesData.map(game => game.get({ plain: true }));
-                    console.log(games)
+                    // console.log(games)
                     // TO ACCESS INFO FOR HANDLEBARS USE game and news
                     // ==============================================
                     res.render('homepage', {
@@ -99,8 +95,6 @@ router.get('/', (req, res) => {
                         loggedIn: req.session.loggedIn,
                     
                     });
-                    
-
                     // ==============================================
                 })
                 .catch(err => {
