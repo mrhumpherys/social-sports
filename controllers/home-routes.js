@@ -102,7 +102,7 @@ router.get('/', (req, res) => {
                     // TO ACCESS INFO FOR HANDLEBARS USE game and news
                     // ==============================================
                     console.log('add new news')
-                    console.log(news);
+                    // console.log(news);
                     res.render('homepage', {
                         style: "style.css",
                         games, news,
