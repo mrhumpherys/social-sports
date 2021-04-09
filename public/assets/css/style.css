@@ -202,12 +202,11 @@ h3.score {
 PROFILE
 =============
 -------------*/
-.profile{
-
+/* .profile{
 }
 .profile-img {
     background: #333;
-}
+} */
 .profile-data li span {
     font-weight: 600;
 }
@@ -217,8 +216,8 @@ PROFILE
 SHOP
 =============
 -------------*/
-
+/* 
 .item img {}
 #cart input[type=number] {
     max-width: 50px;
-}
+} */
