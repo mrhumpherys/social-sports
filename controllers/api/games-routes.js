@@ -136,7 +136,7 @@ router.get('/game/:id', (req, res) => {
       console.log(game);
       console.log('+++++++++++++++++')
       let id = req.params.id
-      res.render(`game/`, {
+      res.render(`game/${id}`, {
         id,
         game
       });

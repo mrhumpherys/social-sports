@@ -38,11 +38,9 @@ router.get('/', (req, res) => {
 
     // GETS NEWS STORIES 
     // ===============================================
-    new NBA().getNews()
-        .then(res => res.json())
+    new NBA().getNewsDb()
         .then(data => {
-            let newsData = JSON.stringify(data)
-            const news = JSON.parse(newsData)
+            const news = (data)
             Games.findAll({
                 attributes: [
                     'id',
@@ -79,9 +77,12 @@ router.get('/', (req, res) => {
                         }
                     },
                 ]
-            }).then(dbGamesData => {
+            })
+            .then(dbGamesData => {
+                  
                     console.log('============================================================================================');
                     const games = dbGamesData.map(game => game.get({ plain: true }));
+                    
                     // TO ACCESS INFO FOR HANDLEBARS USE game and news
                     // ==============================================
                     console.log('add new news')
