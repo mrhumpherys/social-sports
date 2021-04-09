@@ -88,7 +88,7 @@ router.get('/', (req, res) => {
                     console.log('add new news')
                     console.log(news);
                     res.render('homepage', {
-                        // style: "style.css",
+                        style: "style.css",
                         games, news,
                         loggedIn: req.session.loggedIn
                     });
@@ -109,14 +109,18 @@ router.get('/login', (req, res) => {
         res.redirect('/');
         return;
     }
-    res.render('login');
+    res.render('login', {
+      style: "login-signup.css",
+    });
 });
 router.get('/signup', (req, res) => {
     if (req.session.loggedIn) {
         res.redirect('/');
         return;
     }
-    res.render('signup');
+    res.render('signup', {
+      style: "login-signup.css",
+    });
 });
 
 router.get('/game/:id', (req, res) => {
@@ -167,6 +171,7 @@ router.get('/game/:id', (req, res) => {
         console.log('+++++++++++++++++')
         let id = req.params.id
         res.render(`game`, {
+          style: "style.css",
           id,
           game
         });
