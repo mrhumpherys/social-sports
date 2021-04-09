@@ -15,16 +15,9 @@ router.get('/', (req, res) => {
     const moment = require('moment');
     let date = (moment(new Date()).format("YYYY-MM-DD"));
 
-    
-        async function checkScores(){
-           let response= new NBA().isLive()
-           return response
-        }
-        checkScores().catch(e=>{
-            console.log(e)
-            return
-        })
-    
+    new NBA().getGames();
+    new NBA().updateGames(date);
+
 
 
 

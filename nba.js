@@ -289,7 +289,7 @@ class NBA {
                     let current = new Date()
                     let currentDate = moment(current).format()
                     if (status)
-                        if ((dateTimes) >= (currentDate)) {
+                        if ((dateTimes) <= (currentDate)) {
                             runUpdate = true
                         } else {
                             console.log('============================================================================================');

@@ -45,4 +45,4 @@ sequelize.sync({ force: false }).then(() => {
 
 new NBA().create();
 deleteFiles();
-new NBA().isLive();
+
