@@ -3,7 +3,6 @@ const fs = require('fs');
 const fetch = require('node-fetch');
 const moment = require('moment');
 const { Games } = require('./models');
-const path = require('path');
 
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
 // +-----------------------------------------------------------------------------------+//
@@ -25,13 +24,11 @@ class NBA {
         console.log('============================================================================================');
         // if no game data, run api call and create games in database
         if (data === false) {
-
             return
-
         } else {
             let date = (moment(new Date()).format("YYYY-MM-DD"))
+            new NBA().getNews()
             return new NBA().createGames(date);
-
         }
     }
 
@@ -68,7 +65,7 @@ class NBA {
                 return;
             });
         } catch (e) {
-            if (e.errno == -4058) {
+            if (e.errno === -4058) {
                 console.log("FILE NOT FOUND CREATING GAMES!");
                 // IF FILE NOT FOUND ERROR, GET GAMES- GET GAMES WILL FETCH THE API AND WRITE THE JSON TO A FILE IN THE DATA FOLDER
                 try {
@@ -83,7 +80,6 @@ class NBA {
                     let date1 = (moment(new Date()).format("YYYY-MM-DD"));
                     return new NBA().createGames(date1)
                 }
-
             } else {
                 // AN ERROR NOT RELATED TO NOT FINDING THE FILE
                 return console.log("THIS BROKE WHILE CREATING GAMES IN createGames() ", e)
@@ -93,7 +89,7 @@ class NBA {
 
     // RETURNS CURRENT API GAME DATA FOR TODAY'S DATE
     async getGames() {
-         // ALSO NEWS STORIES
+        // ALSO NEWS STORIES
         let date = (moment(new Date()).format("YYYY-MM-DD"));
         let response = await
             fetch(`https://fly.sportsdata.io/v3/nba/scores/json/GamesByDate/${date}`, {
@@ -114,7 +110,7 @@ class NBA {
                         }
                     });
                 });
-        new NBA().getNews();
+                new NBA().getNews()
         return response
     }
     // GETS THE NEWS STORIES FROM THE API
@@ -146,11 +142,14 @@ class NBA {
         let response = await JSON.parse(fs.readFileSync(`./data/news-${date2}.json`, 'utf8',));
         return response;
     };
+    async getGamesDb() {
+        let response = Games.findAll()
+        return response
+    };
 
     // RETURNS TRUE FALSE IF WE NEED TO UPDATE OUR DATABASE WITH NEW GAME INFORMATION FOR THE DAY
     needGames() {
-
-        let date = (moment(new Date()).format("YYYY-MM-DD"));
+    let date = (moment(new Date()).format("YYYY-MM-DD"));
         // RAN IT WITH TRY/CATCH TO CATCH THE ERROR WHEN THE FILE IS NOT FOUND
         try {
             let games = JSON.parse(fs.readFileSync(`./data/games-${date}.json`, 'utf8', (e) => {
@@ -179,17 +178,14 @@ class NBA {
                 return true
             }
         }
-
     }
 
     // USED FOR UPDATING THE LIVE SCORES 
     async updateGames(date) {
-       
         try {
             let response = JSON.parse(fs.readFileSync(`./data/games-${date}.json`, 'utf8',));
             let games = (response)
             // console.log(games)
-
             let data = await games.map(el => {
                 return {
                     game_id: el.GameID,
@@ -212,7 +208,6 @@ class NBA {
                 }
             })
             console.log(data)
-
             // CREATE THE RECORDS IN BULK, DB WONT ALLOW DUPLICATES BUT CATCH THE ERROR
             Games.bulkCreate(data, {
                 fields: ['id',
@@ -273,7 +268,6 @@ class NBA {
                     let date1 = (moment(new Date()).format("YYYY-MM-DD"));
                     return new NBA().updateGames(date1)
                 }
-
             } else {
                 // AN ERROR NOT RELATED TO NOT FINDING THE FILE
                 return console.log("THIS BROKE WHILE CREATING GAMES IN createGames() ", e)
@@ -281,7 +275,7 @@ class NBA {
         }
     }
 
-    // IDEA FOR RUNNING TIMER ONLY WHEN GAMES ARE LIVE
+    // IDEA FOR UPDATING SCORES ONLY WHEN GAMES ARE LIVE
     async isLive() {
         // CHECK OUR CURRENT LIST OF GAMES, IF ANY GAME OF THE GAMES 'status' property or key shows a value === 'InProgress' then run the function to update the scores
         async function inProgress() {
@@ -289,62 +283,84 @@ class NBA {
             })
             return live
         }
-
         inProgress()
             .then(inProgress => {
-
+                let runUpdate = false
                 inProgress.map(el => {
-                    let status = el.status
+                    let inProgressCounter = 1
+                    inProgressCounter ++;
                     let homeTeam = el.home_team;
                     let awayTeam = el.away_team;
                     let dateTimes = moment(el.date_time).format()
-                    let format = dateTimes.split('T')[1]
-                    let hours = format.split(":")[0]
-                    let minutes = format.split(":")[1]
                     let current = new Date()
                     let currentDate = moment(current).format()
-                    console.log("CURRENT DATE",currentDate)
-                    console.log ("GAME TIME",dateTimes)
-                    if (dateTimes <= currentDate) {
+                    if (dateTimes <= currentDate & inProgressCounter <3) {
                         console.log('============================================================================================');
-                        console.log(`The ${homeTeam} vs. ${awayTeam} GAME IS LIVE! UPDATING SCORES!`)
+                        console.log(`The ${homeTeam} vs. ${awayTeam} GAME IS LIVE!`)
                         console.log('============================================================================================');
-                        new NBA().getGames()
-                        new NBA().updateGames().then(res => res.json()).then(data => {
-                            data.map(el => {
-                                let status1 = el.status
-                                let homeTeam1 = el.home_team;
-                                let awayTeam1 = el.away_team;
-
-                                if (status1 === 'InProgress') {
-                                    console.log('============================================================================================');
-                                    console.log(`The ${homeTeam1} vs. ${awayTeam1} GAME IS LIVE! UPDATING SCORES!`)
-                                    console.log('============================================================================================');
-                                    new NBA().getGames();
-                                    new NBA().updateGames();
-                                    return true
-                                } if (status === "Final") {
-                                    console.log('============================================================================================');
-                                    console.log(`The ${homeTeam1} vs. ${awayTeam1} GAME IS OVER`)
-                                    console.log('============================================================================================');
-                                    return false
-                                }
-                            })
-                        })
-
-
+                        return runUpdate = true
                     } else {
-                        console.log('============================================================================================');
-                        console.log(`The ${homeTeam} vs. ${awayTeam} GAME IS NOT LIVE! \nGAME TIME IS SCHEDULED AT ${hours}:${minutes}!`)
-                        console.log('============================================================================================');
-                        return false
+                        inProgressCounter = 0
+                        return runUpdate = false
                     }
                 })
+                if (runUpdate === true) {
+                    new NBA().getGames()
+                        .then(data => {
+                            console.log(data)
+                            let date1 = moment(new Date())
+                            new NBA().updateGames(date1)
+                        })
+                        .then(data => {
+                            console.log("YAY!!!")
+                            let update = false;
+                            function test() {
+                                let updateCounter =0
+                                updateCounter++;
+                                data.map(el => {
+                                    console.log(updateCounter)
+                                    let status1 = el.Status
+                                    if (status1 == 'InProgress' & updateCounter < 25) {
+                                        new NBA().getGamesDb().then(data => {
+                                            data.map(el => {
+                                                let time = el.new_record_number
+                                                let currentTime = Date.now()
+                                                if ((currentTime) - (time) >= 0) {
+                                                    return update = true
+                                                } else {
+                                                    return update = false
+                                                }
+                                            })
+                                        })
+                                    }
+                                    if (status1 === "Final") {
+                                        return update = false
+                                    }
+                                })
+                            }
+                            test()
+                            if (update === true) {
+                                console.log('============================================================================================');
+                                console.log(`UPDATING SCORES!`)
+                                console.log('============================================================================================');
+                                let newDate = moment(new Date())
+                                new NBA().updateGames(newDate);
+                                return
+                            } else {
+                                return console.log('UPDATING GAMES EVERY 5 MINUTES')
+                            }
+                        })
+                }
             }).catch(e => {
                 console.log(e)
                 return
             })
     }
+
+
+
+
+
 }
 
 module.exports = NBA
