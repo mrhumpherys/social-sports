@@ -136,12 +136,13 @@ class NBA {
                 });
         return response
     }
-    // THIS ONE MIGHT BE EXTRA LEAVING FOR NOW
+    // GETS NEWS FROM JSON
     async getNewsDb() {
         let date2 = (moment(new Date()).format("YYYY-MM-DD"));
         let response = await JSON.parse(fs.readFileSync(`./data/news-${date2}.json`, 'utf8',));
         return response;
     };
+    // GETS ALL GAMES FROM DATABASE
     async getGamesDb() {
         let response = Games.findAll()
         return response
@@ -207,7 +208,6 @@ class NBA {
                     new_record_number: Date.now(),
                 }
             })
-            console.log(data)
             // CREATE THE RECORDS IN BULK, DB WONT ALLOW DUPLICATES BUT CATCH THE ERROR
             Games.bulkCreate(data, {
                 fields: ['id',
@@ -276,9 +276,8 @@ class NBA {
     }
 
     // IDEA FOR UPDATING SCORES ONLY WHEN GAMES ARE LIVE
-    async isLive() {
+    isLive() {
         // CHECK OUR CURRENT LIST OF GAMES, IF ANY GAME OF THE GAMES 'status' property or key shows a value === 'InProgress' then run the function to update the scores
-
         new NBA().getGamesDb()
             .then(inProgress => {
                 let runUpdate = false
@@ -304,19 +303,15 @@ class NBA {
                 console.log('============================================================================================');
                 if (runUpdate == true) {
                     new NBA().getGamesDb().then(inProgress1 => {
-                        let updateCounter = 0
-                        updateCounter++;
                         let pastTime
                         let homeTeam
                         let awayTeam
                         let updateScores = false
                         inProgress1.map(el => {
-
                             let homeTeam = el.home_team;
                             let awayTeam = el.away_team;
                             let status = el.status
                             pastTime = el.new_record_number
-
                             awayTeam = awayTeam
                             homeTeam = homeTeam
                             if (status === 'InProgress') {
@@ -327,7 +322,6 @@ class NBA {
                                 return
                             }
                         }); console.log(updateScores)
-
                         if (updateScores === true) {
                             console.log("Time Remaining",((Date.now()-(pastTime)- 300000)),"milliseconds")
                             if ((Date.now()-(pastTime) >= 300000)) {
@@ -341,7 +335,8 @@ class NBA {
                                 console.log(`OUR SCORES CAN ONLY BE UPDATED EVERY 5 MINUTES`)
                                 console.log('============================================================================================');
                                 runUpdate = false
-                                return
+                                return 
+                                
                             }
                         } else {
                             return
