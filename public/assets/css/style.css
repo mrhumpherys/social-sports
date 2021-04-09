@@ -93,7 +93,10 @@ a:hover {
 footer {
   margin-top: 3rem;
 }
-
+.MIN{
+  max-height: 100px;
+  overflow: hidden;
+}
 .carousel-item {
   background-size: cover;
   background-repeat: no-repeat;
