@@ -1,0 +1,20 @@
+
+    <a href="/game/{{id}}">
+        <div class="game-card d-flex justify-content-between">
+            <div class="row">
+                <div class="col-md-3 team-content">
+                    <img src="{{render_team_logo home_team_id}}" alt="{{render_team_name home_team_id}}"
+                        class="img-fluid">
+                </div>
+                <div class="col-md-6 game-detail text-center">
+                    <h3>{{render_team_name this.home_team_id}}</h3>
+                    <h3 class="small">VS</h3>
+                    <h3>{{render_team_name this.away_team_id}}</h3>
+                </div>
+                <div class="col-md-3 team-content">
+                    <img src="{{render_team_logo away_team_id}}" alt="{{render_team_name away_team_id}}"
+                        class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </a>

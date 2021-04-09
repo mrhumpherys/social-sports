@@ -1,150 +1,52 @@
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/style-sports.css">
-<!-- NAVBAR start -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#"><img src="images/logo.png" class="img-fluid"></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">DASHBOARD</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            SPORTS
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">NBA</a></li>
-            <li><a class="dropdown-item" href="#">NFL</a></li>
-            <li><a class="dropdown-item" href="#">MLB</a></li>
-            <li><a class="dropdown-item" href="#">NHL</a></li>
-          </ul>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            LOGIN
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">ACCOUT</a></li>
-            <li><a class="dropdown-item" href="#">LOGOUT</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-<!-- NAVBAR end -->
-<main>
-  <!---------------------------- START container ---------------------------->
-  <!-- <div class="container">
-      <div class="row d-flex justify-content-center">
-        <div>     -->
-  <div class="container mt-5">
+
+<div class="container mt-5">
     <div class="row d-flex justify-content-center">
-      <div class="col-md-10">
-        <div class="row">
-          <div class="col-12 d-flex justify-content-between g-0">
-            <div>
-              <h1 class="page-title">{{render_team_name game.HomeTeamID}} &nbsp;&nbsp;<span
-                  class="text-muted">-VS-</span>&nbsp;&nbsp;
-                {{render_team_name game.AwayTeamID}}</h1>
-            </div>
-            <div><a href="#" class="btn btn-primary">upvote</a></div>
-
-          </div>
-        </div>
-        <!-- VOTE AND TEAM LOGO SECTION -->
-
-        <!-- TEAM SELECT buttons -->
-        <div class="row">
-          <div class="col d-flex align-items-center justify-content-center">
-            <div class="text-center">
-              <img src="{{render_team_url game.HomeTeamID}}" class="img-fluid">
-              <h4 class="mt-2">20 - 14</h4>
-            </div>
-          </div>
-          <div class="col-5 text-center d-flex align-items-center justify-content-center">
-            <h3 class="score d-flex justify-content-center align-items-center">{{#if
-              HomeTeamScore}}{{HomeTeamScore}}{{else}}105{{/if}} <span class="time">Q4
-                3:30</span> {{#if AwayTeamScore}}{{AwayTeamScore}}{{else}}94{{/if}}</h3>
-          </div>
-          <div class="col d-flex align-items-center justify-content-center">
-            <div class="text-center">
-              <img src="{{render_team_url game.AwayTeamID}}" class="img-fluid">
-              <h4 class="mt-2">20 - 14</h4>
-            </div>
-          </div>
-        </div>
-        <!-- END  -->
-      </div>
-      <!-- GAME INFO DIV -->
-      <div class="row mt-5">
-        <div class="col-12">
-          <div class="page-section game-info bg-mid">
-            <h3>GAME INFO</h3>
-            <p>No info to show at this time, please check back again for an update.</p>
-          </div>
-        </div>
-      </div>
-      <!-- COMMENTS DIV -->
-      <div class="row mt-5">
-        <div class="col-12">
-          <div class="page-section game-info bg-mid">
+        <div class="col-md-10">
             <div class="row">
-              <div class="col d-flex justify-content-between">
-                <div>
-                  <h3>GAME CHATTER</h3>
-                </div>
-                <div>130 COMMENTS</div>
-              </div>
-
-            </div>
-            <div class="row">
-              <div class="col-12">
-                {{#each game.comments}}
-                <div class="comment">
-                  <div class="comment-body">
-                    <div class="d-flex">
-                      <div class="flex-shrink-0">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar{{random_number}}.png" alt="..."
-                          class="comment-img">
-                      </div>
-                      <div class="flex-grow-1 ms-3 flex-column">
-                        {{comment_text}}
-                        <div class="comment-meta">
-                          <ul class="list-inline">
-                            <li class="list-inline-item"><i class="fas fa-user-alt"></i>{{user.username}}</li>
-                            <li class="list-inline-item"><i class="fas fa-calendar-alt"></i>Post Date</li>
-                            <li class="list-inline-item"><a href=""><i class="far fa-edit"></i>Edit</a></li>
-                            <li class="list-inline-item"><a href="#"><i class="far fa-trash-alt"></i>Delete</a>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
+                <div class="col-12 d-flex justify-content-between g-0">
+                    <div>
+                        <h1 class="page-title">{{render_team_name game.away_team_id}} -VS- {{render_team_name game.home_team_id}}</h1>
                     </div>
-                  </div>
+                    <div><a href="#" class="btn btn-primary">upvote</a></div>
+
                 </div>
-                {{/each}}
-                <!--end comment-->
-
-
-                <form action="">
-                  <div class="mb-3">
-                    <textarea class="form-control" rows="4"></textarea>
-                  </div>
-                  <button type="button" class="btn btn-primary">POST COMMENT</button>
-                </form>
-              </div>
             </div>
-          </div>
+            <div class="row ">
+                <div class="col-12 single-game">
+                    <div class="row">
+                        <div class="col d-flex align-items-center justify-content-center">
+                            <div class="text-center">
+                                <img src="{{render_team_logo game.away_team_id}}" alt="{{render_team_name game.away_team_id}}"
+                                    class="img-fluid">
+                                <h4 class="mt-2">20 - 14</h4>
+                            </div>
+                        </div>
+                        <div class="col-5 text-center d-flex align-items-center justify-content-center">
+                            <h3 class="score d-flex justify-content-center align-items-center">{{game.away_team_score}} <span class="time">Q{{game.quarter}}<br/ >
+                                    {{game.time_remaining_minutes}}:{{game.time_remaining_seconds}}</span> {{game.home_team_score}} </h3>
+                        </div>
+                        <div class="col d-flex align-items-center justify-content-center">
+                            <div class="text-center">
+                                <img src="{{render_team_logo game.home_team_id}}" alt="{{render_team_name game.home_team_id}}"
+                                    class="img-fluid">
+                                <h4 class="mt-2">20 - 14</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-12">
+                            <div class="page-section game-info bg-mid">
+                                <h3>GAME INFO</h3>
+                                <p>No info to show at this time, please check back again for an update.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                   <!-- {{> comments game.comments}} -->
+
+                </div>
+                <!--end single game-->
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-</main>
+</div>

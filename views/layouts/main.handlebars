@@ -21,90 +21,60 @@
 </head>
 
 <body>
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-trans">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand logo" href="#"><img src="/assets/images/logo.png"></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">DASHBOARD</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            SPORTS
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">NBA</a></li>
-                            <li><a class="dropdown-item" href="#">NFL</a></li>
-                            <li><a class="dropdown-item" href="#">MLB</a></li>
-                            <li><a class="dropdown-item" href="#">NHL</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            LOGIN
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">ACCOUT</a></li>
-                            <li><a class="dropdown-item" href="#">LOGOUT</a></li>
-                        </ul>
-                    </li>
+          <a class="navbar-brand" href="#"><img src="/assets/images/logo.png"></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/">DASHBOARD</a>
+              </li>
+              <!--
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  SPORTS
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="#">NBA</a></li>
+                  <li><a class="dropdown-item" href="#">NFL</a></li>
+                  <li><a class="dropdown-item" href="#">MLB</a></li>
+                  <li><a class="dropdown-item" href="#">NHL</a></li>
                 </ul>
-            </div>
+              </li>
+              --> 
+              {{#unless loggedIn}}
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/login">LOGIN</a>
+                </li>
+              {{/unless}}
+              {{#if loggedIn}}
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="/login" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  SETTINGS
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="/profile">PROFILE</a></li>
+                  <li><a class="dropdown-item" href="#">LOGOUT</a></li>
+                </ul>
+              </li>
+              {{/if}}
+            </ul>
+          </div>
         </div>
-    </nav>
+      </nav>
     <main>
-        <div class="hero">
-            <div class="over-hero text-right">
-                <h1>Welcome to Comics Explained</h1>
-                <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, sunt sapiente. Deleniti
-                    voluptate voluptatibus ipsam possimus nostrum vel!</h2>
-                <a href="" class="btn btn-primary">click here</a>
-            </div>
-            <img src="/assets/images/herobg.png">
-        </div>
-        <div class="container">
-            <div class="row d-flex justify-content-center">
-                <div class="col">
-                    <div class="row">
-                        <div class="col-md-8">
-                            
-                            <div class="row">
-                                <div class="col-12">
-                                    
-                                    <ul class="list-inline subnav">
-                                        <li class="list-inline-item"><h1 class="section-title">GAMES</h1></li>
-                                        <li class="list-inline-item"><a href="">NBA</a></li>
-                                        <li class="list-divider list-inline-item"> | </li>
-                                        <li class="list-inline-item"><a href="">NFL</a></li>
-                                        <li class="list-divider list-inline-item"> | </li>
-                                        <li class="list-inline-item"><a href="">NHL</a></li>
-                                        <li class="list-divider list-inline-item"> | </li>
-                                        <li class="list-inline-item"><a href="">MLB</a></li>
-                                        <li class="list-divider list-inline-item"> | </li>
-                                        <li class="list-inline-item"><a href="">NBA</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                       {{{body}}}
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
+        
+       {{{ body }}}
 
     </main>
     <footer>
-        <div class="container">
+        <div class="container text-center">
             <p>&copy; 2021 Social Sports. All Rights Reserved.</p>
         </div>
 

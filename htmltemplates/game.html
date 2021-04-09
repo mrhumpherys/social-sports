@@ -16,8 +16,9 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,400;0,800;1,100;1,400;1,800&display=swap"
     rel="stylesheet" />
-  <link rel="stylesheet" href="../public/assets/css/style.css" />
-  <title>Hello, world!</title>
+    <link rel="stylesheet" href="../public/css/style.css">
+  <link rel="stylesheet" href="../public/css/style-sports.css" />
+  <title>{{game title}}</title>
 </head>
 <!-- BODY start -->
 
@@ -25,9 +26,7 @@
   <!-- NAVBAR start -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">
-        <img src="images/logo.png">
-      </a>
+      <a class="navbar-brand" href="#"><img src="images/logo.png" class="img-fluid"></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -66,184 +65,167 @@
   <!-- NAVBAR end -->
   <main>
     <!---------------------------- START container ---------------------------->
-    <!-- <div class="container">
-      <div class="row d-flex justify-content-center">
-        <div>     -->
-    <div class="container-fluid">
-      <div class=" d-flex justify-content-center">
-        <div class="col-md-10">
-          <div class="container">
-            <div class="row d-flex justify-content-start ">
-              <div class="col-md-12">
-                <!-- CONTAINER HEADER -->
-                <h1 class="page-title">
-                  HOME TEAM &nbsp;&nbsp;-VS-&nbsp;&nbsp; AWAY TEAM
-                </h1>
-              </div>
-              <!-- VOTE AND TEAM LOGO SECTION -->
 
-              <!-- TEAM SELECT buttons -->
-              <div class="row col-md-12 mb-2">
-                <div class="col-md-3 mb-4">
-                  <div class="btn-toolbar d-flex justify-content-center" role="toolbar"
-                    aria-label="Toolbar with button groups">
+          <div class="container mt-5">
+            <div class="row d-flex justify-content-center">
+              <div class="col-md-10">
+                <div class="row">
+                  <div class="col-12 d-flex justify-content-between g-0">
+                    <div><h1 class="page-title">HOME TEAM -VS- AWAY TEAM</h1></div>
+                    <div><a href="#" class="btn btn-primary">upvote</a></div>
+                    
+                  </div>
+                </div>
+                <div class="row ">
+                  <div class="col-12 single-game">
                     <div class="row">
-                      <div class="col-md-12 team-btn btn-group mb-3" role="group" aria-label="First group">
-                        <button type="button" class="btn btn-primary btn-lg">Vote for the Home Team</button>
+                      <div class="col d-flex align-items-center justify-content-center">
+                        <div class="text-center">
+                          <img src="https://upload.wikimedia.org/wikipedia/en/f/fb/Miami_Heat_logo.svg" class="img-fluid">
+                          <h4 class="mt-2">20 - 14</h4>
+                        </div>
                       </div>
-                      <!-- HOMETEAM LOGO -->
-                      <div class="game-card d-flex justify-content-between">
-                        <div class="col-md-12 team-content">
-                          <img src="https://upload.wikimedia.org/wikipedia/en/0/02/Washington_Wizards_logo.svg" alt=""
-                            class="img-fluid" />
+                      <div class="col-5 text-center d-flex align-items-center justify-content-center">
+                        <h3 class="score d-flex justify-content-center align-items-center">105 <span class="time">Q4 3:30</span> 99</h3>
+                      </div>
+                      <div class="col d-flex align-items-center justify-content-center">
+                        <div class="text-center">
+                          <img src="https://upload.wikimedia.org/wikipedia/en/f/fb/Miami_Heat_logo.svg" class="img-fluid">
+                          <h4 class="mt-2">20 - 14</h4>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mt-5">
+                      <div class="col-12">
+                        <div class="page-section game-info bg-mid">
+                          <h3>GAME INFO</h3>
+                          <p>No info to show at this time, please check back again for an update.</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mt-5">
+                      <div class="col-12">
+                        <div class="page-section game-info bg-mid">
+                          <div class="row">
+                            <div class="col d-flex justify-content-between">
+                              <div><h3>GAME CHATTER</h3></div>
+                          <div>130 COMMENTS</div>
+                            </div>
+                          
+                        </div>
+                          <div class="row">
+                            <div class="col-12">
+                              <div class="comment">
+                              <div class="comment-body">
+                                <div class="d-flex">
+                                  <div class="flex-shrink-0">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="..." class="comment-img">
+                                  </div>
+                                  <div class="flex-grow-1 ms-3 flex-column">
+                                    This is some content from a media component. You can replace this with any content and adjust it as needed.
+                                    <div class="comment-meta">
+                                      <ul class="list-inline">
+                                        <li class="list-inline-item"><i class="fas fa-user-alt"></i>Username</li>
+                                        <li class="list-inline-item"><i class="fas fa-calendar-alt"></i>Post Date</li>
+                                        <li class="list-inline-item"><a href=""><i class="far fa-edit"></i>Edit</a></li>
+                                        <li class="list-inline-item"><a href="#"><i class="far fa-trash-alt"></i>Delete</a></li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <!--end comment-->
+
+                            <div class="comment">
+                              <div class="comment-body">
+                                <div class="d-flex">
+                                  <div class="flex-shrink-0">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="..." class="comment-img">
+                                  </div>
+                                  <div class="flex-grow-1 ms-3 flex-column">
+                                    This is some content from a media component. You can replace this with any content and adjust it as needed.
+                                    <div class="comment-meta">
+                                      <ul class="list-inline">
+                                        <li class="list-inline-item"><i class="fas fa-user-alt"></i>Username</li>
+                                        <li class="list-inline-item"><i class="fas fa-calendar-alt"></i>Post Date</li>
+                                        <li class="list-inline-item"><a href=""><i class="far fa-edit"></i>Edit</a></li>
+                                        <li class="list-inline-item"><a href="#"><i class="far fa-trash-alt"></i>Delete</a></li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <!--end comment-->
+
+                            <div class="comment">
+                              <div class="comment-body">
+                                <div class="d-flex">
+                                  <div class="flex-shrink-0">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="..." class="comment-img">
+                                  </div>
+                                  <div class="flex-grow-1 ms-3 flex-column">
+                                    This is some content from a media component. You can replace this with any content and adjust it as needed.
+                                    <div class="comment-meta">
+                                      <ul class="list-inline">
+                                        <li class="list-inline-item"><i class="fas fa-user-alt"></i>Username</li>
+                                        <li class="list-inline-item"><i class="fas fa-calendar-alt"></i>Post Date</li>
+                                        <li class="list-inline-item"><a href=""><i class="far fa-edit"></i>Edit</a></li>
+                                        <li class="list-inline-item"><a href="#"><i class="far fa-trash-alt"></i>Delete</a></li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <!--end comment-->
+
+                            <div class="comment">
+                              <div class="comment-body">
+                                <div class="d-flex">
+                                  <div class="flex-shrink-0">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="..." class="comment-img">
+                                  </div>
+                                  <div class="flex-grow-1 ms-3 flex-column">
+                                    This is some content from a media component. You can replace this with any content and adjust it as needed.
+                                    <div class="comment-meta">
+                                      <ul class="list-inline">
+                                        <li class="list-inline-item"><i class="fas fa-user-alt"></i>Username</li>
+                                        <li class="list-inline-item"><i class="fas fa-calendar-alt"></i>Post Date</li>
+                                        <li class="list-inline-item"><a href=""><i class="far fa-edit"></i>Edit</a></li>
+                                        <li class="list-inline-item"><a href="#"><i class="far fa-trash-alt"></i>Delete</a></li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <!--end comment-->
+                            <form action="">
+                              <div class="mb-3">
+                              <textarea class="form-control" rows="4"></textarea>
+                            </div>
+                              <button type="button" class="btn btn-primary">POST COMMENT</button>
+                            </form>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <!-- GAME CARD FOR DISPLAY TEAMS AND TIME -->
-                <div class="col-md-6 mb-4">
-                  <div class="d-flex justify-content-center home-away">
-                    <div class="row">
-                      <div class="team-content">
-                        <div class="col-md-6 game-detail text-center">
-                          <h3>HOME TEAM</h3>
-                          <h5>VS</h5>
-                          <h3>AWAY TEAM</h3>
-                          <h3>@9:00</h3>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- AWAY TEAM LOGO -->
-                <div class="col-md-3 mb-4">
-                  <div class="btn-toolbar d-flex justify-content-center" role="toolbar"
-                    aria-label="Toolbar with button groups">
-                    <div class="row">
-                      <div class="col-md-12 team-btn btn-group mb-3" role="group" aria-label="First group">
-                        <button type="button" class="btn btn-primary btn-lg">Vote for the Home Team</button>
-                      </div>
-                      <!-- HOMETEAM LOGO -->
-                      <div class="game-card d-flex justify-content-between">
-                        <div class="col-md-12 team-content">
-                          <img src="https://upload.wikimedia.org/wikipedia/en/0/02/Washington_Wizards_logo.svg" alt=""
-                            class="img-fluid" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- END  -->
-              </div>
-              <!-- GAME INFO DIV -->
-              <div class="col-md-12 mb-4">
-                <div class="game-card d-flex justify-content-between">
-                  <div class="row">
-                    <div class="col-md-6 game-detail text-center">
-                      <h3>GAME INFO</h3>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- COMMENTS DIV -->
-              <div class="col-md-12 mb-4">
-                <div class="game-card d-flex justify-content-between">
-                  <div class="row">
-                    <div class="col-md-6 game-detail text-center">
-                      <h3>COMMENTS</h3>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- COMMENTS DIV -->
-              <div class="col-md-12 mb-4">
-                <div class="game-card d-flex justify-content-between">
-                  <div class="row">
-                    <div class="col-md-6 game-detail text-center">
-                      <h3>COMMENTS</h3>
-                    </div>
-                  </div>
+                  <!--end single game-->
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-
-
-
-
-
-      <!---------------------------------------------------TEST TEST TEST-------------------------------------------------------------------->
-
-      <!---------------------------------------------------TEST TEST TEST-------------------------------------------------------------------->
-      <!-- CHAT header -->
-      <main role="main" class="chat container">
-        <div
-          class="d-flex align-items-center p-3 my-3 bg-secondary bg-gradient text-white-50 bg-blue rounded box-shadow">
-          <img class="mr-3" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" width="48" height="48">
-          <div class="lh-100">
-            <h6 class="mb-0 text-white lh-100">John Doe</h6>
-            <small>Messages</small>
-          </div>
-        </div>
-        <!-- CHAT body -->
-        <div class="my-3 p-3 bg-secondary bg-gradient rounded box-shadow">
-          <h6 class="border-bottom border-gray pb-2 mb-0">Recent updates</h6>
-          <div class="media text-info pt-3">
-            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="" class="mr-2 rounded" width="32"
-              height="32">
-            <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-              <strong class="d-block text-gray-dark">@username</strong>
-              Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor
-              mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-            </p>
-          </div>
-          <div class="media text-info pt-3">
-            <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="" class="mr-2 rounded" width="32"
-              height="32">
-            <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-              <strong class="d-block text-gray-dark">@username</strong>
-              Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor
-              mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-            </p>
-          </div>
-          <div class="media text-info pt-3">
-            <img src="https://bootdey.com/img/Content/avatar/avatar5.png" alt="" class="mr-2 rounded" width="32"
-              height="32">
-            <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-              <strong class="d-block text-gray-dark">@username</strong>
-              Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor
-              mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-            </p>
-          </div>
-          <div class="media text-info pt-3">
-            <img src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="" class="mr-2 rounded" width="32"
-              height="32">
-            <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-              <strong class="d-block text-gray-dark">@username</strong>
-              Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor
-              mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-            </p>
-          </div>
-          <small class="d-block text-right mt-3">
-            <a href="#">All messages</a>
-          </small>
-        </div>
-        <!-- CHAT end -->
+      
       </main>
       <!-- end  -->
-    </div>
-    </div>
-    </div>
-    <!---------------------------- END container ---------------------------->
-    </div>
-    <!---------------------------- END container ---------------------------->
-  </main>
+
   <!-- FOOTER start -->
   <footer>
-    <div class="container">
+    <div class="container text-center">
       <p>&copy; 2021 Social Sports. All Rights Reserved.</p>
     </div>
   </footer>
