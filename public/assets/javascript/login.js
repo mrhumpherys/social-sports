@@ -15,12 +15,12 @@ async function loginFormHandler(event) {
         });
 
         if (response.ok) {
-            document.location.replace('/');
+            document.location.replace('/dashboard');
         } else {
             alert(response.statusText);
         }
     }
 }
-
+// ===================  line 18 put replace dashboard =============================== //
 
 document.querySelector('#login').addEventListener('click', loginFormHandler);

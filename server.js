@@ -4,8 +4,7 @@ const sequelize = require('./config/connection');
 const path = require('path');
 const exphbs = require('express-handlebars');
 const NBA = require('./nba')
-const moment = require('moment');
-const Games = require('./models/Games')
+const deleteFiles = require('./json-file-maintenance')
 
 
 //IMPORT SESSIONS
@@ -44,40 +43,6 @@ sequelize.sync({ force: true }).then(() => {
 
 // DO NOT REMOVE THE CODE BELOW IF YOU DONT UNDERSTAND WHAT IT DOES ASK! - ANTHONY
 
-async function create() {
-    // check for game data
-    data = new NBA().needGames();
-    console.log('============================================================================================');
-    console.log("CREATE GAMES?", data)
-    console.log('============================================================================================');
-    // if no game data, run api call and create games in database
-    if (data === false) {
-
-        return
-
-    } else {
-        let date = (moment(new Date()).format("YYYY-MM-DD"))
-        new NBA().createGames(date);
-
-    }
-}
-
-create()
-
-new NBA().isLive()
-    .then(inProgress => {
-        if (inProgress.length > 0) {
-            console.log('============================================================================================');
-            console.log('LIVE GAMES FOUND! UPDATING GAMES!')
-            console.log('============================================================================================');
-            new NBA().getGames();
-            new NBA().updateGames();
-        } else {
-            console.log('============================================================================================');
-            console.log('NO GAMES ARE CURRENTLY LIVE!')
-            console.log('============================================================================================');
-        }
-    }).catch(e => {
-        console.log(e)
-        return
-    })
+new NBA().create();
+deleteFiles();
+new NBA().isLive();

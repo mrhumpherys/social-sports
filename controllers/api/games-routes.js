@@ -18,25 +18,7 @@ router.get('/', (req, res) => {
   let date = (moment(new Date()).format("YYYY-MM-DD"));
 
 
-  // CHECK FOR LIVE GAMES
   new NBA().isLive()
-    .then(inProgress => {
-      if (inProgress.length > 0) {
-        console.log('============================================================================================');
-        console.log('LIVE GAMES FOUND! UPDATING GAMES!')
-        console.log('============================================================================================');
-        new NBA().getGames();
-        new NBA().updateGames();
-      } else {
-        console.log('============================================================================================');
-        console.log('NO GAMES ARE CURRENTLY LIVE!')
-        console.log('============================================================================================');
-      }
-    }).catch(e => {
-      console.log(e)
-      return
-    })
-
 
   // CHECK IF WE HAVE GAME DATA
   // ==========================
@@ -96,9 +78,9 @@ router.get('/', (req, res) => {
     ]
   })
     .then(dbPostData => {
-      
+
       res.json(dbPostData)
-    
+      console.log('============================================================================================');
     })
     .catch(err => {
       console.log(err);
@@ -107,6 +89,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
+
   Games.findOne({
     where: {
       id: req.params.id
@@ -148,6 +131,7 @@ router.get('/:id', (req, res) => {
         res.status(404).json({ message: 'No Game found with this id' });
         return;
       }
+
       res.json(dbPostData);
     })
     .catch(err => {

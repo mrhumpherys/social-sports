@@ -3,7 +3,6 @@ const fs = require('fs');
 const fetch = require('node-fetch');
 const moment = require('moment');
 const { Games } = require('./models');
-const path = require('path');
 
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
 // +-----------------------------------------------------------------------------------+//
@@ -16,48 +15,22 @@ class NBA {
         this.data = [];
     }
 
-    async getGames() {
-        let date = (moment(new Date()).format("YYYY-MM-DD"));
-        let response = await
-            fetch(`https://fly.sportsdata.io/v3/nba/scores/json/GamesByDate/${date}`, {
-                method: 'GET',
-                headers: {
-                    'Ocp-Apim-Subscription-Key': process.env.KEY
-                }
-            })
-                .then(res => res.json())
-                .then(json => {
-                    let date1 = (moment(new Date()).format("YYYY-MM-DD"));
-                    const data = JSON.stringify(json);
-                    fs.writeFileSync(`./data/games-${date1}.json`, data, 'utf8', (err) => {
-                        if (err) {
-                            console.log(`Error writing file: ${err}`);
-                        } else {
-                            console.log(`Game File is written successfully!`);
-                        }
-                    });
-                });
-        return response
+    // CHECKS FOR OUR LOCAL JSON FILE IF NOT FOUND RUN API AND CREATE THE GAMES INTO THE DATABASE
+    async create() {
+        // check for game data
+        let data = new NBA().needGames();
+        console.log('============================================================================================');
+        console.log("CREATE GAMES?", data)
+        console.log('============================================================================================');
+        // if no game data, run api call and create games in database
+        if (data === false) {
+            return
+        } else {
+            let date = (moment(new Date()).format("YYYY-MM-DD"))
+            new NBA().getNews()
+            return new NBA().createGames(date);
+        }
     }
-
-    async getNews() {
-        let response = await
-            fetch(`https://fly.sportsdata.io/v3/nba/scores/json/News`, {
-                method: 'GET',
-                headers: {
-                    'Ocp-Apim-Subscription-Key': process.env.KEY
-                }
-            })
-                .then(res => res.json())
-        return response
-    }
-
-    async getGamesDb(date) {
-        // let date = (moment(new Date()).format("YYYY-MM-DD"));
-        let response = await JSON.parse(fs.readFileSync(`./data/games-${date}.json`, 'utf8',));
-        return response;
-    };
-
 
     // MAIN FUNCTION TO CREATE INSTANCES OF THE GAME IN THE DATABASE FROM DATA IN OUR DATA FILE FOLDER WHERE THE GAME DATA FOR EACH DAY WILL BE
     async createGames(date) {
@@ -92,7 +65,7 @@ class NBA {
                 return;
             });
         } catch (e) {
-            if (e.errno == -4058) {
+            if (e.errno === -4058) {
                 console.log("FILE NOT FOUND CREATING GAMES!");
                 // IF FILE NOT FOUND ERROR, GET GAMES- GET GAMES WILL FETCH THE API AND WRITE THE JSON TO A FILE IN THE DATA FOLDER
                 try {
@@ -100,24 +73,82 @@ class NBA {
                     return response
                 }
                 catch (e) {
-                    console.log("This broke while attempting to run the get games inside the create game function inside the catch error", e)
+                    return console.log("This broke while attempting to run the get games inside the create game function inside the catch error", e)
                 }
                 finally {
                     // IF THE GET GAMES COMES BACK WITH OUT ERROR, RUN CREATE GAMES AGAIN TO LOAD THE DB 
                     let date1 = (moment(new Date()).format("YYYY-MM-DD"));
-                    new NBA().createGames(date1)
+                    return new NBA().createGames(date1)
                 }
-
             } else {
                 // AN ERROR NOT RELATED TO NOT FINDING THE FILE
-                console.log("THIS BROKE WHILE CREATING GAMES IN createGames() ", e)
+                return console.log("THIS BROKE WHILE CREATING GAMES IN createGames() ", e)
             }
         }
     }
 
+    // RETURNS CURRENT API GAME DATA FOR TODAY'S DATE
+    async getGames() {
+        // ALSO NEWS STORIES
+        let date = (moment(new Date()).format("YYYY-MM-DD"));
+        let response = await
+            fetch(`https://fly.sportsdata.io/v3/nba/scores/json/GamesByDate/${date}`, {
+                method: 'GET',
+                headers: {
+                    'Ocp-Apim-Subscription-Key': process.env.KEY
+                }
+            })
+                .then(res => res.json())
+                .then(json => {
+                    let date1 = (moment(new Date()).format("YYYY-MM-DD"));
+                    const data = JSON.stringify(json);
+                    fs.writeFileSync(`./data/games-${date1}.json`, data, 'utf8', (err) => {
+                        if (err) {
+                            return console.log(`Error writing file: ${err}`);
+                        } else {
+                            return console.log(`Game File is written successfully!`);
+                        }
+                    });
+                });
+        new NBA().getNews()
+        return response
+    }
+    // GETS THE NEWS STORIES FROM THE API
+    async getNews() {
+        let response = await
+            fetch(`https://fly.sportsdata.io/v3/nba/scores/json/News`, {
+                method: 'GET',
+                headers: {
+                    'Ocp-Apim-Subscription-Key': process.env.KEY
+                }
+            })
+                .then(res => res.json())
+                .then(json => {
+                    let date1 = (moment(new Date()).format("YYYY-MM-DD"));
+                    const data = JSON.stringify(json);
+                    fs.writeFileSync(`./data/news-${date1}.json`, data, 'utf8', (err) => {
+                        if (err) {
+                            return console.log(`Error writing file: ${err}`);
+                        } else {
+                            return console.log(`Game File is written successfully!`);
+                        }
+                    });
+                });
+        return response
+    }
+    // THIS ONE MIGHT BE EXTRA LEAVING FOR NOW
+    async getNewsDb() {
+        let date2 = (moment(new Date()).format("YYYY-MM-DD"));
+        let response = await JSON.parse(fs.readFileSync(`./data/news-${date2}.json`, 'utf8',));
+        return response;
+    };
+    async getGamesDb() {
+        let response = Games.findAll()
+        return response
+    };
 
+    // RETURNS TRUE FALSE IF WE NEED TO UPDATE OUR DATABASE WITH NEW GAME INFORMATION FOR THE DAY
     needGames() {
-
         let date = (moment(new Date()).format("YYYY-MM-DD"));
         // RAN IT WITH TRY/CATCH TO CATCH THE ERROR WHEN THE FILE IS NOT FOUND
         try {
@@ -147,16 +178,14 @@ class NBA {
                 return true
             }
         }
-
     }
 
+    // USED FOR UPDATING THE LIVE SCORES 
     async updateGames(date) {
-
         try {
             let response = JSON.parse(fs.readFileSync(`./data/games-${date}.json`, 'utf8',));
             let games = (response)
             // console.log(games)
-
             let data = await games.map(el => {
                 return {
                     game_id: el.GameID,
@@ -179,7 +208,6 @@ class NBA {
                 }
             })
             console.log(data)
-
             // CREATE THE RECORDS IN BULK, DB WONT ALLOW DUPLICATES BUT CATCH THE ERROR
             Games.bulkCreate(data, {
                 fields: ['id',
@@ -233,32 +261,102 @@ class NBA {
                     return response
                 }
                 catch (e) {
-                    console.log("This broke while attempting to run the get games inside the create game function inside the catch error", e)
+                    return console.log("This broke while attempting to run the get games inside the create game function inside the catch error", e)
                 }
                 finally {
                     // IF THE GET GAMES COMES BACK WITH OUT ERROR, RUN CREATE GAMES AGAIN TO LOAD THE DB 
                     let date1 = (moment(new Date()).format("YYYY-MM-DD"));
-                    new NBA().updateGames(date1)
+                    return new NBA().updateGames(date1)
                 }
-
             } else {
                 // AN ERROR NOT RELATED TO NOT FINDING THE FILE
-                console.log("THIS BROKE WHILE CREATING GAMES IN createGames() ", e)
+                return console.log("THIS BROKE WHILE CREATING GAMES IN createGames() ", e)
             }
         }
     }
 
-    // IDEA FOR RUNNING TIMER ONLY WHEN GAMES ARE LIVE
+    // IDEA FOR UPDATING SCORES ONLY WHEN GAMES ARE LIVE
     async isLive() {
         // CHECK OUR CURRENT LIST OF GAMES, IF ANY GAME OF THE GAMES 'status' property or key shows a value === 'InProgress' then run the function to update the scores
 
-        const inProgress = await Games.findAll({
-            where: { status: 'InProgress' }
-        })
+        new NBA().getGamesDb()
+            .then(inProgress => {
+                let runUpdate = false
+                inProgress.map(el => {
+                    let homeTeam = el.home_team;
+                    let awayTeam = el.away_team;
+                    let status = el.status
+                    let dateTimes = moment(el.date_time).format()
+                    let current = new Date()
+                    let currentDate = moment(current).format()
+                    if (status)
+                        if ((dateTimes) >= (currentDate)) {
+                            runUpdate = true
+                        } else {
+                            console.log('============================================================================================');
+                            console.log(`The ${homeTeam} vs. ${awayTeam} GAME IS NOT LIVE!`)
+                            console.log('============================================================================================');
+                            runUpdate = false
+                        }
+                });
+                console.log('============================================================================================');
+                console.log("LIVE GAMES?", runUpdate)
+                console.log('============================================================================================');
+                if (runUpdate == true) {
+                    new NBA().getGamesDb().then(inProgress1 => {
+                        let updateCounter = 0
+                        updateCounter++;
+                        let pastTime
+                        let homeTeam
+                        let awayTeam
+                        let updateScores = false
+                        inProgress1.map(el => {
 
-        return inProgress
-        // .then(dbPostData => res.json(dbPostData))
+                            let homeTeam = el.home_team;
+                            let awayTeam = el.away_team;
+                            let status = el.status
+                            pastTime = el.new_record_number
+
+                            awayTeam = awayTeam
+                            homeTeam = homeTeam
+                            if (status === 'InProgress') {
+                                console.log('============================================================================================');
+                                console.log(`The ${homeTeam} vs. ${awayTeam} GAME IS LIVE!`)
+                                console.log('============================================================================================');
+                                updateScores = true
+                                return
+                            }
+                        }); console.log(updateScores)
+
+                        if (updateScores === true) {
+                            console.log("Time Remaining",((Date.now()-(pastTime)- 300000)),"milliseconds")
+                            if ((Date.now()-(pastTime) >= 300000)) {
+                                console.log('============================================================================================');
+                                console.log(`The ${homeTeam} vs. ${awayTeam} GAME BEING UPDATED!`)
+                                console.log('============================================================================================');
+                                let newDate = moment(new Date())
+                                new NBA().updateGames(newDate);
+                            } else {
+                                console.log('============================================================================================');
+                                console.log(`OUR SCORES CAN ONLY BE UPDATED EVERY 5 MINUTES`)
+                                console.log('============================================================================================');
+                                runUpdate = false
+                                return
+                            }
+                        } else {
+                            return
+                        }
+                    })
+                }
+            }).catch(e => {
+                console.log(e)
+                return
+            })
     }
 }
 
 module.exports = NBA
+
+
+
+
