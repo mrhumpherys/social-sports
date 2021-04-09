@@ -4,7 +4,7 @@ const sequelize = require('./config/connection');
 const path = require('path');
 const exphbs = require('express-handlebars');
 const NBA = require('./nba')
-const deleteFiles = require('./json-file-maintenance')
+//const deleteFiles = require('./json-file-maintenance')
 
 
 //IMPORT SESSIONS
@@ -44,5 +44,5 @@ sequelize.sync({ force: false }).then(() => {
 // DO NOT REMOVE THE CODE BELOW IF YOU DONT UNDERSTAND WHAT IT DOES ASK! - ANTHONY
 
 new NBA().create();
-deleteFiles();
+//deleteFiles();
 

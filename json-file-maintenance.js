@@ -14,9 +14,9 @@ fs.readdir(dir, (err, files) => {
     // rips the day-date out of the file name
     files.forEach(file => {
         let date = (moment(new Date()).format("YYYY-MM-DD"));
-        currentDay=date.split("-")[2];
-        data = file.split("-")[3];
-        day=data.split('.')[0]
+        let currentDay=date.split("-")[2];
+        let data = file.split("-")[3];
+        let day=data.split('.')[0]
 
         // checks to see if the #of days that have past is greater than or equal to 2, if it is, delete those files.
         if(currentDay-day >= 2){
