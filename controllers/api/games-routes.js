@@ -14,12 +14,8 @@ router.get('/', (req, res) => {
   // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
 
   const NBA = require('../../nba');
-  const moment = require('moment');
-  let date = (moment(new Date()).format("YYYY-MM-DD"));
-
-
   new NBA().isLive()
-
+    
   // CHECK IF WE HAVE GAME DATA
   // ==========================
   async function create() {
@@ -70,10 +66,11 @@ router.get('/', (req, res) => {
       {
         model: Comment,
         attributes: ['id', 'comment_text', 'games_id', 'user_id', 'created_at'],
+        order: [['created_at', 'DESC']],
         include: {
           model: User,
           attributes: ['username']
-        }
+        },
       },
     ]
   })
@@ -89,7 +86,6 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-
   Games.findOne({
     where: {
       id: req.params.id

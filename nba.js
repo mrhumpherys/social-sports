@@ -136,12 +136,13 @@ class NBA {
                 });
         return response
     }
-    // THIS ONE MIGHT BE EXTRA LEAVING FOR NOW
+    // GETS NEWS FROM JSON
     async getNewsDb() {
         let date2 = (moment(new Date()).format("YYYY-MM-DD"));
         let response = await JSON.parse(fs.readFileSync(`./data/news-${date2}.json`, 'utf8',));
         return response;
     };
+    // GETS ALL GAMES FROM DATABASE
     async getGamesDb() {
         let response = Games.findAll()
         return response
@@ -207,7 +208,6 @@ class NBA {
                     new_record_number: Date.now(),
                 }
             })
-            console.log(data)
             // CREATE THE RECORDS IN BULK, DB WONT ALLOW DUPLICATES BUT CATCH THE ERROR
             Games.bulkCreate(data, {
                 fields: ['id',
@@ -276,12 +276,14 @@ class NBA {
     }
 
     // IDEA FOR UPDATING SCORES ONLY WHEN GAMES ARE LIVE
-    async isLive() {
+    isLive() {
         // CHECK OUR CURRENT LIST OF GAMES, IF ANY GAME OF THE GAMES 'status' property or key shows a value === 'InProgress' then run the function to update the scores
-
         new NBA().getGamesDb()
             .then(inProgress => {
                 let runUpdate = false
+                let statusGame = false
+                let api = Date.now();
+                let apiTimer;
                 inProgress.map(el => {
                     let homeTeam = el.home_team;
                     let awayTeam = el.away_team;
@@ -289,65 +291,86 @@ class NBA {
                     let dateTimes = moment(el.date_time).format()
                     let current = new Date()
                     let currentDate = moment(current).format()
-                    if (status)
-                        if ((dateTimes) >= (currentDate)) {
-                            runUpdate = true
-                        } else {
+
+                    if ((dateTimes) <= (currentDate)) {
+                        runUpdate = true
+                        if (status === "InProgress" || status === "Postponed") {
+                            statusGame = true
                             console.log('============================================================================================');
-                            console.log(`The ${homeTeam} vs. ${awayTeam} GAME IS NOT LIVE!`)
+                            console.log(`The ${homeTeam} vs. ${awayTeam} GAME IS LIVE!`)
                             console.log('============================================================================================');
-                            runUpdate = false
                         }
-                });
-                console.log('============================================================================================');
-                console.log("LIVE GAMES?", runUpdate)
-                console.log('============================================================================================');
-                if (runUpdate == true) {
-                    new NBA().getGamesDb().then(inProgress1 => {
-                        let updateCounter = 0
-                        updateCounter++;
-                        let pastTime
-                        let homeTeam
-                        let awayTeam
-                        let updateScores = false
-                        inProgress1.map(el => {
 
-                            let homeTeam = el.home_team;
-                            let awayTeam = el.away_team;
-                            let status = el.status
-                            pastTime = el.new_record_number
+                    } else {
+                        console.log('============================================================================================');
+                        console.log(`The ${homeTeam} vs. ${awayTeam} GAME IS NOT LIVE!`)
+                        console.log('============================================================================================');
+                        runUpdate = false
+                    }
+                })
+                // 
 
-                            awayTeam = awayTeam
-                            homeTeam = homeTeam
-                            if (status === 'InProgress') {
-                                console.log('============================================================================================');
-                                console.log(`The ${homeTeam} vs. ${awayTeam} GAME IS LIVE!`)
-                                console.log('============================================================================================');
-                                updateScores = true
-                                return
-                            }
-                        }); console.log(updateScores)
+                if (runUpdate === true & statusGame === true) {
 
-                        if (updateScores === true) {
-                            console.log("Time Remaining",((Date.now()-(pastTime)- 300000)),"milliseconds")
-                            if ((Date.now()-(pastTime) >= 300000)) {
-                                console.log('============================================================================================');
-                                console.log(`The ${homeTeam} vs. ${awayTeam} GAME BEING UPDATED!`)
-                                console.log('============================================================================================');
-                                let newDate = moment(new Date())
-                                new NBA().updateGames(newDate);
-                            } else {
-                                console.log('============================================================================================');
-                                console.log(`OUR SCORES CAN ONLY BE UPDATED EVERY 5 MINUTES`)
-                                console.log('============================================================================================');
-                                runUpdate = false
-                                return
-                            }
-                        } else {
-                            return
-                        }
-                    })
+                    if ((Date.now()) - api > 400000) {
+                        let date = (moment(new Date()).format("YYYY-MM-DD"));
+
+                        new NBA().getGames();
+                        new NBA().updateGames(date);
+                        return
+                    }
+
+
+
+                } else {
+                    console.log("Games Are Updated Every 5 Minutes")
+                    return
                 }
+                // console.log('============================================================================================');
+                // console.log("LIVE GAMES?", runUpdate)
+                // console.log('============================================================================================');
+                // if (runUpdate == true) {
+                //     new NBA().getGamesDb().then(inProgress1 => {
+                //         let pastTime
+                //         let homeTeam
+                //         let awayTeam
+                //         let updateScores = false
+                //         inProgress1.map(el => {
+                //             let homeTeam = el.home_team;
+                //             let awayTeam = el.away_team;
+                //             let status = el.status
+                //             pastTime = el.new_record_number
+                //             awayTeam = awayTeam
+                //             homeTeam = homeTeam
+                //             if (status === 'InProgress') {
+                //                 console.log('============================================================================================');
+                //                 console.log(`The ${homeTeam} vs. ${awayTeam} GAME IS LIVE!`)
+                //                 console.log('============================================================================================');
+                //                 updateScores = true
+                //                 return
+                //             }
+                //         }); console.log(updateScores)
+                //         if (updateScores === true) {
+                //             console.log("Time Remaining",((Date.now()-(pastTime)- 300000)),"milliseconds")
+                //             if ((Date.now()-(pastTime) >= 300000)) {
+                //                 console.log('============================================================================================');
+                //                 console.log(`The ${homeTeam} vs. ${awayTeam} GAME BEING UPDATED!`)
+                //                 console.log('============================================================================================');
+                //                 let newDate = moment(new Date())
+                //                 new NBA().updateGames(newDate);
+                //             } else {
+                //                 console.log('============================================================================================');
+                //                 console.log(`OUR SCORES CAN ONLY BE UPDATED EVERY 5 MINUTES`)
+                //                 console.log('============================================================================================');
+                //                 runUpdate = false
+                //                 return 
+
+                //             }
+                //         } else {
+                //             return
+                //         }
+                //     })
+                // }
             }).catch(e => {
                 console.log(e)
                 return

@@ -12,26 +12,8 @@ router.get('/', (req, res) => {
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
 
     const NBA = require('../nba');
-    const moment = require('moment');
-    let date = (moment(new Date()).format("YYYY-MM-DD"));
-
-    // ADDED COUNT VISIT TO LIMIT USER LIVE SCORES TO LESS THAN 100 PER LOGIN, THEY CAN PAY FOR MORE!!!
-    // LIVE SCORES WILL NOW ONLY LOAD ON SERVER START ONE CHECK AND THEN YOU MUST BE LOGGED IN
-    // CHECK FOR LIVE GAMES
-    if (req.session.countVisit) {
-        // If the 'countVisit' session variable exists, increment it by 1 and set the 'firstTime' session variable to 'false'
-        req.session.countVisit++
-        req.session.firstTime = false
-        if (require.session < 100) {
-            new NBA().isLive()
-        }
-    } else {
-        // If the 'countVisit' session variable doesn't exist, set it to 1 and set the 'firstTime' session variable to 'true'
-        req.session.countVisit = 1;
-        req.session.firstTime = true;
-        new NBA().isLive()
-    }
-
+    new NBA().isLive()
+    
 
 
 
@@ -39,7 +21,7 @@ router.get('/', (req, res) => {
     // ==========================
     async function create() {
         // check for game data
-        data = new NBA().needGames();
+        let data = new NBA().needGames();
         console.log('============================================================================================');
         console.log("CREATE GAMES?", data)
         console.log('============================================================================================');
@@ -58,6 +40,13 @@ router.get('/', (req, res) => {
         .then(data => {
             const news = (data)
             Games.findAll({
+                // SOMETIMES THIS RETURNS DATA SOMETIMES IT JUST FRICKEN SPINS, TRIED TO CATCH IT AND STOP IT BUT I THINK THE CONNECTION TO MYSQL IS CRAP AND WE HAVE LIKE OVER 1K RECORDS BC OF THE LIVE UPDATES
+                where:{
+                    [Op.or]:
+                    
+                        [{status:'InProgress'},{status:'Scheduled'},{status:'Postponed'},]
+                    
+                },
                 attributes: [
                     'id',
                     'game_id',
@@ -94,11 +83,11 @@ router.get('/', (req, res) => {
                     },
                 ]
             })
-                .then(dbGamesData => {
-
+            .then(dbGamesData => {
+                
                     console.log('============================================================================================');
                     const games = dbGamesData.map(game => game.get({ plain: true }));
-
+                    // console.log(games)
                     // TO ACCESS INFO FOR HANDLEBARS USE game and news
                     // ==============================================
                     console.log('add new news')
@@ -107,17 +96,17 @@ router.get('/', (req, res) => {
                         style: "style.css",
                         games, news,
                         loggedIn: req.session.loggedIn,
-                        countVisit: req.session.countVisit
+                    
                     });
-
                     // ==============================================
                 })
                 .catch(err => {
                     console.log(err);
                     res.status(500).json(err);
                 });
+                // .finally(()=>sequelize.connectionManager.close()).then(() => console.log('shut down gracefully'))
 
-        })
+        });
 
 });
 
