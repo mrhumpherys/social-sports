@@ -6,6 +6,19 @@
   --green: #4edc16;
 }
 
+/* .dynamicContainer {
+  background-image: url("../../assets/images/wallpaper-flame.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  font-family: "Numans", sans-serif;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: start;
+  opacity: 0.5;
+} */
+
 .btn-primary {
   background: var(--green);
   border-color: #45c014;
@@ -114,11 +127,27 @@ p {
 
 .container {
   height: 100%;
-  align-content: center;
 }
+
+/* .dynamicContainer {
+  height: 70%;
+} */
 
 .sign-up-form {
   padding-top: 150px;
+  padding-bottom: 50px;
+  align-content: center;
+  background-image: url("../../assets/images/wallpaper-flame.png");
+  /* background-size: cover; */
+  /* background-repeat: no-repeat; */
+  background-position: center;
+  font-family: "Numans", sans-serif;
+  /* display: flex; */
+  /* flex-wrap: wrap; */
+  justify-content: center;
+  /* align-items: start; */
+  opacity: 0.9;
+  /* max-width: 100%; */
 }
 
 .card {
@@ -218,8 +247,10 @@ input.form-control {
   margin-top: 145px;
 }
 
-#sign-up-card {
-  height: 445px;
+#sign-up-card,
+#login-card 
+{
+  height: 475px;
   background: var(--darkbg);
   padding: 2rem;
   cursor: pointer;
@@ -227,14 +258,16 @@ input.form-control {
   border: 1px solid rgba(0, 0, 0, 0);
 }
 
-#sign-up-card:hover {
+#sign-up-card:hover,
+#login-card:hover {
   border: 1px solid rgba(78, 220, 22, 0.35);
   -webkit-box-shadow: 0px 0px 15px -3px rgba(78, 220, 22, 0.3);
   box-shadow: 0px 0px 15px -3px rgba(78, 220, 22, 0.3);
 }
 
+/* 
 #login-card {
-  height: 400px;
+  height: 475px;
   background: var(--darkbg);
   padding: 2rem;
   cursor: pointer;
@@ -246,7 +279,8 @@ input.form-control {
   border: 1px solid rgba(78, 220, 22, 0.35);
   -webkit-box-shadow: 0px 0px 15px -3px rgba(78, 220, 22, 0.3);
   box-shadow: 0px 0px 15px -3px rgba(78, 220, 22, 0.3);
-}
+} 
+*/
 
 .card {
   box-shadow: 0 0.46875rem 2.1875rem rgba(4, 9, 20, 0.03),
@@ -255,4 +289,5 @@ input.form-control {
     0 0.125rem 0.1875rem rgba(4, 9, 20, 0.03);
   border-width: 0;
   transition: all 0.2s;
-}
+} 
+
