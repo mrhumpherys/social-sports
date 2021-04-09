@@ -15,24 +15,26 @@ router.get('/', (req, res) => {
     const moment = require('moment');
     let date = (moment(new Date()).format("YYYY-MM-DD"));
 
-// ADDED COUNT VISIT TO LIMIT USER LIVE SCORES TO LESS THAN 100 PER LOGIN, THEY CAN PAY FOR MORE!!!
-// LIVE SCORES WILL NOW ONLY LOAD ON SERVER START ONE CHECK AND THEN YOU MUST BE LOGGED IN
+    // ADDED COUNT VISIT TO LIMIT USER LIVE SCORES TO LESS THAN 100 PER LOGIN, THEY CAN PAY FOR MORE!!!
+    // LIVE SCORES WILL NOW ONLY LOAD ON SERVER START ONE CHECK AND THEN YOU MUST BE LOGGED IN
     // CHECK FOR LIVE GAMES
     if (req.session.countVisit) {
         // If the 'countVisit' session variable exists, increment it by 1 and set the 'firstTime' session variable to 'false'
         req.session.countVisit++
         req.session.firstTime = false
-        if(require.session<100){
+        if (require.session < 100) {
             new NBA().isLive()
         }
-      } else {
+    } else {
         // If the 'countVisit' session variable doesn't exist, set it to 1 and set the 'firstTime' session variable to 'true'
         req.session.countVisit = 1;
         req.session.firstTime = true;
         new NBA().isLive()
     }
 
-        
+
+
+
     // CHECK IF WE HAVE GAME DATA
     // ==========================
     async function create() {
@@ -92,11 +94,11 @@ router.get('/', (req, res) => {
                     },
                 ]
             })
-            .then(dbGamesData => {
-            
+                .then(dbGamesData => {
+
                     console.log('============================================================================================');
                     const games = dbGamesData.map(game => game.get({ plain: true }));
-                    
+
                     // TO ACCESS INFO FOR HANDLEBARS USE game and news
                     // ==============================================
                     res.render('homepage', {

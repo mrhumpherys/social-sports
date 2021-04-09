@@ -20,19 +20,21 @@ router.get('/', (req, res) => {
 // ADDED COUNT VISIT TO LIMIT USER LIVE SCORES TO LESS THAN 100 PER LOGIN, THEY CAN PAY FOR MORE!!!
 // LIVE SCORES WILL NOW ONLY LOAD ON SERVER START ONE CHECK AND THEN YOU MUST BE LOGGED IN
   // CHECK FOR LIVE GAMES
-  if (req.session.countVisit) {
-        // If the 'countVisit' session variable exists, increment it by 1 and set the 'firstTime' session variable to 'false'
-        req.session.countVisit++
-        req.session.firstTime = false
-        if(require.session<100){
-            new NBA().isLive()
-        }
-      } else {
-        // If the 'countVisit' session variable doesn't exist, set it to 1 and set the 'firstTime' session variable to 'true'
-        req.session.countVisit = 1;
-        req.session.firstTime = true;
-        new NBA().isLive()
-    }
+  // if (req.session.countVisit) {
+  //       // If the 'countVisit' session variable exists, increment it by 1 and set the 'firstTime' session variable to 'false'
+  //       req.session.countVisit++
+  //       req.session.firstTime = false
+  //       if(require.session<100){
+  //           new NBA().isLive()
+  //       }
+  //     } else {
+  //       // If the 'countVisit' session variable doesn't exist, set it to 1 and set the 'firstTime' session variable to 'true'
+  //       req.session.countVisit = 1;
+  //       req.session.firstTime = true;
+  //       new NBA().isLive()
+  //   }
+
+  new NBA().isLive()
 
   // CHECK IF WE HAVE GAME DATA
   // ==========================
