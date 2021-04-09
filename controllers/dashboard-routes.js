@@ -1,9 +1,9 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
 const { Games, User, Comment, Vote } = require('../models');
+const withAuth = require('../utils/auth');
 
-
-router.get('/', (req, res) => {
+router.get('/', withAuth, (req, res) => {
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
     // +-----------------------------------------------------------------------------------+//
     // |MAIN LOGIC IN OF API CALLS AND RETURNING THE DATA FOR GAMES TO THE DATABASE DO NOT |//
@@ -87,7 +87,7 @@ router.get('/', (req, res) => {
                     // ==============================================
                     console.log('add new news')
                     console.log(news);
-                    res.render('homepage', {
+                    res.render('dashboard', {
                         style: "style.css",
                         games, news,
                         loggedIn: req.session.loggedIn
@@ -104,83 +104,4 @@ router.get('/', (req, res) => {
 
 });
 
-router.get('/login', (req, res) => {
-    if (req.session.loggedIn) {
-        res.redirect('/dashboard');
-        return;
-    }
-    res.render('login', {
-      style: "login-signup.css",
-    });
-});
-router.get('/signup', (req, res) => {
-    if (req.session.loggedIn) {
-        res.redirect('/');
-        return;
-    }
-    res.render('signup', {
-      style: "login-signup.css",
-    });
-});
-
-router.get('/game/:id', (req, res) => {
-    Games.findOne({
-      where: {
-        id: req.params.id
-      },
-      attributes: [
-        'id',
-        'game_id',
-        'game_type',
-        'date_time',
-        "status",
-        'quarter',
-        'home_team_id',
-        'home_team',
-        "home_team_score",
-        'away_team_id',
-        'away_team',
-        "away_team_score",
-        'time_remaining_minutes',
-        'time_remaining_seconds',
-        "channel",
-        "quarters",
-        'created_at',
-        'updated',
-        'new_record_number',
-      ],
-      include: [
-        {
-          model: Comment,
-          attributes: ['id', 'comment_text', 'games_id', 'user_id', 'created_at'],
-          include: {
-            model: User,
-            attributes: ['username']
-          }
-        },
-      ]
-    })
-      .then(dbPostData => {
-        if (!dbPostData) {
-          res.status(404).json({ message: 'No Game found with this id' });
-          return;
-        }
-        let game = dbPostData.get({ plain: true })
-        console.log('+++++++++++++++++')
-        console.log(game);
-        console.log('+++++++++++++++++')
-        let id = req.params.id
-        res.render(`game`, {
-          style: "style.css",
-          id,
-          game
-        });
-  
-      })
-      .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-      });
-      
-  });
 module.exports = router;

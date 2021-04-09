@@ -202,9 +202,7 @@ h3.score {
 PROFILE
 =============
 -------------*/
-.profile{
 
-}
 .profile-img {
     background: #333;
 }
@@ -218,7 +216,7 @@ SHOP
 =============
 -------------*/
 
-.item img {}
+
 #cart input[type=number] {
     max-width: 50px;
 }
