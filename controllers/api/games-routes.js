@@ -17,8 +17,23 @@ router.get('/', (req, res) => {
   const moment = require('moment');
   let date = (moment(new Date()).format("YYYY-MM-DD"));
 
-
+// ADDED COUNT VISIT TO LIMIT USER LIVE SCORES TO LESS THAN 100 PER LOGIN, THEY CAN PAY FOR MORE!!!
+// LIVE SCORES WILL NOW ONLY LOAD ON SERVER START ONE CHECK AND THEN YOU MUST BE LOGGED IN
   // CHECK FOR LIVE GAMES
+  // if (req.session.countVisit) {
+  //       // If the 'countVisit' session variable exists, increment it by 1 and set the 'firstTime' session variable to 'false'
+  //       req.session.countVisit++
+  //       req.session.firstTime = false
+  //       if(require.session<100){
+  //           new NBA().isLive()
+  //       }
+  //     } else {
+  //       // If the 'countVisit' session variable doesn't exist, set it to 1 and set the 'firstTime' session variable to 'true'
+  //       req.session.countVisit = 1;
+  //       req.session.firstTime = true;
+  //       new NBA().isLive()
+  //   }
+
   new NBA().isLive()
 
   // CHECK IF WE HAVE GAME DATA
@@ -90,6 +105,13 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
+  if(req.session.countVisit){
+    req.session.countVisit++
+    
+}else{
+    require.session.countVisit=1;
+    
+}
   Games.findOne({
     where: {
       id: req.params.id
@@ -131,6 +153,7 @@ router.get('/:id', (req, res) => {
         res.status(404).json({ message: 'No Game found with this id' });
         return;
       }
+      // countVisit: req.session.countVisit
       res.json(dbPostData);
     })
     .catch(err => {
