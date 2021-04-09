@@ -1,11 +1,9 @@
 //AKA POSTS
-const { Model, DataTypes } = require('sequelize');
+const { Model, DataTypes, Sequelize } = require('sequelize');
 const sequelize = require('../config/connection');
 
 // create our Post model
 class Games extends Model {
-    // MODIFIED THE VOTE MODEL TO TRACK VOTES ON THE GAMES
-    // ============================================================
     static upvote(body, models) {
         return models.Vote.create({
             user_id: body.user_id,
@@ -27,8 +25,7 @@ class Games extends Model {
             });
         });
     }
-    // ========================================================================================================
-    // MIGHT NEED TO BE RE-WORKED HAVE NOT YET TESTED
+
 }
 
 
@@ -46,13 +43,73 @@ Games.init(
             allowNull: true,
             unique: true,
         },
-        // user_id: {
-        //     type: DataTypes.INTEGER,
-        //     references: {
-        //         model: 'user',
-        //         key: 'id'
-        //     }
-        // }
+        game_type:{
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        date_time:{
+            type: DataTypes.DATE,
+            allowNull: true,
+        
+        },
+        status:{
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
+        quarter: {
+            type: DataTypes.STRING,
+            allowNull:true,
+        },
+        home_team_id: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+        },
+        home_team: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
+        home_team_score:{
+            type: DataTypes.INTEGER,
+            allowNull: true,
+        },
+        away_team_id: {
+            type: DataTypes.INTEGER,
+            allowNull: true
+        },
+        away_team: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        away_team_score:{
+            type: DataTypes.INTEGER,
+            allowNull: true,
+        },
+        time_remaining_minutes:{
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            
+        },
+        time_remaining_seconds:{
+            type: DataTypes.INTEGER,
+            allowNull: true
+        },
+        updated:{
+            type: DataTypes.DATE,
+            allowNull: true,
+        },
+        channel: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
+        quarters: {
+            type: DataTypes.JSON,
+            allowNull:true,
+        },
+        new_record_number: {
+            type: DataTypes.BIGINT,
+            allowNull: true,
+            defaultValue: null,
+        }
     },
     {
         sequelize,

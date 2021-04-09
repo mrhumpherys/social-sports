@@ -3,8 +3,9 @@ const routes = require('./controllers/');
 const sequelize = require('./config/connection');
 const path = require('path');
 const exphbs = require('express-handlebars');
-const NBA = require ('./nba')
-const moment = require('moment');
+const NBA = require('./nba')
+const deleteFiles = require('./json-file-maintenance')
+
 
 //IMPORT SESSIONS
 const session = require('express-session');
@@ -40,23 +41,8 @@ sequelize.sync({ force: false }).then(() => {
     app.listen(PORT, () => console.log(`Now listening on ${PORT}`));
 });
 
-// DO NOT REMOVE THE CODE BELOW IF YOU DONT UNDERSTAND WHAT IT DOES ASK!
+// DO NOT REMOVE THE CODE BELOW IF YOU DONT UNDERSTAND WHAT IT DOES ASK! - ANTHONY
 
-async function create() {
-    // check for game data
-    data = new NBA().needGames();
+new NBA().create();
+deleteFiles();
 
-    console.log("CREATE GAMES?", data)
-    // if no game data, run api call and create games in database
-    if (data === false) {
-
-        return
-
-    } else {
-        let date = (moment(new Date()).format("YYYY-MM-DD"))
-        new NBA().createGames(date);
-
-    }
-}
-
-create()
