@@ -42,8 +42,7 @@ sequelize.sync({ force: false }).then(() => {
 });
 
 // DO NOT REMOVE THE CODE BELOW IF YOU DONT UNDERSTAND WHAT IT DOES ASK! - ANTHONY
-deleteFiles()
-new NBA().create()
-new NBA().isLive()
-// new NBA().getNews();
-    
+
+new NBA().create();
+deleteFiles();
+

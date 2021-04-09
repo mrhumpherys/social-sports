@@ -14,13 +14,8 @@ router.get('/', (req, res) => {
   // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
 
   const NBA = require('../../nba');
-  const moment = require('moment');
-  let date = (moment(new Date()).format("YYYY-MM-DD"));
-
-
-  // CHECK FOR LIVE GAMES
   new NBA().isLive()
-
+    
   // CHECK IF WE HAVE GAME DATA
   // ==========================
   async function create() {
@@ -71,10 +66,11 @@ router.get('/', (req, res) => {
       {
         model: Comment,
         attributes: ['id', 'comment_text', 'games_id', 'user_id', 'created_at'],
+        order: [['created_at', 'DESC']],
         include: {
           model: User,
           attributes: ['username']
-        }
+        },
       },
     ]
   })
@@ -114,6 +110,10 @@ router.get('/:id', (req, res) => {
       'created_at',
       'updated',
       'new_record_number',
+      [
+        sequelize.literal('(SELECT COUNT(*) FROM vote WHERE games.id = vote.games_id)'),
+        'vote_count'
+      ]
     ],
     include: [
       {
@@ -131,6 +131,7 @@ router.get('/:id', (req, res) => {
         res.status(404).json({ message: 'No Game found with this id' });
         return;
       }
+
       res.json(dbPostData);
     })
     .catch(err => {

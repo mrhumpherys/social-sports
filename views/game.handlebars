@@ -7,7 +7,7 @@
                     <div>
                         <h1 class="page-title">{{render_team_name game.away_team_id}} -VS- {{render_team_name game.home_team_id}}</h1>
                     </div>
-                    <div><a href="#" class="btn btn-primary">upvote</a></div>
+                    <div><a id="upvote-btn" class="btn btn-primary">upvote</a></div>
 
                 </div>
             </div>
@@ -18,7 +18,7 @@
                             <div class="text-center">
                                 <img src="{{render_team_logo game.away_team_id}}" alt="{{render_team_name game.away_team_id}}"
                                     class="img-fluid">
-                                <h4 class="mt-2">20 - 14</h4>
+                                {{!-- <h4 class="mt-2">20 - 14</h4> --}}
                             </div>
                         </div>
                         <div class="col-5 text-center d-flex align-items-center justify-content-center">
@@ -29,7 +29,7 @@
                             <div class="text-center">
                                 <img src="{{render_team_logo game.home_team_id}}" alt="{{render_team_name game.home_team_id}}"
                                     class="img-fluid">
-                                <h4 class="mt-2">20 - 14</h4>
+                                {{!-- <h4 class="mt-2">20 - 14</h4> --}}
                             </div>
                         </div>
                     </div>
@@ -37,16 +37,69 @@
                         <div class="col-12">
                             <div class="page-section game-info bg-mid">
                                 <h3>GAME INFO</h3>
-                                <p>No info to show at this time, please check back again for an update.</p>
+                                <p>{{game.vote_count}} <br>{{format_plural "vote" game.vote_count}} </p>
                             </div>
                         </div>
                     </div>
 
-                   <!-- {{> comments game.comments}} -->
 
+                   <div class="row mt-5">
+                      <div class="col-12">
+                        <div class="page-section game-info bg-mid">
+                          <div class="row">
+                            <div class="col d-flex justify-content-between">
+                              <div><h3>GAME CHATTER</h3></div>
+                              <div>{{game.comments.length}} {{format_plural "comment" game.comments.length}}</div>
+                            </div>
+                          
+                        </div>
+                          <div class="row">
+                            <div class="col-12">
+                              {{#if game.comments}}
+                              {{#each game.comments}}
+                              <div id="comment-id" class="comment" data-comment="{{id}}">
+                              <div class="comment-body">
+                                <div class="d-flex">
+                                  <div class="flex-shrink-0">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="..." class="comment-img">
+                                  </div>
+                                  <div class="flex-grow-1 ms-3 flex-column">
+                                    {{comment_text}}
+                                    <div class="comment-meta">
+                                      <ul class="list-inline">
+                                        <li class="list-inline-item"><i class="fas fa-user-alt"></i>{{user.username}}</li>
+                                        <li class="list-inline-item"><i class="fas fa-calendar-alt"></i>{{nice_format_date created_at}}</li>
+                                        <li class="list-inline-item"><a href="#" id="delete-btn"><i class="far fa-trash-alt"></i>Delete</a></li>
+  
+                                      </ul>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <!--end comment-->
+                            {{/each}}
+                            {{/if}}
+                            <form>
+                              <div class="mb-3">
+                              <textarea id="comment-textarea" class="form-control" rows="4"></textarea>
+                            </div>
+                              <button id="add-comment-btn" type="button" class="btn btn-primary">POST COMMENT</button>
+                            </form>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- END COMMENTS -->
                 </div>
                 <!--end single game-->
             </div>
         </div>
     </div>
 </div>
+<script src="/assets/javascript/comment.js"></script>
+{{#if game.comments}}
+<script src="/assets/javascript/commentDelete.js"></script>
+{{/if}}
+<script src="/assets/javascript/upvote.js"></script>
