@@ -65,7 +65,7 @@ class NBA {
                 return;
             });
         } catch (e) {
-            if (e.errno === -4058) {
+            if (e.errno === -4058 || e.errno === -2) {
                 console.log("FILE NOT FOUND CREATING GAMES!");
                 // IF FILE NOT FOUND ERROR, GET GAMES- GET GAMES WILL FETCH THE API AND WRITE THE JSON TO A FILE IN THE DATA FOLDER
                 try {
@@ -153,7 +153,7 @@ class NBA {
         // RAN IT WITH TRY/CATCH TO CATCH THE ERROR WHEN THE FILE IS NOT FOUND
         try {
             let games = JSON.parse(fs.readFileSync(`./data/games-${date}.json`, 'utf8', (e) => {
-                if (e.errno == -4058) {
+                if (e.errno === -4058 || e.errno === -2) {
                     console.log("FILE NOT FOUND CREATING GAMES!");
                     // IF FILE NOT FOUND ERROR, GET GAMES- GET GAMES WILL FETCH THE API AND WRITE THE JSON TO A FILE IN THE DATA FOLDER
                     return true
@@ -169,7 +169,7 @@ class NBA {
             }
         }
         catch (e) {
-            if (e.errno == -4058) {
+            if (e.errno === -4058 || e.errno === -2) {
                 console.log("FILE NOT FOUND CREATING GAMES!");
                 // IF FILE NOT FOUND ERROR, GET GAMES- GET GAMES WILL FETCH THE API AND WRITE THE JSON TO A FILE IN THE DATA FOLDER
                 return true
@@ -253,7 +253,7 @@ class NBA {
                 return;
             });
         } catch (e) {
-            if (e.errno == -4058) {
+            if (e.errno === -4058 || e.errno === -2) {
                 console.log("FILE NOT FOUND CREATING GAMES!");
                 // IF FILE NOT FOUND ERROR, GET GAMES- GET GAMES WILL FETCH THE API AND WRITE THE JSON TO A FILE IN THE DATA FOLDER
                 try {
