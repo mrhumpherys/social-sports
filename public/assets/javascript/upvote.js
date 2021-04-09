@@ -1,11 +1,11 @@
 async function upvoteHandler(event) {
     event.preventDefault();
 
-    const id = window.location.toString().split('/')[
+    let id = window.location.toString().split('/')[
         window.location.toString().split('/').length - 1
     ];
-
-    const response = await fetch('/api/posts/upvote', {
+    id = id.replace("#",'');
+    const response = await fetch('/api/games/upvote', {
         method: 'PUT',
         body: JSON.stringify({
             games_id: id
@@ -16,6 +16,7 @@ async function upvoteHandler(event) {
     });
 
     if (response.ok) {
+        
         document.location.reload();
     } else {
         alert(response.statusText);
@@ -23,4 +24,4 @@ async function upvoteHandler(event) {
 }
 
 
-document.querySelector('.upvote-btn').addEventListener('click', upvoteHandler);
+document.querySelector('#upvote-btn').addEventListener('click', upvoteHandler);

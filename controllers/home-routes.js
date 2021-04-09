@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
 const { Games, User, Comment, Vote } = require('../models');
+const withAuth = require('../utils/auth');
 
 
 router.get('/', (req, res) => {
@@ -41,12 +42,12 @@ router.get('/', (req, res) => {
             const news = (data)
             Games.findAll({
                 // SOMETIMES THIS RETURNS DATA SOMETIMES IT JUST FRICKEN SPINS, TRIED TO CATCH IT AND STOP IT BUT I THINK THE CONNECTION TO MYSQL IS CRAP AND WE HAVE LIKE OVER 1K RECORDS BC OF THE LIVE UPDATES
-                where:{
-                    [Op.or]:
+                // where:{
+                //     [Op.or]:
                     
-                        [{status:'InProgress'},{status:'Scheduled'},{status:'Postponed'},]
+                //         [{status:'InProgress'},{status:'Scheduled'},{status:'Postponed'},]
                     
-                },
+                // },
                 attributes: [
                     'id',
                     'game_id',
@@ -129,7 +130,7 @@ router.get('/signup', (req, res) => {
     });
 });
 
-router.get('/game/:id', (req, res) => {
+router.get('/game/:id', withAuth, (req, res) => {
     Games.findOne({
       where: {
         id: req.params.id
@@ -154,10 +155,15 @@ router.get('/game/:id', (req, res) => {
         'created_at',
         'updated',
         'new_record_number',
+        [
+          sequelize.literal('(SELECT COUNT(*) FROM vote WHERE games.id = vote.games_id)'),
+          'vote_count'
+        ]
       ],
       include: [
         {
           model: Comment,
+          order: [['created_at', 'DESC']],
           attributes: ['id', 'comment_text', 'games_id', 'user_id', 'created_at'],
           include: {
             model: User,
@@ -179,7 +185,8 @@ router.get('/game/:id', (req, res) => {
         res.render(`game`, {
           style: "style.css",
           id,
-          game
+          game,
+          loggedIn: true
         });
   
       })

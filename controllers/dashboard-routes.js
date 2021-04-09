@@ -90,7 +90,8 @@ router.get('/', withAuth, (req, res) => {
                     res.render('dashboard', {
                         style: "style.css",
                         games, news,
-                        loggedIn: req.session.loggedIn
+                        loggedIn: true,
+                        username: req.session.username
                     });
 
                     // ==============================================

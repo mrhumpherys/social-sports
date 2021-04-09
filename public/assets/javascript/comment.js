@@ -17,33 +17,15 @@ async function submitComment(event) {
             }
         });
         if (response.ok) {
-            console.log('success');
-            alert(comment_text);
-            //document.location.reload();
-        } else {
-            alert(response.statusText);
-        }
-    }
-}
-async function commentDelete(event) {
-    event.preventDefault();
-    const comment_id = document.querySelector('commentId').value;
-    if (comment_id) {
-        const response = await fetch(`/api/comments/${commentId}`, {
-            method: 'DELETE'
-        });
-        if (response.ok) {
-            console.log('success');
-        //    document.location.reload();
+            
+            
+            document.location.reload();
         } else {
             alert(response.statusText);
         }
     }
 }
 
-let hasComment = document.querySelector('#delete-btn');
-if(hasComment) {
-    document.querySelector('#delete-btn').addEventListener('click', commentDelete);
-}
+
 
 document.querySelector('#add-comment-btn').addEventListener('click', submitComment);

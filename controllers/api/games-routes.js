@@ -110,6 +110,10 @@ router.get('/:id', (req, res) => {
       'created_at',
       'updated',
       'new_record_number',
+      [
+        sequelize.literal('(SELECT COUNT(*) FROM vote WHERE games.id = vote.games_id)'),
+        'vote_count'
+      ]
     ],
     include: [
       {
