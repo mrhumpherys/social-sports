@@ -4,7 +4,7 @@ const { Games, User, Comment, Vote } = require('../../models');
 
 
 
-router.get('/', (req, res) => {
+router.get('/game/', (req, res) => {
 
   // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
   // +-----------------------------------------------------------------------------------+//
@@ -89,7 +89,7 @@ router.get('/', (req, res) => {
     });
 });
 
-router.get('/:id', (req, res) => {
+router.get('/game/:id', (req, res) => {
   Games.findOne({
     where: {
       id: req.params.id
@@ -131,12 +131,22 @@ router.get('/:id', (req, res) => {
         res.status(404).json({ message: 'No Game found with this id' });
         return;
       }
-      res.json(dbPostData);
+      let game = dbPostData;
+      console.log('+++++++++++++++++')
+      console.log(game);
+      console.log('+++++++++++++++++')
+      let id = req.params.id
+      res.render(`game/`, {
+        id,
+        game
+      });
+
     })
     .catch(err => {
       console.log(err);
       res.status(500).json(err);
     });
+    
 });
 
 router.post('/', (req, res) => {

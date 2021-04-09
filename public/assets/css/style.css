@@ -153,6 +153,9 @@ nav {
     padding: 1.5rem;
     border-radius: var(--bradius);
 }
+.team-content img {
+  max-height: 96px;
+}
 /*------------
 =============
 SINGLE GAME

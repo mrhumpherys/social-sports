@@ -124,7 +124,7 @@ class NBA {
                     'Ocp-Apim-Subscription-Key': process.env.KEY
                 }
             })
-                .then(res => res.json())
+
         return response
     }
     // THIS ONE MIGHT BE EXTRA LEAVING FOR NOW

@@ -39,8 +39,10 @@ router.get('/', (req, res) => {
     // GETS NEWS STORIES 
     // ===============================================
     new NBA().getNews()
+        .then(res => res.json())
         .then(data => {
-            const news = JSON.stringify(data)
+            let newsData = JSON.stringify(data)
+            const news = JSON.parse(newsData)
             Games.findAll({
                 attributes: [
                     'id',
@@ -77,12 +79,13 @@ router.get('/', (req, res) => {
                         }
                     },
                 ]
-            })
-                .then(dbGamesData => {
+            }).then(dbGamesData => {
                     console.log('============================================================================================');
                     const games = dbGamesData.map(game => game.get({ plain: true }));
                     // TO ACCESS INFO FOR HANDLEBARS USE game and news
                     // ==============================================
+                    console.log('add new news')
+                    console.log(news);
                     res.render('homepage', {
                         games, news,
                         loggedIn: req.session.loggedIn
@@ -99,5 +102,78 @@ router.get('/', (req, res) => {
 
 });
 
+router.get('/login', (req, res) => {
+    if (req.session.loggedIn) {
+        res.redirect('/');
+        return;
+    }
+    res.render('login');
+});
+router.get('/signup', (req, res) => {
+    if (req.session.loggedIn) {
+        res.redirect('/');
+        return;
+    }
+    res.render('signup');
+});
 
+router.get('/game/:id', (req, res) => {
+    Games.findOne({
+      where: {
+        id: req.params.id
+      },
+      attributes: [
+        'id',
+        'game_id',
+        'game_type',
+        'date_time',
+        "status",
+        'quarter',
+        'home_team_id',
+        'home_team',
+        "home_team_score",
+        'away_team_id',
+        'away_team',
+        "away_team_score",
+        'time_remaining_minutes',
+        'time_remaining_seconds',
+        "channel",
+        "quarters",
+        'created_at',
+        'updated',
+        'new_record_number',
+      ],
+      include: [
+        {
+          model: Comment,
+          attributes: ['id', 'comment_text', 'games_id', 'user_id', 'created_at'],
+          include: {
+            model: User,
+            attributes: ['username']
+          }
+        },
+      ]
+    })
+      .then(dbPostData => {
+        if (!dbPostData) {
+          res.status(404).json({ message: 'No Game found with this id' });
+          return;
+        }
+        let game = dbPostData.get({ plain: true })
+        console.log('+++++++++++++++++')
+        console.log(game);
+        console.log('+++++++++++++++++')
+        let id = req.params.id
+        res.render(`game`, {
+          id,
+          game
+        });
+  
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+      
+  });
 module.exports = router;

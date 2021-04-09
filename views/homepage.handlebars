@@ -1,133 +1,82 @@
-     <div class="row">
-                                <div class="col-md-6 mb-4">
-                                    <div class="game-card d-flex justify-content-between">
-                                        <div class="row">
-                                            <div class="col-md-3 team-content">
-                                                <img src="https://upload.wikimedia.org/wikipedia/en/0/02/Washington_Wizards_logo.svg"
-                                                    alt="" class="img-fluid">
-                                            </div>
-                                            <div class="col-md-6 game-detail text-center">
-                                                <h3>HOME TEAM</h3>
-                                                <h3 class="small">VS</h3>
-                                                <h3>AWAY TEAM</h3>
-                                            </div>
-                                            <div class="col-md-3 team-content">
-                                                <img src="https://upload.wikimedia.org/wikipedia/en/0/02/Washington_Wizards_logo.svg"
-                                                    alt="" class="img-fluid">
-                                            </div>
-                                        </div>
+<div class="hero row g-0">
+    <div class="col-md-5 col-sm-12">
+        <img src="assets/images/herobg.png" class="img-fluid">
+    </div>
+    <div class="col-md-4 col-sm-12">
+        <div class="hero-text text-right">
+            <h1>Welcome to Sports Buzz</h1>
+            <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, sunt sapiente. Deleniti
+                voluptate voluptatibus ipsam possimus nostrum vel!</h2>
+            <a href="/login" class="btn btn-primary btn-lg">Login</a>
+            <a href="/signup" class="btn btn-outline btn-lg">Sign Up</a>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row d-flex justify-content-center">
+        <div class="col">
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="section-title">FEATURE GAME</h1>
+                </div>
+            </div>
+
+            <div class="row pt-5">
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-12">
+                            <h1 class="section-title">GAMES</h1>
+                        </div>
+                    </div>
+                    <!--START ALL GAMES -->
+                    <div class="row">
+                        {{#each games}}
+                        <div class="col-md-6 mb-4">
+                            <a href="/game/{{id}}">
+                            <div class="game-card d-flex justify-content-between">
+                                <div class="row">
+                                    <div class="col-md-3 team-content">
+                                        <img src="{{render_team_logo home_team_id}}"
+                                            alt="{{render_team_name home_team_id}}" class="img-fluid">
                                     </div>
-                                </div>
-                                <div class="col-md-6 mb-4">
-                                    <div class="game-card d-flex justify-content-between">
-                                        <div class="row">
-                                            <div class="col-md-3 team-content">
-                                                <img src="https://upload.wikimedia.org/wikipedia/en/0/02/Washington_Wizards_logo.svg"
-                                                    alt="" class="img-fluid">
-                                            </div>
-                                            <div class="col-md-6 game-detail text-center">
-                                                <h3>HOME TEAM</h3>
-                                                <h3 class="small">VS</h3>
-                                                <h3>AWAY TEAM</h3>
-                                            </div>
-                                            <div class="col-md-3 team-content">
-                                                <img src="https://upload.wikimedia.org/wikipedia/en/0/02/Washington_Wizards_logo.svg"
-                                                    alt="" class="img-fluid">
-                                            </div>
-                                        </div>
+                                    <div class="col-md-6 game-detail text-center">
+                                        <h3>{{render_team_name home_team_id}}</h3>
+                                        <h3 class="small">VS</h3>
+                                        <h3>{{render_team_name away_team_id}}</h3>
                                     </div>
-                                </div>
-                                <div class="col-md-6 mb-4">
-                                    <div class="game-card d-flex justify-content-between">
-                                        <div class="row">
-                                            <div class="col-md-3 team-content">
-                                                <img src="https://upload.wikimedia.org/wikipedia/en/0/02/Washington_Wizards_logo.svg"
-                                                    alt="" class="img-fluid">
-                                            </div>
-                                            <div class="col-md-6 game-detail text-center">
-                                                <h3>HOME TEAM</h3>
-                                                <h3 class="small">VS</h3>
-                                                <h3>AWAY TEAM</h3>
-                                            </div>
-                                            <div class="col-md-3 team-content">
-                                                <img src="https://upload.wikimedia.org/wikipedia/en/0/02/Washington_Wizards_logo.svg"
-                                                    alt="" class="img-fluid">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-4">
-                                    <div class="game-card d-flex justify-content-between">
-                                        <div class="row">
-                                            <div class="col-md-3 team-content">
-                                                <img src="https://upload.wikimedia.org/wikipedia/en/0/02/Washington_Wizards_logo.svg"
-                                                    alt="" class="img-fluid">
-                                            </div>
-                                            <div class="col-md-6 game-detail text-center">
-                                                <h3>HOME TEAM</h3>
-                                                <h3 class="small">VS</h3>
-                                                <h3>AWAY TEAM</h3>
-                                            </div>
-                                            <div class="col-md-3 team-content">
-                                                <img src="https://upload.wikimedia.org/wikipedia/en/0/02/Washington_Wizards_logo.svg"
-                                                    alt="" class="img-fluid">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-4">
-                                    <div class="game-card d-flex justify-content-between">
-                                        <div class="row">
-                                            <div class="col-md-3 team-content">
-                                                <img src="https://upload.wikimedia.org/wikipedia/en/0/02/Washington_Wizards_logo.svg"
-                                                    alt="" class="img-fluid">
-                                            </div>
-                                            <div class="col-md-6 game-detail text-center">
-                                                <h3>HOME TEAM</h3>
-                                                <h3 class="small">VS</h3>
-                                                <h3>AWAY TEAM</h3>
-                                            </div>
-                                            <div class="col-md-3 team-content">
-                                                <img src="https://upload.wikimedia.org/wikipedia/en/0/02/Washington_Wizards_logo.svg"
-                                                    alt="" class="img-fluid">
-                                            </div>
-                                        </div>
+                                    <div class="col-md-3 team-content">
+                                        <img src="{{render_team_logo away_team_id}}"
+                                            alt="{{render_team_name away_team_id}}" class="img-fluid">
                                     </div>
                                 </div>
                             </div>
+                            </a>
                         </div>
-                        <div class="col-md-4">
-                            <h1 class="section-title">NEWS</h1>
-                            <div class="news-container">
-                                <div class="news-article">
-                                    <div class="news-body">
-                                        <h3>NEW ARTICLE TITLE</h3>
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci accusamus ad, doloremque, nisi temporibus totam, porro atque sunt nam harum distinctio iste qui minus voluptas voluptatibus pariatur error commodi maxime.</p>
-                                        <a href="">Read More <i class="fas fa-arrow-right"></i></a>
-                                        <div class="news-footer">
-                                            <i class="far fa-calendar-alt"></i> Date Posted
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="news-article">
-                                    <div class="news-body">
-                                        <h3>NEW ARTICLE TITLE</h3>
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci accusamus ad, doloremque, nisi temporibus totam, porro atque sunt nam harum distinctio iste qui minus voluptas voluptatibus pariatur error commodi maxime.</p>
-                                        <a href="">Read More <i class="fas fa-arrow-right"></i></a>
-                                        <div class="news-footer">
-                                            <i class="far fa-calendar-alt"></i> Date Posted
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="news-article">
-                                    <div class="news-body">
-                                        <h3>NEW ARTICLE TITLE</h3>
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci accusamus ad, doloremque, nisi temporibus totam, porro atque sunt nam harum distinctio iste qui minus voluptas voluptatibus pariatur error commodi maxime.</p>
-                                        <a href="">Read More <i class="fas fa-arrow-right"></i></a>
-                                        <div class="news-footer">
-                                            <i class="far fa-calendar-alt"></i> Date Posted
-                                        </div>
-                                    </div>
+                        {{/each}}
+                    </div>
+                    <!--END ALL GAMES -->
+                </div>
+                <!--START NEWS -->
+                <div class="col-md-4">
+                    <h1 class="section-title">ALL SPORTS NEWS</h1>
+                    <div class="news-container">
+                        {{#each news}}
+                        <div class="news-article">
+                            <div class="news-body">
+                                <h3>{{Title}}</h3>
+                                <p>{{Content}}</p>
+                                <a href="{{Url}}">Read More <i class="fas fa-arrow-right"></i></a>
+                                <div class="news-footer">
+                                    <i class="far fa-calendar-alt"></i> {{TimeAgo}}
                                 </div>
                             </div>
                         </div>
+                        {{/each}}
+                    </div>
+                </div>
+                <!--END NEWS -->
+            </div>
+        </div>
+    </div>
+</div>
