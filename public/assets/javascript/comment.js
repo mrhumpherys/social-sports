@@ -1,6 +1,6 @@
 async function submitComment(event) {
     event.preventDefault();
-    const comment_text = document.querySelector('textarea[name="comment-body"]').value.trim();
+    const comment_text = document.querySelector('#comment-textarea').value.trim();
     const games_id = window.location.toString().split('/')[
         window.location.toString().split('/').length - 1
     ];
@@ -36,5 +36,5 @@ async function commentDelete(event) {
         }
     }
 }
-document.querySelector('whateverTheDeleteButtonIs').addEventListener('click', commentDelete);
-document.querySelector('.whateverTheCommentbuttonIs').addEventListener('submit', submitComment);
+document.querySelector('#delete-btn').addEventListener('click', commentDelete);
+document.querySelector('#add-comment-btn').addEventListener('submit', submitComment);

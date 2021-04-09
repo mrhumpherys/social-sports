@@ -67,7 +67,7 @@
                                       <ul class="list-inline">
                                         <li class="list-inline-item"><i class="fas fa-user-alt"></i>Username</li>
                                         <li class="list-inline-item"><i class="fas fa-calendar-alt"></i>Post Date</li>
-                                        <li class="list-inline-item"><a href="#"><i class="far fa-trash-alt"></i>Delete</a></li>
+                                        <li class="list-inline-item"><a href="#" id="delte-btn"><i class="far fa-trash-alt"></i>Delete</a></li>
                                       </ul>
                                     </div>
                                   </div>
@@ -77,11 +77,11 @@
                             <!--end comment-->
 
                             
-                            <form action="">
+                            <form>
                               <div class="mb-3">
-                              <textarea class="form-control" rows="4"></textarea>
+                              <textarea id="comment-textarea" class="form-control" rows="4"></textarea>
                             </div>
-                              <button type="button" class="btn btn-primary">POST COMMENT</button>
+                              <button id="add-comment-btn" type="button" class="btn btn-primary">POST COMMENT</button>
                             </form>
                             </div>
                           </div>
@@ -95,3 +95,4 @@
         </div>
     </div>
 </div>
+<script src="../public/assets/javascript/comment.js"></script>
