@@ -312,7 +312,6 @@ class NBA {
                             new NBA().updateGames(date1)
                         })
                         .then(data => {
-                            console.log("YAY!!!")
                             let update = false;
                             function test() {
                                 let updateCounter =0
@@ -325,7 +324,7 @@ class NBA {
                                             data.map(el => {
                                                 let time = el.new_record_number
                                                 let currentTime = Date.now()
-                                                if ((currentTime) - (time) >= 0) {
+                                                if ((currentTime) - (time) >= 300000) {
                                                     return update = true
                                                 } else {
                                                     return update = false
