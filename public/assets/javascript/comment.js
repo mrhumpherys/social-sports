@@ -1,9 +1,10 @@
 async function submitComment(event) {
     event.preventDefault();
     const comment_text = document.querySelector('#comment-textarea').value.trim();
-    const games_id = window.location.toString().split('/')[
+    let games_id = window.location.toString().split('/')[
         window.location.toString().split('/').length - 1
     ];
+    games_id = games_id.replace("?",'');
     if (comment_text) {
         const response = await fetch('/api/comments', {
             method: 'POST',
@@ -16,7 +17,9 @@ async function submitComment(event) {
             }
         });
         if (response.ok) {
-            document.location.reload();
+            console.log('success');
+            alert(comment_text);
+            //document.location.reload();
         } else {
             alert(response.statusText);
         }
@@ -30,11 +33,17 @@ async function commentDelete(event) {
             method: 'DELETE'
         });
         if (response.ok) {
-            document.location.reload();
+            console.log('success');
+        //    document.location.reload();
         } else {
             alert(response.statusText);
         }
     }
 }
-document.querySelector('#delete-btn').addEventListener('click', commentDelete);
-document.querySelector('#add-comment-btn').addEventListener('submit', submitComment);
+
+let hasComment = document.querySelector('#delete-btn');
+if(hasComment) {
+    document.querySelector('#delete-btn').addEventListener('click', commentDelete);
+}
+
+document.querySelector('#add-comment-btn').addEventListener('click', submitComment);

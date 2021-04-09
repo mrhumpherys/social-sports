@@ -1,10 +1,10 @@
 module.exports = {
-    format_date: (date) => {
-        let newDate = date.split('T')[0];
+    // format_date: (date) => {
+    //     let newDate = date.split('T')[0];
 
-        return newDate;
+    //     return newDate;
 
-    },
+    // },
     format_time: (date) => {
         let newDate = date.split('T')[1];
         let time = newDate.split(":")[0];
