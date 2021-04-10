@@ -57,7 +57,7 @@
                             <div class="col-12">
                               {{#if game.comments}}
                               {{#each game.comments}}
-                              <div id="comment-id" class="comment" data-comment="{{id}}">
+                              <div id="comment-id" class="comment" data-comment="{{id}}" data-user="{{user.id}}">
                               <div class="comment-body">
                                 <div class="d-flex">
                                   <div class="flex-shrink-0">
@@ -69,8 +69,9 @@
                                       <ul class="list-inline">
                                         <li class="list-inline-item"><i class="fas fa-user-alt"></i>{{user.username}}</li>
                                         <li class="list-inline-item"><i class="fas fa-calendar-alt"></i>{{nice_format_date created_at}}</li>
-                                        <li class="list-inline-item"><a href="#" id="delete-btn"><i class="far fa-trash-alt"></i>Delete</a></li>
-  
+                                        
+                                        {{!-- <li class="list-inline-item"><a href="#" id="delete-btn"><i class="far fa-trash-alt"></i>Delete</a></li> --}}
+                                        
                                       </ul>
                                     </div>
                                   </div>
@@ -99,7 +100,8 @@
     </div>
 </div>
 <script src="/assets/javascript/comment.js"></script>
-{{#if game.comments}}
-<script src="/assets/javascript/commentDelete.js"></script>
-{{/if}}
+
+
+{{!-- <script src="/assets/javascript/commentDelete.js"></script> --}}
+
 <script src="/assets/javascript/upvote.js"></script>

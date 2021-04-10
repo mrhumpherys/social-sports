@@ -29,6 +29,13 @@ router.post('/', (req, res) => {
 });
 
 router.delete('/:id',  (req, res) => {
+    let currentUser = req.session.user_id
+    let poster = req.body.poster
+    
+    if (poster != currentUser) {
+        window.location.reload();
+        return
+    } 
     Comment.destroy({
         where: {
             id: req.params.id

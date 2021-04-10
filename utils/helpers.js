@@ -39,6 +39,15 @@ module.exports = {
 
         return word;
     },
+    // deleteButton: (poster) => {
+    //     let user = req.session.user_id
+    //     let poster = user.id
+    //     if (poster === user) {
+    //         return poster = true;
+    //     } else {
+    //         return poster = false;
+    //     }
+    // },
 
 
 
