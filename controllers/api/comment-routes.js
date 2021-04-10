@@ -13,6 +13,20 @@ router.get('/', (req, res) => {
         });
 });
 
+router.get('/:id', withAuth, (req, res) => {
+    Comment.findOne({
+        where: {
+            id: req.params.id,
+            user_id: req.session.user_id
+        },
+    })
+    .then(dbCommentData => res.json(dbCommentData))
+            .catch(err => {
+                console.log(err);
+                res.status(400).json(err);
+            });
+})
+
 router.post('/',withAuth, (req, res) => {
     // check the session
     if (req.session) {

@@ -3,6 +3,7 @@ const sequelize = require('../config/connection');
 const { Games, User, Comment, Vote } = require('../models');
 const NBA = require('../nba');
 const withAuth = require('../utils/auth');
+const { Op } = require("sequelize");
 
 
 router.get('/', (req, res) => {
@@ -42,13 +43,16 @@ router.get('/', (req, res) => {
     .then(data => {
       const news = (data)
       Games.findAll({
+        
         // SOMETIMES THIS RETURNS DATA SOMETIMES IT JUST FRICKEN SPINS, TRIED TO CATCH IT AND STOP IT BUT I THINK THE CONNECTION TO MYSQL IS CRAP AND WE HAVE LIKE OVER 1K RECORDS BC OF THE LIVE UPDATES
-        // where:{
-        //     [Op.or]:
+        where:{
+            status: {
+              [Op.or]: ['InProgress', 'Scheduled', 'Postponed']
+            }
 
-        //         [{status:'InProgress'},{status:'Scheduled'},{status:'Postponed'},]
+                // [{status:'InProgress'},{status:'Scheduled'},{status:'Postponed'},]
 
-        // },
+        },
         attributes: [
           'id',
           'game_id',
@@ -184,7 +188,8 @@ router.get('/game/:id', withAuth, (req, res) => {
         style: "style.css",
         id,
         game,
-        loggedIn: true
+        loggedIn: true,
+        username: req.session.username
       });
 
     })

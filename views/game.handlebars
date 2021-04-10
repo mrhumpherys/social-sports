@@ -82,11 +82,21 @@
                                 <li class="list-inline-item"><i class="fas fa-user-alt"></i>{{user.username}}</li>
                                 <li class="list-inline-item"><i class="fas fa-calendar-alt"></i>{{nice_format_date
                                   created_at}}</li>
-
-                                {{!-- <li class="list-inline-item"><a href="#" id="delete-btn"><i
-                                      class="far fa-trash-alt"></i>Delete</a></li> --}}
+                                <li  class="list-inline-item"><a id="delete-btn" data-user='{{user.id}}'><i
+                                      class="far fa-trash-alt"></i>Delete</a></li>
+                                
 
                               </ul>
+                              {{!-- LEAVE THIS IN HERE WE NEED AN ALERT HOWARD HATES WINDOW ALERTS --}}
+                              <section id="deleteAlert" style="visibility: visible;">
+                                <div class="col-12 d-flex justify-content-center">
+                                  <div id="blank-field-alert"
+                                    class="alert alert-dark bg-dark text-white col-4 d-flex justify-content-center border-success shadow"
+                                    role="alert">
+                                  </div>
+                                </div>
+                              </section>
+                              {{!-- LEAVE THE MESSAGE IN CAN BE REUSED ANYWHERE FOR AN ALERT --}}
                             </div>
                           </div>
                         </div>
@@ -132,7 +142,7 @@
 <script src="/assets/javascript/comment.js"></script>
 
 
-{{!--
-<script src="/assets/javascript/commentDelete.js"></script> --}}
-
+{{#if game.comments}}
+<script src="/assets/javascript/commentDelete.js"></script>
+{{/if}}
 <script src="/assets/javascript/upvote.js"></script>
