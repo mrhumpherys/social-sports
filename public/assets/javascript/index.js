@@ -2,6 +2,8 @@
 $(document).on('ready', function() {
 
     $(".vertical").slick({
-      infinite: false
+      infinite: false,
+      autoplay: true, 
+      autoplaySpeed: 10000,
     });
   });
