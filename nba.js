@@ -357,7 +357,7 @@ class NBA {
                         console.log('============================================================================================');
                         console.log(`The ${homeTeam} vs. ${awayTeam} GAME IS NOT LIVE!`)
                         console.log('============================================================================================');
-                        runUpdate = false
+                        statusGame = false
                     }
                 })
                 if (statusGame === true) {

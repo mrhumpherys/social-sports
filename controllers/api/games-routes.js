@@ -15,9 +15,7 @@ router.get('/', (req, res) => {
   // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
 
   const NBA = require('../../nba');
-  new NBA().updateScores().then(()=>{
-    return
-  })
+  new NBA().updateScores()
   // CHECK IF WE HAVE GAME DATA
   // ==========================
   async function create() {
