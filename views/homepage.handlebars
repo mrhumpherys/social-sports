@@ -5,8 +5,7 @@
     <div class="col-md-4 col-sm-12">
         <div class="hero-text text-right">
             <h1>Welcome to Sports Buzz</h1>
-            <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, sunt sapiente. Deleniti
-                voluptate voluptatibus ipsam possimus nostrum vel!</h2>
+            <h2>Your best source for quality NBA news, rumors, analysis, stats and scores from the fan perspective.</h2>
             <a href="/login" class="btn btn-primary btn-lg">Login</a>
             <a href="/signup" class="btn btn-outline btn-lg">Sign Up</a>
         </div>
@@ -34,20 +33,25 @@
                         {{#each games}}
                         <div class="col-md-6 mb-4">
                             <a href="/game/{{id}}">
-                            <div class="game-card d-flex justify-content-between">
-                                <div class="row">
-                                    <div class="col-md-3 team-content">
+                            <div class="game-card">
+                                <div class="row mt-3">
+                                    <div class="col-md-12 col-sm-12 game-detail text-center">
+                                        <h3>{{render_team_name home_team_id}} VS {{render_team_name away_team_id}}</h3>
+                                    </div>
+                                </div>
+                                <div class="row mt-3 mb-3">
+                                    <div class="col-md-6 col-sm-12 team-content d-flex justify-content-center">
                                         <img src="{{render_team_logo home_team_id}}"
                                             alt="{{render_team_name home_team_id}}" class="img-fluid">
                                     </div>
-                                    <div class="col-md-6 game-detail text-center">
-                                        <h3>{{render_team_name home_team_id}}</h3>
-                                        <h3 class="small">VS</h3>
-                                        <h3>{{render_team_name away_team_id}}</h3>
-                                    </div>
-                                    <div class="col-md-3 team-content">
+                                    <div class="col-md-6 col-sm-12 team-content d-flex justify-content-center">
                                         <img src="{{render_team_logo away_team_id}}"
                                             alt="{{render_team_name away_team_id}}" class="img-fluid">
+                                    </div>
+                                    </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-12 col-sm-12 game-detail text-center">
+                                        <h3>Game Time</h3>
                                     </div>
                                 </div>
                             </div>

@@ -136,7 +136,7 @@ nav {
   padding: 2rem;
 }
 .hero-text h1 {
-  font-size: 5rem;
+  font-size: 4rem;
   font-weight: 800;
   text-transform: uppercase;
 }
@@ -158,6 +158,11 @@ nav {
 }
 .team-content img {
   max-height: 96px;
+  min-width: 50px;
+}
+.game-detail h3{
+  font-size: 1.5rem;
+  font-weight: 800;
 }
 /*------------
 =============
@@ -222,4 +227,37 @@ SHOP
 
 #cart input[type=number] {
     max-width: 50px;
+}
+/*------------
+=============
+SLICK SLIDE
+=============
+-------------*/
+
+.slick-prev, .slick-next {
+  top: auto;
+  bottom: -30px;
+}
+.slick-prev {
+  left: 0;
+}
+.slick-next {
+  left: 30px;
+}
+
+.vote-container {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background: var(--darkbg);
+  border-radius: var(--bradius);
+}
+.vote-count {
+  padding-right: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+  .vs {
+    padding: 1rem 0;
+    display: block;
+  }
 }

@@ -15,11 +15,14 @@
 
       <div class="row">
         <div class="col-12 d-flex justify-content-between g-0">
-          <div>
+          <div class="game-title-info">
             <h1 class="page-title">{{render_team_name game.away_team_id}} -VS- {{render_team_name game.home_team_id}}
             </h1>
           </div>
-          <div><a id="upvote-btn" class="btn btn-primary">upvote</a></div>
+          <div class="vote-container d-flex justtify-content-between align-items-center ">
+            <div class="vote-count">{{game.vote_count}} {{format_plural "vote" game.vote_count}} </div>
+            <a id="upvote-btn" class="btn btn-primary"><i class="far fa-thumbs-up"></i> upvote</a>
+          </div>
 
 
 
@@ -49,15 +52,6 @@
               </div>
             </div>
           </div>
-          <div class="row mt-5">
-            <div class="col-12">
-              <div class="page-section game-info bg-mid">
-                <h3>GAME INFO</h3>
-                <p>{{game.vote_count}} <br>{{format_plural "vote" game.vote_count}} </p>
-              </div>
-            </div>
-          </div>
-
 
           <div class="row mt-5">
             <div class="col-12">
