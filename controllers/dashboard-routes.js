@@ -102,7 +102,7 @@ router.get('/', withAuth, (req, res) => {
         })
 
 });
-
+/*
 router.get(`/profile`, withAuth, (req, res) => {
     User.findOne({
         where: {
@@ -126,5 +126,5 @@ router.get(`/profile`, withAuth, (req, res) => {
             res.status(500).json(err);
         });
 });
-
+*/
 module.exports = router;
