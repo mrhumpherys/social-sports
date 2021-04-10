@@ -14,8 +14,7 @@ router.get('/', (req, res) => {
   // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
 
   const NBA = require('../../nba');
-  new NBA().isLive()
-    
+  new NBA().updateScores()
   // CHECK IF WE HAVE GAME DATA
   // ==========================
   async function create() {
@@ -86,6 +85,8 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
+  const NBA = require('../../nba');
+  new NBA().updateScores()
   Games.findOne({
     where: {
       id: req.params.id
