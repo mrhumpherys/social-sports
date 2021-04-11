@@ -1,11 +1,12 @@
 <div class="hero row g-0">
-    <div class="col-md-5 col-sm-12">
+    <div class="col-lg-5 col-md-12">
         <img src="assets/images/herobg.png" class="img-fluid">
     </div>
-    <div class="col-md-4 col-sm-12">
+    <div class="col-lg-6 col-md-12">
         <div class="hero-text text-right">
-            <h1>Welcome back {{username}}</h1>
-            <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit.</h2>
+            <h1>Welcome back, {{username}}</h1>
+            <h2>Your best source for quality NBA news, rumors, analysis, stats and scores from the fan perspective.</h2>
+            <a href="#games-section" class="btn btn-primary">View Games</a>
         </div>
     </div>
 </div>
@@ -13,17 +14,30 @@
 <div class="container">
     <div class="row d-flex justify-content-center">
         <div class="col">
-            <div class="row">
-                <div class="col-12">
-                    <h1 class="section-title">FAVORITES</h1>
-                    <div class="page-section">
-                        Add a favorite team to your <a href="/profile">profile</a> to see the latest updates.
+
+            <div id="games-section" class="row pt-5">
+                <!--START NEWS -->
+                <div class="col-lg-4">
+                    <h1 class="section-title">NEWS</h1>
+                    <div class="news-container">
+                        <section class="single-item">
+                            {{#each news}}
+                            <div class="news-article">
+                                <div class="news-body">
+                                    <h3>{{Title}}</h3>
+                                    <p id="preview-text">{{Content}}</p>
+                                    <a href="{{Url}}"target='_blank' rel="noreopener">Read More <i class="fas fa-arrow-right"></i></a>
+                                    <div class="news-footer">
+                                        <i class="far fa-calendar-alt"></i> {{TimeAgo}}
+                                    </div>
+                                </div>
+                            </div>
+                            {{/each}}
+                        </section>
                     </div>
                 </div>
-            </div>
-
-            <div class="row pt-5">
-                <div class="col-md-8">
+                <!--END NEWS -->
+                <div class="col-lg-8 col-sm-12">
                     <div class="row">
                         <div class="col-12">
                             <h1 class="section-title">GAMES</h1>
@@ -32,22 +46,28 @@
                     <!--START ALL GAMES -->
                     <div class="row">
                         {{#each games}}
-                        <div class="col-md-6 mb-4">
+                        <div class="col-lg-6">
                             <a href="/game/{{id}}">
-                            <div class="game-card d-flex justify-content-between">
-                                <div class="row">
-                                    <div class="col-md-3 team-content">
+                            <div class="game-card">
+                                <div class="row mt-3">
+                                    <div class="col-lg-12 col-md-12 game-matchup game-detail text-center">
+                                        <h3>{{render_team_name home_team_id}} VS {{render_team_name away_team_id}}</h3>
+                                    </div>
+                                </div>
+                                <div class="row mt-3 mb-3">
+                                    <div class="col-lg-5 col-md-5 col-sm-12 team-content d-flex justify-content-center">
                                         <img src="{{render_team_logo home_team_id}}"
-                                            alt="{{render_team_name home_team_id}}" class="img-fluid">
+                                            alt="{{render_team_name home_team_id}}" class="img-fluid team-img">
                                     </div>
-                                    <div class="col-md-6 game-detail text-center">
-                                        <h3>{{render_team_name home_team_id}}</h3>
-                                        <h3 class="small">VS</h3>
-                                        <h3>{{render_team_name away_team_id}}</h3>
-                                    </div>
-                                    <div class="col-md-3 team-content">
+                                    <div class="col-lg-2 col-md-2 text-center d-flex align-items-center justify-content-center"><span class="vs">VS</span></div>
+                                    <div class="col-lg-5 col-md-5 col-sm-12 team-content d-flex justify-content-center">
                                         <img src="{{render_team_logo away_team_id}}"
-                                            alt="{{render_team_name away_team_id}}" class="img-fluid">
+                                            alt="{{render_team_name away_team_id}}" class="img-fluid team-img">
+                                    </div>
+                                    </div>
+                                <div class="row mt-3">
+                                    <div class="col-lg-12 col-md-12 game-detail text-center">
+                                        <h3>{{nice_format_date date_time}} <br>{{format_time date_time}} PM EST</h3>
                                     </div>
                                 </div>
                             </div>
@@ -57,25 +77,7 @@
                     </div>
                     <!--END ALL GAMES -->
                 </div>
-                <!--START NEWS -->
-                <div class="col-md-4">
-                    <h1 class="section-title">ALL SPORTS NEWS</h1>
-                    <div class="news-container">
-                        {{#each news}}
-                        <div class="news-article">
-                            <div class="news-body">
-                                <h3>{{Title}}</h3>
-                                <p>{{Content}}</p>
-                                <a href="{{Url}}" target='_blank' rel="noreopener">Read More <i class="fas fa-arrow-right"></i></a>
-                                <div class="news-footer">
-                                    <i class="far fa-calendar-alt"></i> {{TimeAgo}}
-                                </div>
-                            </div>
-                        </div>
-                        {{/each}}
-                    </div>
-                </div>
-                <!--END NEWS -->
+                
             </div>
         </div>
     </div>

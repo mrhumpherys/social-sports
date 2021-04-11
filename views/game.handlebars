@@ -1,104 +1,174 @@
-
 <div class="container mt-5">
-    <div class="row d-flex justify-content-center">
-        <div class="col-md-10">
-            <div class="row">
-                <div class="col-12 d-flex justify-content-between g-0">
-                    <div>
-                        <h1 class="page-title">{{render_team_name game.away_team_id}} -VS- {{render_team_name game.home_team_id}}</h1>
-                    </div>
-                    <div><a id="upvote-btn" class="btn btn-primary">upvote</a></div>
-
-                </div>
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-10">
+      {{!-- LEAVE THIS IN HERE WE NEED AN ALERT HOWARD HATES WINDOW ALERTS --}}
+      <section id="messageAlert" class="hide">
+        <div class="col-12 d-flex justify-content-center">
+          <div id="blank-field-alert"
+            class="alert alert-dark bg-dark text-white col-4 d-flex justify-content-center border-success shadow"
+            role="alert">
+            You can only vote once!
+          </div>
+        </div>
+      </section>
+      {{!-- LEAVE THE MESSAGE IN CAN BE REUSED ANYWHERE FOR AN ALERT --}}
+      <div class="row g-0">
+        <div class="col-12">
+          <div class="row">
+            <div class="col-md-9 col-lg-9 g-0">
+              <div class="game-title-info">
+            <h1 class="page-title">{{render_team_name game.away_team_id}} -VS- {{render_team_name game.home_team_id}}
+            </h1>
+          </div>
             </div>
-            <div class="row ">
-                <div class="col-12 single-game">
-                    <div class="row">
-                        <div class="col d-flex align-items-center justify-content-center">
-                            <div class="text-center">
-                                <img src="{{render_team_logo game.away_team_id}}" alt="{{render_team_name game.away_team_id}}"
-                                    class="img-fluid">
-                                {{!-- <h4 class="mt-2">20 - 14</h4> --}}
-                            </div>
-                        </div>
-                        <div class="col-5 text-center d-flex align-items-center justify-content-center">
-                            <h3 class="score d-flex justify-content-center align-items-center">{{game.away_team_score}} <span class="time">Q{{game.quarter}}<br/ >
-                                    {{game.time_remaining_minutes}}:{{game.time_remaining_seconds}}</span> {{game.home_team_score}} </h3>
-                        </div>
-                        <div class="col d-flex align-items-center justify-content-center">
-                            <div class="text-center">
-                                <img src="{{render_team_logo game.home_team_id}}" alt="{{render_team_name game.home_team_id}}"
-                                    class="img-fluid">
-                                {{!-- <h4 class="mt-2">20 - 14</h4> --}}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mt-5">
-                        <div class="col-12">
-                            <div class="page-section game-info bg-mid">
-                                <h3>GAME INFO</h3>
-                                <p>{{game.vote_count}} <br>{{format_plural "vote" game.vote_count}} </p>
-                            </div>
-                        </div>
-                    </div>
+            <div class="col-md-12 col-lg-3 g-0">
+              <div class="vote-container d-flex justify-content-end align-items-center ">
+            <div class="vote-count">{{game.vote_count}} {{format_plural "vote" game.vote_count}} </div>
+            <a id="upvote-btn" class="btn btn-primary"><i class="far fa-thumbs-up"></i> upvote</a>
+          </div>
+            </div>
+          </div>
+          
+          
+        </div>
+      </div>
+      <div class="row ">
+        <div class="col-12">
+          <!--desktop only-->
+          <div class="d-none d-lg-block">
+            <div class="row single-game">
+              <div class="col d-flex align-items-center justify-content-center">
+                <div class="text-center">
+                  <img src="{{render_team_logo game.away_team_id}}" alt="{{render_team_name game.away_team_id}}"
+                    class="img-fluid">
+                  {{!-- <h4 class="mt-2">20 - 14</h4> --}}
+                </div>
+              </div>
+              <div class="col-md-4 col-sm-4 text-center d-flex align-items-center justify-content-center">
+                
+                <h3 class="score d-flex justify-content-center align-items-center">{{game.away_team_score}} <span
+                    class="time">{{format_quarter game.quarter game.status}}<br />
+                    {{format_min game.time_remaining_minutes}}:{{format_min game.time_remaining_seconds}}</span> {{game.home_team_score}} </h3>
+              </div>
+              <div class="col d-flex align-items-center justify-content-center">
+                <div class="text-center">
+                  <img src="{{render_team_logo game.home_team_id}}" alt="{{render_team_name game.home_team_id}}"
+                    class="img-fluid">
+                  {{!-- <h4 class="mt-2">20 - 14</h4> --}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- desktop only-->
 
+          <!--mobile only-->
+          <div class="d-sm-block d-md-block d-lg-none d-xs-block">
+            <div class="row d-block mobile-game">
 
-                   <div class="row mt-5">
-                      <div class="col-12">
-                        <div class="page-section game-info bg-mid">
-                          <div class="row">
-                            <div class="col d-flex justify-content-between">
-                              <div><h3>GAME CHATTER</h3></div>
-                              <div>{{game.comments.length}} {{format_plural "comment" game.comments.length}}</div>
-                            </div>
-                          
-                        </div>
-                          <div class="row">
-                            <div class="col-12">
-                              {{#if game.comments}}
-                              {{#each game.comments}}
-                              <div id="comment-id" class="comment" data-comment="{{id}}">
-                              <div class="comment-body">
-                                <div class="d-flex">
-                                  <div class="flex-shrink-0">
-                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="..." class="comment-img">
-                                  </div>
-                                  <div class="flex-grow-1 ms-3 flex-column">
-                                    {{comment_text}}
-                                    <div class="comment-meta">
-                                      <ul class="list-inline">
-                                        <li class="list-inline-item"><i class="fas fa-user-alt"></i>{{user.username}}</li>
-                                        <li class="list-inline-item"><i class="fas fa-calendar-alt"></i>{{nice_format_date created_at}}</li>
-                                        <li class="list-inline-item"><a href="#" id="delete-btn"><i class="far fa-trash-alt"></i>Delete</a></li>
-  
-                                      </ul>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <!--end comment-->
-                            {{/each}}
-                            {{/if}}
-                            <form>
-                              <div class="mb-3">
-                              <textarea id="comment-textarea" class="form-control" rows="4"></textarea>
-                            </div>
-                              <button id="add-comment-btn" type="button" class="btn btn-primary">POST COMMENT</button>
-                            </form>
+              <div class="col-sm-12">
+                <div class="row">
+                  <div class="col-sm-6 col-6">
+                <div class="text-center">
+                  <img src="{{render_team_logo game.away_team_id}}" alt="{{render_team_name game.away_team_id}}"
+                    class="img-fluid">
+                    <h3 class="score d-flex justify-content-center align-items-center">
+                        {{game.home_team_score}} </h3>
+                </div>
+              </div>
+              <div class="col-sm-6 col-6">
+                <div class="text-center">
+                  <img src="{{render_team_logo game.home_team_id}}" alt="{{render_team_name game.home_team_id}}"
+                    class="img-fluid">
+                  <h3 class="score d-flex justify-content-center align-items-center"> {{game.home_team_score}} </h3>
+                </div>
+              </div>
+                </div>
+                <div class="row">
+                  <div class="col-12 d-flex justify-content-center">
+                    <span
+                    class="time text-center">{{format_quarter game.quarter game.status}}<br />
+                    {{format_min game.time_remaining_minutes}}:{{format_min game.time_remaining_seconds}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end mobile only-->
+
+          <div class="row mt-5">
+            <div class="col-12">
+              <div class="page-section game-info bg-mid">
+                <div class="row">
+                  <div class="col d-flex justify-content-between">
+                    <div>
+                      <h3>GAME CHATTER</h3>
+                    </div>
+                    <div>{{game.comments.length}} {{format_plural "comment" game.comments.length}}</div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    {{#if game.comments}}
+                    {{#each game.comments}}
+                    <div id="comment-id" class="comment" data-user="{{user.id}}">
+                      <div class="comment-body">
+                        <div class="d-flex">
+                          <div class="flex-shrink-0">
+                            <img src="/assets/images/nba-logo.svg" alt="..." class="comment-img">
+                          </div>
+                          <div class="flex-grow-1 ms-3 flex-column">
+                            {{comment_text}}
+                            <div class="comment-meta">
+                              <ul class="list-inline">
+                                <li class="list-inline-item"><i class="fas fa-user-alt"></i>{{user.username}}</li>
+                                <li class="list-inline-item"><i class="fas fa-calendar-alt"></i>{{nice_format_date
+                                  created_at}}</li>
+                                <li id="delete-btn" class="list-inline-item"><a><i data-comment="{{id}}"
+                                      data-user='{{user.username}}' class="far fa-trash-alt"></i>Delete</a></li>
+                              </ul>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <!-- END COMMENTS -->
+                    <!--end comment-->
+                    {{/each}}
+                    {{/if}}
+                    <form>
+                      <div class="mb-3">
+                        <textarea id="comment-textarea" class="form-control" rows="4"></textarea>
+                      </div>
+                      <button id="add-comment-btn" type="button" class="btn btn-primary">SEND</button>
+                    </form>
+                  </div>
                 </div>
-                <!--end single game-->
+              </div>
             </div>
+          </div>
+          <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
+            <div class="toast " style="position: absolute; top: 0; right: 0;">
+              <div class="toast-header d-flex flex-wrap justify-content-between">
+                <img src="/assets/images/logo.png" style="height: 20px;" class="rounded mr-2" alt="...">
+                <strong class="mr-auto">Sports Buzz</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="toast-body">
+                SORRY YOU CAN ONLY VOTE ONCE
+              </div>
+            </div>
+          </div>
+          <!-- END COMMENTS -->
         </div>
+        <!--end single game-->
+      </div>
     </div>
+  </div>
 </div>
 <script src="/assets/javascript/comment.js"></script>
+
+
 {{#if game.comments}}
 <script src="/assets/javascript/commentDelete.js"></script>
 {{/if}}

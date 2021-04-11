@@ -2,6 +2,7 @@ const router = require('express').Router();
 const sequelize = require('../config/connection');
 const { Games, User, Comment, Vote } = require('../models');
 const withAuth = require('../utils/auth');
+const { Op } = require("sequelize");
 
 router.get('/', withAuth, (req, res) => {
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
@@ -17,7 +18,9 @@ router.get('/', withAuth, (req, res) => {
 
 
     // CHECK FOR LIVE GAMES
-    new NBA().isLive()
+    new NBA().create();
+  
+    new NBA().updateScores();
 
     // CHECK IF WE HAVE GAME DATA
     // ==========================
@@ -42,6 +45,14 @@ router.get('/', withAuth, (req, res) => {
         .then(data => {
             const news = (data)
             Games.findAll({
+                where:{
+                    status: {
+                      [Op.or]: ['InProgress', 'Scheduled', 'Postponed']
+                    }
+        
+                        // [{status:'InProgress'},{status:'Scheduled'},{status:'Postponed'},]
+        
+                },
                 attributes: [
                     'id',
                     'game_id',
@@ -78,15 +89,13 @@ router.get('/', withAuth, (req, res) => {
                     },
                 ]
             })
-            .then(dbGamesData => {
-                  
+                .then(dbGamesData => {
+
                     console.log('============================================================================================');
                     const games = dbGamesData.map(game => game.get({ plain: true }));
-                    
+
                     // TO ACCESS INFO FOR HANDLEBARS USE game and news
                     // ==============================================
-                    console.log('add new news')
-                    console.log(news);
                     res.render('dashboard', {
                         style: "style.css",
                         games, news,
@@ -111,25 +120,22 @@ router.get(`/profile`, withAuth, (req, res) => {
             id: req.session.user_id
         }
     })
-      .then(dbUserData => {
-        if (!dbUserData) {
-            res.status(404).json({ message: 'No user found with this id' });
-            return;
-          }
-          const user = dbUserData.get({ plain: true})
-          console.log('+++++++++++++++++++')
-          console.log(user)
-          console.log('+++++++++++++++++++')
-          res.render(`profile`, {
-            style: "style.css", 
-            user,
-            loggedIn: true
+        .then(dbUserData => {
+            if (!dbUserData) {
+                res.status(404).json({ message: 'No user found with this id' });
+                return;
+            }
+            const user = dbUserData.get({ plain: true })
+            res.render(`profile`, {
+                style: "style.css",
+                user,
+                loggedIn: true
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
         });
-      })
-      .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-      });
-  });
+});
 
 module.exports = router;

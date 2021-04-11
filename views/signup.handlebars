@@ -1,79 +1,75 @@
-        <div class="sign-up-form container">
-            <div class="row d-flex justify-content-center">
-                <div class="col">
-                    <!-- <div class="row">
+<div class="sign-up-form container">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md">
+            <!-- <div class="row">
                         <div class="col-12">
                             <h1 class="section-title">FEATURE GAME</h1>
                         </div>
                     </div> -->
-                    <div class="row">
-                        <div class="col-12">
-                            <div id="sign-up-container" class="container d-flex flex-wrap justify-content-center">
-                                <div class="col-sm-12 d-flex flex-wrap justify-content-center">
-                                    <div id="sign-up-card" class="card">
-                                        <div class="card-header">
-                                            <h3>Sign Up</h3>
-                                            <div class="d-flex justify-content-end social_icon">
-                                                <span><i class="fab fa-facebook-square"></i></span>
-                                                <!-- <a href="#" target="_blank" class="icon-facebook">
-                                        <i class="fab fa-facebook-f">
-                                        </i>
-                                      </a> -->
-                                                <span><i class="fab fa-google-plus-square"></i></span>
-                                                <!-- <a href="#" target="_blank" class="icon-google_plus">
-                                        <i class="fab fa-google-plus-g">
-                                        </i>
-                                      </a> -->
-                                                <span><i class="fab fa-twitter-square"></i></span>
-                                                <!-- <a href="#" target="_blank" class="icon-google_plus">
-                                        <i class="fab fa-google-plus-g">
-                                        </i>
-                                      </a> -->
+            <div class="row">
+                <div class="col">
+                    <div id="sign-up-container" class="container d-flex flex-wrap justify-content-center">
+                        <div class="col-12 col-sm-12 col-xs-12 d-flex flex-wrap justify-content-center">
+                            <div id="sign-up-card" class="card">
+                                <div class="card-header">
+                                    <h3>Sign Up</h3>
+
+                                    {{!-- If you want to add social media icons to the top of the login and signup; add
+                                    these --}}
+                                    {{!-- You will also need to change everything over to passport instead of sessions
+                                    then you will need to follow passport docs for instrustions for implementation --}}
+
+                                    {{!-- <div class="d-flex justify-content-end social_icon">
+                                        <span><i class="fab fa-facebook-square"></i></span>
+                                        <span><i class="fab fa-google-plus-square"></i></span>
+                                        <span><i class="fab fa-twitter-square"></i></span>
+                                    </div> --}}
+
+                                </div>
+                                <div id="sign-up-body" class="card-body">
+                                    <form>
+                                        <div class="input-group form-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
                                             </div>
+                                            <input id="email-signup" type="text" class="form-control"
+                                                placeholder="Enter Valid Email" />
                                         </div>
-                                        <div id="sign-up-body" class="card-body">
-                                            <form>
-                                                <div class="input-group form-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text"><i
-                                                                class="fas fa-envelope"></i></span>
-                                                    </div>
-                                                    <input id="email-signup" type="text" class="form-control"
-                                                        placeholder="Enter Valid Email" />
-                                                </div>
-                                                <div class="input-group form-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text"><i
-                                                                class="fas fa-user"></i></span>
-                                                    </div>
-                                                    <input id="username-signup" type="text" class="form-control"
-                                                        placeholder="Enter A Username" />
-                                                </div>
-                                                <div class="input-group form-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text"><i class="fas fa-key"></i></span>
-                                                    </div>
-                                                    <input id="password-signup" type="password" class="form-control"
-                                                        placeholder="Password" />
-                                                </div>
-                                                <div class="row align-items-center remember mt-3">
-                                                    <input type="checkbox" />Remember Me
-                                                </div>
-                                                <div class="d-flex justify-content-end form-group mt-3">
-                                                    <input id="signup" type="submit" value="Login"
-                                                        class="btn float-right btn-primary login_btn" />
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <div id="sign-up-footer" class="card-footer">
-                                            <div class="d-flex justify-content-center links">
-                                                Have have an account? <a class="btn-hover" href="/login"> Sign In</a>
+                                        <div class="input-group form-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-user"></i></span>
                                             </div>
-                                            <!-- <div class="d-flex justify-content-center">
+                                            <input id="username-signup" type="text" class="form-control"
+                                                placeholder="Enter A Username" />
+                                        </div>
+                                        <div class="input-group form-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-key"></i></span>
+                                            </div>
+                                            <input id="password-signup" type="password" class="form-control"
+                                                placeholder="Password" />
+                                        </div>
+                                        {{!-- removed remember me checkbox from here for now; left it on the login --}}
+                                        {{!-- <div class="row align-items-center remember mt-3">
+                                            <input type="checkbox" />Remember Me
+                                        </div> --}}
+
+                                        {{!-- <div class="d-flex justify-content-end form-group mt-3">
+                                            <input id="signup" type="submit" value="SignUp"
+                                                class="btn float-right btn-primary text-center login_btn" />
+                                        </div> --}}
+                                        <div class="d-flex justify-content-end form-group mt-3">
+                                            <button id="signup" type="submit" class="btn btn-primary">SIGN UP</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div id="sign-up-footer" class="card-footer">
+                                    <div class="d-flex justify-content-center links">
+                                        Have have an account? <a class="btn-hover" href="/login"> Sign In</a>
+                                    </div>
+                                    <!-- <div class="d-flex justify-content-center">
                                                 <a href="#">Forgot your password?</a>
                                             </div> -->
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -81,5 +77,7 @@
                 </div>
             </div>
         </div>
-        </div>
-    <script src="/assets/javascript/signup.js"></script>
+    </div>
+</div>
+</div>
+<script src="/assets/javascript/signup.js"></script>

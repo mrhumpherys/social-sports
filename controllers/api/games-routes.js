@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const sequelize = require('../../config/connection');
 const { Games, User, Comment, Vote } = require('../../models');
+const withAuth = require('../../utils/auth');
 
 
 
@@ -14,8 +15,8 @@ router.get('/', (req, res) => {
   // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
 
   const NBA = require('../../nba');
-  new NBA().isLive()
-    
+  new NBA().create();
+  new NBA().updateScores();
   // CHECK IF WE HAVE GAME DATA
   // ==========================
   async function create() {
@@ -28,7 +29,9 @@ router.get('/', (req, res) => {
     if (data === false) {
       return
     } else {
-      new NBA().createGames(date);
+      new NBA().createGames(date).then(()=>{
+        return
+      });
     }
   }
   create()
@@ -86,6 +89,9 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
+  const NBA = require('../../nba');
+   new NBA().create();
+   new NBA().updateScores();
   Games.findOne({
     where: {
       id: req.params.id
@@ -140,11 +146,11 @@ router.get('/:id', (req, res) => {
     });
 });
 
-router.post('/', (req, res) => {
+router.post('/', withAuth, (req, res) => {
   // expects {game_id: 16241, user_id: 1}
   Games.create({
     game_id: req.body.game_id,
-    user_id: req.body.user_id
+    user_id: req.session.user_id
   })
     .then(dbPostData => res.json(dbPostData))
     .catch(err => {
@@ -153,18 +159,20 @@ router.post('/', (req, res) => {
     });
 });
 
-router.put('/upvote', (req, res) => {
+router.put('/upvote', withAuth, (req, res) => {
   // custom static method created in models/Post.js
-
-  Games.upvote({ ...req.body, user_id: req.session.user_id }, { Vote, Comment, User })
+   const body = req.body
+   console.log(body);
+  Games.upvote({ ...body, user_id: parseInt(req.session.user_id) }, { Vote, Comment, User })
     .then(updatedVoteData => res.json(updatedVoteData))
     .catch(err => {
       console.log(err);
       res.status(500).json(err);
+      return
     });
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', withAuth,(req, res) => {
   Games.update(
     req.body,
     {
@@ -186,7 +194,7 @@ router.put('/:id', (req, res) => {
     });
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id',withAuth, (req, res) => {
   Games.destroy({
     where: {
       id: req.params.id
@@ -204,5 +212,6 @@ router.delete('/:id', (req, res) => {
       res.status(500).json(err);
     });
 });
+
 
 module.exports = router;

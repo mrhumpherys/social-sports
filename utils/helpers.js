@@ -17,18 +17,41 @@ module.exports = {
 
         return word;
     },
-    format_time: (date) => {
-        let newDate = date.split('T')[1];
-        let time = newDate.split(":")[0];
-        let mins = newDate.split(":")[1];
-        if (time > 12) {
-            let formatted_time = time -= 12
-            let newTime = formatted_time + ":" + mins
-            return newTime;
+    // format_time: (gameTime) => {
+    //     let newDate = gameTime.split('T')[1];
+    //     let time = newDate.split(":")[0];
+    //     let mins = newDate.split(":")[1];
+        
+    //     if (time > 12) {
+    //         let formatted_time = time -= 12
+    //         let newTime = formatted_time + ":" + mins
+    //         return newTime;
+    //     } else {
+    //         let formatted_time = time.split("0");
+    //         let newTime = formatted_time + ":" + mins;
+    //         return newTime
+    //     }
+    // },
+    format_time: gameTime => {
+        const moment = require ("moment")
+        let newDate = moment(gameTime).format("hh:mm")
+        return(newDate)
+    },
+    format_min: (time) => {
+        if (time === null) {
+            return time = "00"
+        } 
+        if (time <10) {
+            return '0'+time;
         } else {
-            let formatted_time = time.split("0");
-            let newTime = formatted_time + ":" + mins;
-            return newTime
+            return time;
+        }
+    },
+    format_quarter: (time, start) => {
+        if (time == null) {
+            return start
+        } else {
+            return 'Q ' + time;
         }
     },
 
@@ -38,6 +61,19 @@ module.exports = {
         }
 
         return word;
+    },
+    deleteButton: (poster, user, options) => {
+        
+        // user = id
+        // poster = user.id
+        // console.log(poster);
+        // console.log(user);
+        console.log(poster, user);
+        if (poster === user) {
+            return options.fn(this);
+        } else {
+            return;
+        }
     },
 
 
