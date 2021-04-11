@@ -136,6 +136,7 @@ nav {
 }
 .hero-text {
   padding: 2rem;
+  max-width: 635px;
 }
 .hero-text h1 {
   font-size: 4rem;
@@ -163,7 +164,7 @@ nav {
   min-width: 50px;
 }
 .game-detail h3{
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: 800;
 }
 /*------------
@@ -206,7 +207,14 @@ h3.score {
 .comment-img {
     width: 50px;
 }
-
+#messageAlert {
+  transition: all ease .3s;
+}
+.hide {
+  display: none;
+  height: 0;
+  
+}
 /*------------
 =============
 PROFILE
@@ -261,11 +269,26 @@ SLICK SLIDE
 .mobile-game img {
   height: 200px;
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 768px) {
+  .hero-text {
+    width: auto;
+  }
   .vs {
     padding: 1rem 0;
     display: block;
   }
+  #blank-field-alert {
+    width: 100%;
+  }
+  .team-content img {
+    height: auto;
+  }
+  .game-detail h3 {
+    font-size: 1.5rem;
+  }
+}
+@media only screen and (max-width: 600px) {
+  
   .page-title {
     text-align: center;
     display: block;
@@ -274,6 +297,7 @@ SLICK SLIDE
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
+    margin: 0 1rem;
   }
   
 }

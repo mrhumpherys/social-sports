@@ -100,7 +100,7 @@ router.get('/', (req, res) => {
             style: "style.css",
             games, news,
             loggedIn: req.session.loggedIn,
-
+            username: req.session.username
           });
           // ==============================================
         })
