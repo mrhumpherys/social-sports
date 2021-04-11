@@ -280,6 +280,12 @@ SLICK SLIDE
   #blank-field-alert {
     width: 100%;
   }
+  .team-content img {
+    height: auto;
+  }
+  .game-detail h3 {
+    font-size: 1.5rem;;
+  }
 }
 @media only screen and (max-width: 600px) {
   
