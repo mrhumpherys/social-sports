@@ -479,51 +479,6 @@ class NBA {
 
 
 
-
-
-
-
-
-
-    //     inProgress.map(el => {
-    //         let homeTeam = el.HomeTeam;
-    //         let awayTeam = el.AwayTeam;
-    //         let status = el.Status
-    //         let dateTimes = moment(el.DateTime).format()
-    //         let current = new Date()
-    //         let currentDate = moment(current).format()
-
-    //         if ((dateTimes) <= (currentDate)) {
-    //             if (status === "InProgress" || status === "Postponed") {
-    //                 console.log('============================================================================================');
-    //                 runUpdate = true 
-    //                 return
-    //             }
-    //         } else {
-    //             console.log('============================================================================================');
-    //             console.log(`The ${homeTeam} vs. ${awayTeam} GAME IS NOT LIVE!`)
-    //             console.log('============================================================================================');
-    //             runUpdate = false
-    //             return
-    //         }
-    //     })
-    //     if (runUpdate === true) {
-    //         let date = (moment(new Date()).format("YYYY-MM-DD"));
-    //         new NBA().getGames();
-    //         new NBA().updateGames(date);
-    //         console.log(`UPDATING SCORES`)
-    //         console.log('============================================================================================');
-    //         return
-    //     } else {
-    //         console.log("Games Are Updated Every 5 Minutes")
-    //         return
-    //     }
-    // }).catch(e => {
-    //     console.log(e)
-    //     return
-    // })
-
-
 }
 
 
