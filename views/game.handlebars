@@ -35,9 +35,10 @@
               </div>
             </div>
             <div class="col-5 text-center d-flex align-items-center justify-content-center">
+              
               <h3 class="score d-flex justify-content-center align-items-center">{{game.away_team_score}} <span
-                  class="time">Q{{game.quarter}}<br />
-                  {{game.time_remaining_minutes}}:{{game.time_remaining_seconds}}</span> {{game.home_team_score}} </h3>
+                  class="time">{{format_quarter game.quarter game.status}}<br />
+                  {{format_min game.time_remaining_minutes}}:{{format_min game.time_remaining_seconds}}</span> {{game.home_team_score}} </h3>
             </div>
             <div class="col d-flex align-items-center justify-content-center">
               <div class="text-center">

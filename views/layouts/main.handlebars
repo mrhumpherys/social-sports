@@ -70,12 +70,10 @@
           {{/unless}}
           {{#if loggedIn}}
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/">HOME</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/dashboard">DASHBOARD</a>
           </li>
-          <li class="nav-item dropdown">
+          <li><a class="nav-link active" id="logout" href="#">LOGOUT</a></li>
+          {{!-- <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="/login" id="navbarDropdown" role="button"
               data-bs-toggle="dropdown" aria-expanded="false">
               SETTINGS
@@ -84,7 +82,7 @@
               <li><a class="dropdown-item" href="/profile">PROFILE</a></li>
               <li><a class="dropdown-item" id="logout" href="#">LOGOUT</a></li>
             </ul>
-          </li>
+          </li> --}}
           {{/if}}
         </ul>
       </div>

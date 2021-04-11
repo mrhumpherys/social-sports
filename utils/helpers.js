@@ -21,6 +21,7 @@ module.exports = {
         let newDate = date.split('T')[1];
         let time = newDate.split(":")[0];
         let mins = newDate.split(":")[1];
+        
         if (time > 12) {
             let formatted_time = time -= 12
             let newTime = formatted_time + ":" + mins
@@ -29,6 +30,23 @@ module.exports = {
             let formatted_time = time.split("0");
             let newTime = formatted_time + ":" + mins;
             return newTime
+        }
+    },
+    format_min: (time) => {
+        if (time === null) {
+            return time = "00"
+        } 
+        if (time <10) {
+            return '0'+time;
+        } else {
+            return time;
+        }
+    },
+    format_quarter: (time, start) => {
+        if (time == null) {
+            return start
+        } else {
+            return 'Q ' + time;
         }
     },
 
