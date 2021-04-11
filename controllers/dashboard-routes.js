@@ -16,7 +16,7 @@ router.get('/', withAuth, (req, res) => {
     const moment = require('moment');
     let date = (moment(new Date()).format("YYYY-MM-DD"));
 
-
+    
     // CHECK FOR LIVE GAMES
     new NBA().updateScores()
 

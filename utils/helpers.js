@@ -1,5 +1,7 @@
+const moment = require("moment");
+
 module.exports = {
-    format_date: (date) => {
+    format_date: date => {
         let newDate = date.split('T')[0];
 
         return newDate;
@@ -17,11 +19,13 @@ module.exports = {
 
         return word;
     },
-    format_time: (gameTime) => {
-        let newDate = gameTime.split('T')[1];
-        let time = newDate.split(":")[0];
-        let mins = newDate.split(":")[1];
-        
+    format_time: gameTime => {
+        const moment = require ("moment")
+        let newDate = moment(gameTime).tz("America/New_York").format("hh:mm")
+        // let newDate = gameTime.split('T')[1];
+        // let time = newDate.split(":")[0];
+        // let mins = newDate.split(":")[1];
+        return(newDate)
         if (time > 12) {
             let formatted_time = time -= 12
             let newTime = formatted_time + ":" + mins

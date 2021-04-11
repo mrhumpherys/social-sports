@@ -327,7 +327,7 @@ class NBA {
             .then(inProgress => {
                 let runUpdate = false
                 let data = JSON.stringify(inProgress)
-                let dataTWO = JSON.parse(data)
+                let dataTWO = inProgress
                 console.log("+++++++++++++++++++ \nDATA FROM OUR DB",)
                 let dateTimes
                 let current = new Date()

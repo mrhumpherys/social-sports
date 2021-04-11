@@ -93,7 +93,9 @@ router.get('/', (req, res) => {
         .then(dbGamesData => {
 
           console.log('============================================================================================');
-          const games = dbGamesData.map(game => game.get({ plain: true }));
+          // const game = dbGamesData.map(game => game.get({ plain: true }));
+          const data = JSON.stringify(dbGamesData);
+          const games = JSON.parse(data)
           // console.log(games)
           // TO ACCESS INFO FOR HANDLEBARS USE game and news
           // ==============================================
