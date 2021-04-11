@@ -13,6 +13,13 @@ async function upvoteHandler(event) {
         headers: {
             'Content-Type': 'application/json'
         }
+    }).catch(function (err) {
+        console.log(err);
+        return new Response(JSON.strigify({
+            code: 400,
+            message: 'You can only vote once!'
+        }))
+        //err.json();
     });
 
     if (response.ok) {
@@ -21,8 +28,8 @@ async function upvoteHandler(event) {
     } else {
 
         // CAN NOT USE WINDOW ALERTS HOWARD HAS SAID A BUNCH OF TIMES HOW MUCH HE HATES THEM
-        document.getElementById('messageAlert').classList.remove("hide")
-        setTimeout(function(){document.getElementById('messageAlert').classList.add("hide")},4000)
+        document.getElementById('messageAlert').setAttribute("style", "visibility:visible")
+        setTimeout(function(){document.getElementById('messageAlert').setAttribute("style", "visibility:collapse")},4000)
     }
 }
 

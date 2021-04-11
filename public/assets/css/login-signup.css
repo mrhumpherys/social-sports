@@ -289,13 +289,11 @@ input.form-control {
   transition: all ease 0.3s;
   border: 1px solid rgba(0, 0, 0, 0);
 }
-
 #login-card:hover {
   border: 1px solid rgba(78, 220, 22, 0.35);
   -webkit-box-shadow: 0px 0px 15px -3px rgba(78, 220, 22, 0.3);
   box-shadow: 0px 0px 15px -3px rgba(78, 220, 22, 0.3);
 } 
 */
-
 
 
