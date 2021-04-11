@@ -116,6 +116,7 @@ footer {
 }
 .navbar-brand img {
   max-width: 50px;
+  max-height: 45px;
 }
 nav {
   padding: 0.5rem 1rem;
@@ -210,10 +211,9 @@ h3.score {
 PROFILE
 =============
 -------------*/
-
 .profile-img {
     background: #333;
-}
+} */
 .profile-data li span {
     font-weight: 600;
 }
