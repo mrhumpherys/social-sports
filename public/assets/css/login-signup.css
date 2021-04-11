@@ -97,6 +97,11 @@ a:hover {
 .navbar-dark .navbar-nav .nav-link {
   border-top: 3px solid rgba(0, 0, 0, 0);
 }
+
+.bg-dark {
+  background-color: #363636!important;
+}
+
 .navbar-dark .navbar-nav .nav-link:focus,
 .navbar-dark .navbar-nav .nav-link:hover {
   color: var(--green);
@@ -132,14 +137,15 @@ body {
   height: 70%;
 } */
 
-.sign-up-form {
+.sign-up-form { 
   padding-top: 150px;
-  padding-bottom: 50px;
+  padding-bottom: 200px;
   align-content: center;
   background-image: url("../../assets/images/wallpaper-flame.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  /* background-position: 43px; */
   font-family: "Numans", sans-serif;
   /* display: flex; */
   /* flex-wrap: wrap; */
@@ -268,34 +274,6 @@ input.form-control {
   -webkit-box-shadow: 0px 0px 15px -3px rgba(78, 220, 22, 0.3);
   box-shadow: 0px 0px 15px -3px rgba(78, 220, 22, 0.3);
 }
-
-
-
-/* #style-login {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  color: #46aa46;
-  font-weight: bold;
-  margin-top: 145px;
-} */
-
-/* 
-#login-card {
-  height: 475px;
-  background: var(--darkbg);
-  padding: 2rem;
-  cursor: pointer;
-  transition: all ease 0.3s;
-  border: 1px solid rgba(0, 0, 0, 0);
-}
-
-#login-card:hover {
-  border: 1px solid rgba(78, 220, 22, 0.35);
-  -webkit-box-shadow: 0px 0px 15px -3px rgba(78, 220, 22, 0.3);
-  box-shadow: 0px 0px 15px -3px rgba(78, 220, 22, 0.3);
-} 
-*/
 
 
 
