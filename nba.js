@@ -3,7 +3,7 @@ const fs = require('fs');
 const fetch = require('node-fetch');
 const moment = require('moment');
 const { Games } = require('./models');
-const { defineLocale } = require('moment');
+
 
 
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
@@ -317,113 +317,9 @@ class NBA {
                 }
             })
 
-        //     inProgress.map(el => {
-        //         let homeTeam = el.HomeTeam;
-        //         let awayTeam = el.AwayTeam;
-        //         let status = el.Status
-        //         let dateTimes = moment(el.DateTime).format()
-        //         let current = new Date()
-        //         let currentDate = moment(current).format()
-
-        //         if ((dateTimes) <= (currentDate)) {
-        //             if (status === "InProgress" || status === "Postponed") {
-        //                 console.log('============================================================================================');
-        //                 runUpdate = true 
-        //                 return
-        //             }
-        //         } else {
-        //             console.log('============================================================================================');
-        //             console.log(`The ${homeTeam} vs. ${awayTeam} GAME IS NOT LIVE!`)
-        //             console.log('============================================================================================');
-        //             runUpdate = false
-        //             return
-        //         }
-        //     })
-        //     if (runUpdate === true) {
-        //         let date = (moment(new Date()).format("YYYY-MM-DD"));
-        //         new NBA().getGames();
-        //         new NBA().updateGames(date);
-        //         console.log(`UPDATING SCORES`)
-        //         console.log('============================================================================================');
-        //         return
-        //     } else {
-        //         console.log("Games Are Updated Every 5 Minutes")
-        //         return
-        //     }
-        // }).catch(e => {
-        //     console.log(e)
-        //     return
-        // })
+        
     }
-    updateScores1() {
-        // CHECK OUR CURRENT LIST OF GAMES, IF ANY GAME OF THE GAMES 'status' property or key shows a value === 'InProgress' then run the function to update the scores
-        new NBA().getGamesDb()
-            .then(inProgress => {
-                let runUpdate = true
-                let statusGame = false
-                let apiTimer;
-
-                inProgress.map(el => {
-                    let homeTeam = el.home_team;
-                    let awayTeam = el.away_team;
-                    let status = el.status
-                    let newRecordNumber = el.new_record_number
-                    let dateTimes = moment(el.date_time).format()
-                    let current = new Date()
-                    let currentDate = moment(current).format()
-                    apiTimer = JSON.parse(newRecordNumber)
-
-                    if ((dateTimes) <= (currentDate)) {
-                        if (status === "InProgress") {
-                            console.log('============================================================================================');
-                            console.log(`The ${homeTeam} vs. ${awayTeam} GAME IS LIVE!`)
-                            console.log('============================================================================================');
-                            statusGame = true
-                            runUpdate = true
-                            return
-
-                        }
-                    } else {
-                        console.log('============================================================================================');
-                        console.log(`The ${homeTeam} vs. ${awayTeam} GAME IS NOT LIVE!`)
-                        console.log('============================================================================================');
-                        statusGame = false
-                    }
-                })
-                if (statusGame === true) {
-                    console.log("CHECKING TIME BETWEEN CALLS, CALLS ARE MADE EVERY 300000ms or 5mins")
-                    console.log("LAST TIME STAMP: ", apiTimer)
-                    console.log("+++++++++++++++++")
-                    console.log((((Date.now()) - apiTimer) / 1000), "\nseconds since last call")
-                    if ((Date.now()) - apiTimer > 300000) {
-
-                        console.log('============================================================================================');
-                        console.log("UPDATING LIVE SCORES")
-                        console.log('============================================================================================');
-                        let date = (moment(new Date()).format("YYYY-MM-DD"));
-                        new NBA().getGames();
-                        new NBA().updateGames(date);
-
-                        return
-                    } else {
-                        console.log("Games Are Updated Every 5 Minutes")
-                        console.log('============================================================================================');
-                        return
-                    }
-                } else {
-                    console.log("Games Are Updated Every 5 Minutes")
-                    return
-                }
-            }).catch(e => {
-                console.log(e)
-                return
-            })
-    }
-
-
-
-
-
+    
     updateScores() {
 
         // CHECK OUR CURRENT LIST OF GAMES, IF ANY GAME OF THE GAMES 'status' property or key shows a value === 'InProgress' then run the function to update the scores

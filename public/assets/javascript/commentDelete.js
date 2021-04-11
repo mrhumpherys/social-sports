@@ -7,14 +7,14 @@ async function commentDelete(event) {
     console.log(`++++++\nFRONT-END\nthis is the COMMENTId: ${comment_id}`)
 
 
-    let apiUrl = `http://localhost:3001/api/comments/${comment_id}`
+    let apiUrl = `https://sports-buzz.herokuapp.com/api/comments/${comment_id}`
     fetch(apiUrl).then(function (response) {
         console.log(response)
         if (response.ok) {
 
 
             async function deleteComment() {
-                const responseDelete = await fetch(`http://localhost:3001/api/comments/${comment_id}`, {
+                const responseDelete = await fetch(`https://sports-buzz.herokuapp.com/api/comments/${comment_id}`, {
                     method: 'DELETE',
                 })
                 return responseDelete
