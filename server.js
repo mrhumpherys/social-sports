@@ -22,7 +22,6 @@ const sess = {
     })
 };
 const helpers = require('./utils/helpers');
-const { toUnicode } = require('punycode');
 const hbs = exphbs.create({ helpers });
 const app = express();
 const PORT = process.env.PORT || 3001;
