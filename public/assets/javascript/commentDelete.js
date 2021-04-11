@@ -1,31 +1,52 @@
 async function commentDelete(event) {
     event.preventDefault();
 
-    
-    let comment_id = document.querySelector('#comment-id').getAttribute('data-comment');
-    console.log(comment_id);
-    comment_id = comment_id.replace("#",'');
-    if (comment_id) {
-        const response = await fetch(`/api/comments/${comment_id}`, {
-            method: 'DELETE',
-            
-        });
+    console.log(event.target)
+    let comment_id = event.target.getAttribute("data-comment");
+    let user = event.target.getAttribute("data-user");
+    console.log(`++++++\nFRONT-END\nthis is the COMMENTId: ${comment_id}`)
+
+
+    let apiUrl = `http://localhost:3001/api/comments/${comment_id}`
+    fetch(apiUrl).then(function (response) {
+        console.log(response)
         if (response.ok) {
-            console.log('success');
-            document.location.reload();
+
+
+            async function deleteComment() {
+                const responseDelete = await fetch(`http://localhost:3001/api/comments/${comment_id}`, {
+                    method: 'DELETE',
+                })
+                return responseDelete
+            }
+            deleteComment().then(res => {
+                if (res.ok) {
+                    document.getElementById('messageAlert').setAttribute("style", "visibility:visible")
+                    document.getElementById("blank-field-alert").innerHTML = 'Successfully deleted your comment';
+                    setTimeout(function () { document.getElementById('messageAlert').setAttribute("style", "visibility:collapse") }, 4000)
+                    document.location.reload()
+                } else {
+                    document.getElementById('messageAlert').setAttribute("style", "visibility:visible")
+                    document.getElementById("blank-field-alert").innerText = response.statusText;
+                    setTimeout(function () { document.getElementById('messageAlert').setAttribute("style", "visibility:collapse") }, 4000)
+                    return
+                }
+            })
         } else {
-            // IF YOU ADD THE DELETE LOOK AT THE LOGIN AND SIGN UP I ADDED A HIDDEN DIV THAT WILL OUTPUT THE ERROR TEXT, 
-            // JUST COPY THE DIV FROM THE HANDLEBARS FILES IT IS LABELED AND AT THE TOP
-            // COMMENT THIS IN BELOW AFTER AND IT IS READY TO GO
-            // =================================================================
-            // document.getElementById('messageAlert').setAttribute("style", "visibility:visible")
-            // document.getElementById("blank-field-alert").innerText=response.statusText
-            // setTimeout(function(){document.getElementById('messageAlert').setAttribute("style", "visibility:collapse")},4000)
-            
-            alert(response.statusText);
+            document.getElementById('messageAlert').setAttribute("style", "visibility:visible")
+            document.getElementById("blank-field-alert").innerText = 'You can only delete your own comments';
+            setTimeout(function () { document.getElementById('deleteAlert').setAttribute("style", "visibility:collapse") }, 4000)
+            return
         }
-    }
+    })
+    return
 }
 
 
-document.querySelector('#delete-btn').addEventListener('click', commentDelete);
+
+const cbox = document.querySelectorAll('#delete-btn');
+
+for (let i = 0; i < cbox.length; i++) {
+    cbox[i].addEventListener("click", commentDelete
+    );
+}

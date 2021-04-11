@@ -36,6 +36,9 @@ async function loginFormHandler(event) {
       });
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> feature/routes
         if (response.ok) {
             document.location.replace('/dashboard');
         } else {
@@ -45,6 +48,7 @@ async function loginFormHandler(event) {
         setTimeout(function(){document.getElementById('messageAlert').setAttribute("style", "visibility:collapse")},4000)
         
         }
+<<<<<<< HEAD
 =======
       if (response.ok) {
         document.location.replace("/dashboard");
@@ -52,6 +56,8 @@ async function loginFormHandler(event) {
         alert(response.statusText);
       }
 >>>>>>> feature/codys-front-end
+=======
+>>>>>>> feature/routes
     }
   }
 }

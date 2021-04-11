@@ -12,7 +12,6 @@
         </div>
       </section>
       {{!-- LEAVE THE MESSAGE IN CAN BE REUSED ANYWHERE FOR AN ALERT --}}
-
       <div class="row">
         <div class="col-12 d-flex justify-content-between g-0">
           <div class="game-title-info">
@@ -23,14 +22,10 @@
             <div class="vote-count">{{game.vote_count}} {{format_plural "vote" game.vote_count}} </div>
             <a id="upvote-btn" class="btn btn-primary"><i class="far fa-thumbs-up"></i> upvote</a>
           </div>
-
-
-
         </div>
       </div>
       <div class="row ">
         <div class="col-12 single-game">
-
           <div class="row">
             <div class="col d-flex align-items-center justify-content-center">
               <div class="text-center">
@@ -40,9 +35,10 @@
               </div>
             </div>
             <div class="col-5 text-center d-flex align-items-center justify-content-center">
+              
               <h3 class="score d-flex justify-content-center align-items-center">{{game.away_team_score}} <span
-                  class="time">Q{{game.quarter}}<br />
-                  {{game.time_remaining_minutes}}:{{game.time_remaining_seconds}}</span> {{game.home_team_score}} </h3>
+                  class="time">{{format_quarter game.quarter game.status}}<br />
+                  {{format_min game.time_remaining_minutes}}:{{format_min game.time_remaining_seconds}}</span> {{game.home_team_score}} </h3>
             </div>
             <div class="col d-flex align-items-center justify-content-center">
               <div class="text-center">
@@ -52,7 +48,6 @@
               </div>
             </div>
           </div>
-
           <div class="row mt-5">
             <div class="col-12">
               <div class="page-section game-info bg-mid">
@@ -63,13 +58,12 @@
                     </div>
                     <div>{{game.comments.length}} {{format_plural "comment" game.comments.length}}</div>
                   </div>
-
                 </div>
                 <div class="row">
                   <div class="col-12">
                     {{#if game.comments}}
                     {{#each game.comments}}
-                    <div id="comment-id" class="comment" data-comment="{{id}}" data-user="{{user.id}}">
+                    <div id="comment-id" class="comment" data-user="{{user.id}}">
                       <div class="comment-body">
                         <div class="d-flex">
                           <div class="flex-shrink-0">
@@ -82,10 +76,8 @@
                                 <li class="list-inline-item"><i class="fas fa-user-alt"></i>{{user.username}}</li>
                                 <li class="list-inline-item"><i class="fas fa-calendar-alt"></i>{{nice_format_date
                                   created_at}}</li>
-
-                                {{!-- <li class="list-inline-item"><a href="#" id="delete-btn"><i
-                                      class="far fa-trash-alt"></i>Delete</a></li> --}}
-
+                                <li id="delete-btn" class="list-inline-item"><a><i data-comment="{{id}}"
+                                      data-user='{{user.username}}' class="far fa-trash-alt"></i>Delete</a></li>
                               </ul>
                             </div>
                           </div>
@@ -120,8 +112,6 @@
               </div>
             </div>
           </div>
-
-
           <!-- END COMMENTS -->
         </div>
         <!--end single game-->
@@ -132,7 +122,7 @@
 <script src="/assets/javascript/comment.js"></script>
 
 
-{{!--
-<script src="/assets/javascript/commentDelete.js"></script> --}}
-
+{{#if game.comments}}
+<script src="/assets/javascript/commentDelete.js"></script>
+{{/if}}
 <script src="/assets/javascript/upvote.js"></script>

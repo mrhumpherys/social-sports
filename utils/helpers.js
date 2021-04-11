@@ -21,6 +21,7 @@ module.exports = {
         let newDate = date.split('T')[1];
         let time = newDate.split(":")[0];
         let mins = newDate.split(":")[1];
+        
         if (time > 12) {
             let formatted_time = time -= 12
             let newTime = formatted_time + ":" + mins
@@ -31,6 +32,23 @@ module.exports = {
             return newTime
         }
     },
+    format_min: (time) => {
+        if (time === null) {
+            return time = "00"
+        } 
+        if (time <10) {
+            return '0'+time;
+        } else {
+            return time;
+        }
+    },
+    format_quarter: (time, start) => {
+        if (time == null) {
+            return start
+        } else {
+            return 'Q ' + time;
+        }
+    },
 
     format_plural: (word, amount) => {
         if (amount !== 1) {
@@ -39,15 +57,19 @@ module.exports = {
 
         return word;
     },
-    // deleteButton: (poster) => {
-    //     let user = req.session.user_id
-    //     let poster = user.id
-    //     if (poster === user) {
-    //         return poster = true;
-    //     } else {
-    //         return poster = false;
-    //     }
-    // },
+    deleteButton: (poster, user, options) => {
+        
+        // user = id
+        // poster = user.id
+        // console.log(poster);
+        // console.log(user);
+        console.log(poster, user);
+        if (poster === user) {
+            return options.fn(this);
+        } else {
+            return;
+        }
+    },
 
 
 

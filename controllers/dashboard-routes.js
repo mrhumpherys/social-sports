@@ -2,6 +2,7 @@ const router = require('express').Router();
 const sequelize = require('../config/connection');
 const { Games, User, Comment, Vote } = require('../models');
 const withAuth = require('../utils/auth');
+const { Op } = require("sequelize");
 
 router.get('/', withAuth, (req, res) => {
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
@@ -17,7 +18,7 @@ router.get('/', withAuth, (req, res) => {
 
 
     // CHECK FOR LIVE GAMES
-    new NBA().isLive()
+    new NBA().updateScores()
 
     // CHECK IF WE HAVE GAME DATA
     // ==========================
@@ -42,6 +43,14 @@ router.get('/', withAuth, (req, res) => {
         .then(data => {
             const news = (data)
             Games.findAll({
+                where:{
+                    status: {
+                      [Op.or]: ['InProgress', 'Scheduled', 'Postponed']
+                    }
+        
+                        // [{status:'InProgress'},{status:'Scheduled'},{status:'Postponed'},]
+        
+                },
                 attributes: [
                     'id',
                     'game_id',

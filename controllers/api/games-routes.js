@@ -15,9 +15,7 @@ router.get('/', (req, res) => {
   // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
 
   const NBA = require('../../nba');
-  new NBA().updateScores().then(()=>{
-    return
-  })
+  new NBA().updateScores()
   // CHECK IF WE HAVE GAME DATA
   // ==========================
   async function create() {
@@ -91,9 +89,7 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
   const NBA = require('../../nba');
-  new NBA().updateScores().then(()=>{
-    return
-  })
+   new NBA().updateScores()
   Games.findOne({
     where: {
       id: req.params.id
@@ -163,8 +159,9 @@ router.post('/', withAuth, (req, res) => {
 
 router.put('/upvote', withAuth, (req, res) => {
   // custom static method created in models/Post.js
-
-  Games.upvote({ ...req.body, user_id: req.session.user_id }, { Vote, User })
+   const body = req.body
+   console.log(body);
+  Games.upvote({ ...body, user_id: parseInt(req.session.user_id) }, { Vote, Comment, User })
     .then(updatedVoteData => res.json(updatedVoteData))
     .catch(err => {
       console.log(err);
@@ -213,5 +210,6 @@ router.delete('/:id',withAuth, (req, res) => {
       res.status(500).json(err);
     });
 });
+
 
 module.exports = router;

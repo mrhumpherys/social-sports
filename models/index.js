@@ -15,7 +15,7 @@ User.belongsToMany(Games, {
 Games.belongsToMany(User, {
     through: Vote,
     as: 'voted_games',
-    foreignKey: 'id'
+    foreignKey: 'games_id'
 });
 Vote.belongsTo(User, {
     foreignKey: 'user_id',
