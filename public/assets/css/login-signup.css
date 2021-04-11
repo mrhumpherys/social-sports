@@ -137,8 +137,8 @@ body {
   padding-bottom: 50px;
   align-content: center;
   background-image: url("../../assets/images/wallpaper-flame.png");
-  /* background-size: cover; */
-  /* background-repeat: no-repeat; */
+  background-size: cover;
+  background-repeat: no-repeat;
   background-position: center;
   font-family: "Numans", sans-serif;
   /* display: flex; */

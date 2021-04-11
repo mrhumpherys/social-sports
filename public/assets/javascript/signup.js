@@ -21,7 +21,9 @@ async function signupFormHandler(event) {
       if (response.ok) {
         document.location.replace('/dashboard');
       } else {
-        alert(response.statusText);
+        document.getElementById('messageAlert').setAttribute("style", "visibility:visible")
+        document.getElementById("blank-field-alert").innerText=response.statusText
+        setTimeout(function(){document.getElementById('messageAlert').setAttribute("style", "visibility:collapse")},4000)
       }
     }
 }

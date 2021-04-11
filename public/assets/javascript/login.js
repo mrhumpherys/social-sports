@@ -35,11 +35,15 @@ async function loginFormHandler(event) {
         headers: { "Content-Type": "application/json" },
       });
 
-      if (response.ok) {
-        document.location.replace("/dashboard");
-      } else {
-        alert(response.statusText);
-      }
+        if (response.ok) {
+            document.location.replace('/dashboard');
+        } else {
+          // CAN NOT USE WINDOW ALERTS HOWARD HAS SAID A BUNCH OF TIMES HOW MUCH HE HATES THEM
+        document.getElementById('messageAlert').setAttribute("style", "visibility:visible")
+        document.getElementById("blank-field-alert").innerText=response.statusText
+        setTimeout(function(){document.getElementById('messageAlert').setAttribute("style", "visibility:collapse")},4000)
+        
+        }
     }
   }
 }

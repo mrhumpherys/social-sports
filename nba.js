@@ -65,7 +65,7 @@ class NBA {
                 return;
             });
         } catch (e) {
-            if (e.errno === -4058 || e.errno === -2) {
+            if (e) {
                 console.log("FILE NOT FOUND CREATING GAMES!");
                 // IF FILE NOT FOUND ERROR, GET GAMES- GET GAMES WILL FETCH THE API AND WRITE THE JSON TO A FILE IN THE DATA FOLDER
                 try {
@@ -110,7 +110,6 @@ class NBA {
                         }
                     });
                 });
-        new NBA().getNews()
         return response
     }
     // GETS THE NEWS STORIES FROM THE API
@@ -148,13 +147,20 @@ class NBA {
         return response
     };
 
+    // GETS GAMES FROM JSON
+    async getGamesJSON() {
+        let date2 = (moment(new Date()).format("YYYY-MM-DD"));
+        let response = await JSON.parse(fs.readFileSync(`./data/games-${date2}.json`, 'utf8',));
+        return response;
+    };
+
     // RETURNS TRUE FALSE IF WE NEED TO UPDATE OUR DATABASE WITH NEW GAME INFORMATION FOR THE DAY
     needGames() {
         let date = (moment(new Date()).format("YYYY-MM-DD"));
         // RAN IT WITH TRY/CATCH TO CATCH THE ERROR WHEN THE FILE IS NOT FOUND
         try {
             let games = JSON.parse(fs.readFileSync(`./data/games-${date}.json`, 'utf8', (e) => {
-                if (e.errno === -4058 || e.errno === -2) {
+                if (e) {
                     console.log("FILE NOT FOUND CREATING GAMES!");
                     // IF FILE NOT FOUND ERROR, GET GAMES- GET GAMES WILL FETCH THE API AND WRITE THE JSON TO A FILE IN THE DATA FOLDER
                     return true
@@ -170,7 +176,7 @@ class NBA {
             }
         }
         catch (e) {
-            if (e.errno === -4058 || e.errno === -2) {
+            if (e) {
                 console.log("FILE NOT FOUND CREATING GAMES!");
                 // IF FILE NOT FOUND ERROR, GET GAMES- GET GAMES WILL FETCH THE API AND WRITE THE JSON TO A FILE IN THE DATA FOLDER
                 return true
@@ -244,8 +250,10 @@ class NBA {
                     // console.log(updateGameData)
                     return
                 } else {
-                    console.log(updateGameData)
-                    console.log("SUCCESS")
+                    // console.log(updateGameData)
+                    console.log(`+++++++++++++++++++++++++`)
+                    console.log("SUCCESS, UPDATED RECORDS")
+                    console.log(`+++++++++++++++++++++++++`)
                     return;
                 }
             }).catch(e => {
@@ -253,7 +261,7 @@ class NBA {
                 return;
             });
         } catch (e) {
-            if (e.errno === -4058 || e.errno === -2) {
+            if (e) {
                 console.log("FILE NOT FOUND CREATING GAMES!");
                 // IF FILE NOT FOUND ERROR, GET GAMES- GET GAMES WILL FETCH THE API AND WRITE THE JSON TO A FILE IN THE DATA FOLDER
                 try {
@@ -277,100 +285,105 @@ class NBA {
 
     // IDEA FOR UPDATING SCORES ONLY WHEN GAMES ARE LIVE
     isLive() {
+        // CHECK THE SPORTS API'S LIST OF CURRENT  GAMES, IF ANY GAME OF THE GAMES 'status' property or key shows a value === 'InProgress' THEN UPDATE OUR DB
+        new NBA().getGamesJSON()
+            .then(inProgress => {
+                let runUpdate = false
+                inProgress.map(el => {
+                    let homeTeam = el.HomeTeam;
+                    let awayTeam = el.AwayTeam;
+                    let status = el.Status
+                    let dateTimes = moment(el.DateTime).format()
+                    let current = new Date()
+                    let currentDate = moment(current).format()
+
+                    if ((dateTimes) <= (currentDate)) {
+                        if (status === "InProgress" || status === "Postponed") {
+                            console.log('============================================================================================');
+                            return runUpdate = true
+                        }
+                    } else {
+                        console.log('============================================================================================');
+                        console.log(`The ${homeTeam} vs. ${awayTeam} GAME IS NOT LIVE!`)
+                        console.log('============================================================================================');
+                        return runUpdate = false
+                    }
+                })
+                if (runUpdate === true) {
+                    let date = (moment(new Date()).format("YYYY-MM-DD"));
+                    new NBA().getGames();
+                    new NBA().updateGames(date);
+                    console.log(`UPDATING SCORES`)
+                    console.log('============================================================================================');
+                    return
+                } else {
+                    console.log("Games Are Updated Every 5 Minutes")
+                    return
+                }
+            }).catch(e => {
+                console.log(e)
+                return
+            })
+    }
+    updateScores() {
         // CHECK OUR CURRENT LIST OF GAMES, IF ANY GAME OF THE GAMES 'status' property or key shows a value === 'InProgress' then run the function to update the scores
         new NBA().getGamesDb()
             .then(inProgress => {
                 let runUpdate = false
                 let statusGame = false
-                let api = Date.now();
                 let apiTimer;
+
                 inProgress.map(el => {
                     let homeTeam = el.home_team;
                     let awayTeam = el.away_team;
                     let status = el.status
+                    let newRecordNumber = el.new_record_number
                     let dateTimes = moment(el.date_time).format()
                     let current = new Date()
                     let currentDate = moment(current).format()
+                    apiTimer = JSON.parse(newRecordNumber)
 
                     if ((dateTimes) <= (currentDate)) {
-                        runUpdate = true
-                        if (status === "InProgress" || status === "Postponed") {
-                            statusGame = true
+                        if (status === "InProgress") {
                             console.log('============================================================================================');
                             console.log(`The ${homeTeam} vs. ${awayTeam} GAME IS LIVE!`)
                             console.log('============================================================================================');
-                        }
+                            statusGame = true
+                            runUpdate = true
+                            return
 
+                        }
                     } else {
                         console.log('============================================================================================');
                         console.log(`The ${homeTeam} vs. ${awayTeam} GAME IS NOT LIVE!`)
                         console.log('============================================================================================');
-                        runUpdate = false
+                        statusGame = false
                     }
                 })
-                // 
+                if (statusGame === true) {
+                    console.log("CHECKING TIME BETWEEN CALLS, CALLS ARE MADE EVERY 300000ms or 5mins")
+                    console.log("LAST TIME STAMP: ", apiTimer)
+                    console.log("+++++++++++++++++")
+                    console.log((((Date.now()) - apiTimer) / 1000), "\nseconds since last call")
+                    if ((Date.now()) - apiTimer > 300000) {
 
-                if (runUpdate === true & statusGame === true) {
-
-                    if ((Date.now()) - api > 400000) {
+                        console.log('============================================================================================');
+                        console.log("UPDATING LIVE SCORES")
+                        console.log('============================================================================================');
                         let date = (moment(new Date()).format("YYYY-MM-DD"));
-
                         new NBA().getGames();
                         new NBA().updateGames(date);
+
+                        return
+                    } else {
+                        console.log("Games Are Updated Every 5 Minutes")
+                        console.log('============================================================================================');
                         return
                     }
-
-
-
                 } else {
                     console.log("Games Are Updated Every 5 Minutes")
                     return
                 }
-                // console.log('============================================================================================');
-                // console.log("LIVE GAMES?", runUpdate)
-                // console.log('============================================================================================');
-                // if (runUpdate == true) {
-                //     new NBA().getGamesDb().then(inProgress1 => {
-                //         let pastTime
-                //         let homeTeam
-                //         let awayTeam
-                //         let updateScores = false
-                //         inProgress1.map(el => {
-                //             let homeTeam = el.home_team;
-                //             let awayTeam = el.away_team;
-                //             let status = el.status
-                //             pastTime = el.new_record_number
-                //             awayTeam = awayTeam
-                //             homeTeam = homeTeam
-                //             if (status === 'InProgress') {
-                //                 console.log('============================================================================================');
-                //                 console.log(`The ${homeTeam} vs. ${awayTeam} GAME IS LIVE!`)
-                //                 console.log('============================================================================================');
-                //                 updateScores = true
-                //                 return
-                //             }
-                //         }); console.log(updateScores)
-                //         if (updateScores === true) {
-                //             console.log("Time Remaining",((Date.now()-(pastTime)- 300000)),"milliseconds")
-                //             if ((Date.now()-(pastTime) >= 300000)) {
-                //                 console.log('============================================================================================');
-                //                 console.log(`The ${homeTeam} vs. ${awayTeam} GAME BEING UPDATED!`)
-                //                 console.log('============================================================================================');
-                //                 let newDate = moment(new Date())
-                //                 new NBA().updateGames(newDate);
-                //             } else {
-                //                 console.log('============================================================================================');
-                //                 console.log(`OUR SCORES CAN ONLY BE UPDATED EVERY 5 MINUTES`)
-                //                 console.log('============================================================================================');
-                //                 runUpdate = false
-                //                 return 
-
-                //             }
-                //         } else {
-                //             return
-                //         }
-                //     })
-                // }
             }).catch(e => {
                 console.log(e)
                 return

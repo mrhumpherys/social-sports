@@ -39,6 +39,19 @@ module.exports = {
 
         return word;
     },
+    deleteButton: (poster, user, options) => {
+        
+        // user = id
+        // poster = user.id
+        // console.log(poster);
+        // console.log(user);
+        console.log(poster, user);
+        if (poster === user) {
+            return options.fn(this);
+        } else {
+            return;
+        }
+    },
 
 
 

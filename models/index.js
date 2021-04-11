@@ -1,7 +1,7 @@
 const User = require("./User");
 const Games = require("./Games");
 const Vote = require('./Vote');
-const Comment = require('./Comment')
+const Comment = require('./Comment');
 
 // create associations
 
@@ -15,19 +15,20 @@ User.belongsToMany(Games, {
 Games.belongsToMany(User, {
     through: Vote,
     as: 'voted_games',
-    foreignKey: 'id'
+    foreignKey: 'games_id'
 });
 Vote.belongsTo(User, {
-    foreignKey: 'user_id'
+    foreignKey: 'user_id',
+    
 });
 
 Vote.belongsTo(Games, {
     foreignKey: 'games_id'
 });
 
-User.hasMany(Vote, {
-    foreignKey: 'user_id'
-});
+// User.hasMany(Vote, {
+//     foreignKey: 'user_id'
+// });
 
 Games.hasMany(Vote, {
     foreignKey: 'games_id'
