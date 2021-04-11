@@ -2,7 +2,7 @@
     <div class="col-lg-5 col-md-12">
         <img src="assets/images/herobg.png" class="img-fluid">
     </div>
-    <div class="col-lg-4 col-md-12">
+    <div class="col-lg-6 col-md-12">
         <div class="hero-text text-right">
             <h1>Welcome back, {{username}}</h1>
             <h2>Your best source for quality NBA news, rumors, analysis, stats and scores from the fan perspective.</h2>
@@ -25,7 +25,7 @@
                             <div class="news-article">
                                 <div class="news-body">
                                     <h3>{{Title}}</h3>
-                                    <p>{{Content}}</p>
+                                    <p id="preview-text">{{Content}}</p>
                                     <a href="{{Url}}"target='_blank' rel="noreopener">Read More <i class="fas fa-arrow-right"></i></a>
                                     <div class="news-footer">
                                         <i class="far fa-calendar-alt"></i> {{TimeAgo}}
@@ -37,7 +37,7 @@
                     </div>
                 </div>
                 <!--END NEWS -->
-                <div class="col-lg-8 col-sm-1">
+                <div class="col-lg-8 col-sm-12">
                     <div class="row">
                         <div class="col-12">
                             <h1 class="section-title">GAMES</h1>
@@ -59,7 +59,7 @@
                                         <img src="{{render_team_logo home_team_id}}"
                                             alt="{{render_team_name home_team_id}}" class="img-fluid">
                                     </div>
-                                    <div class="col-lg-2 text-center"><span class="vs">VS</span></div>
+                                    <div class="col-lg-2 text-center d-flex align-items-center justify-content-center"><span class="vs">VS</span></div>
                                     <div class="col-lg-5 col-md-12 team-content d-flex justify-content-center">
                                         <img src="{{render_team_logo away_team_id}}"
                                             alt="{{render_team_name away_team_id}}" class="img-fluid">
