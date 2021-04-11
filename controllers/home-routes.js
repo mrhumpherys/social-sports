@@ -15,6 +15,7 @@ router.get('/', (req, res) => {
   // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
 
   const NBA = require('../nba');
+  new NBA().create();
   new NBA().updateScores()
 
 
