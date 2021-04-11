@@ -1,9 +1,10 @@
 
-$(document).on('ready', function() {
+// $(document).on('ready', function() {
 
-    $(".vertical").slick({
-      infinite: false,
-      autoplay: true, 
-      autoplaySpeed: 10000,
-    });
-  });
+//     $(".single-item").slick({
+//       infinite: false,
+//       autoplay: true, 
+//       autoplaySpeed: 10000,
+//     });
+//   });
+
