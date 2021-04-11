@@ -260,4 +260,14 @@ SLICK SLIDE
     padding: 1rem 0;
     display: block;
   }
+  .page-title {
+    text-align: center;
+    display: block;
+  }
+  .vote-container {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+  }
 }
+

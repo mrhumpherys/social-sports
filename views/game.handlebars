@@ -13,20 +13,28 @@
       </section>
       {{!-- LEAVE THE MESSAGE IN CAN BE REUSED ANYWHERE FOR AN ALERT --}}
       <div class="row">
-        <div class="col-12 d-flex justify-content-between g-0">
-          <div class="game-title-info">
+        <div class="col-12 d-flex justify-content-between">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="game-title-info">
             <h1 class="page-title">{{render_team_name game.away_team_id}} -VS- {{render_team_name game.home_team_id}}
             </h1>
           </div>
-          <div class="vote-container d-flex justtify-content-between align-items-center ">
+            </div>
+            <div class="col-md-6">
+              <div class="vote-container d-flex justtify-content-between align-items-center ">
             <div class="vote-count">{{game.vote_count}} {{format_plural "vote" game.vote_count}} </div>
             <a id="upvote-btn" class="btn btn-primary"><i class="far fa-thumbs-up"></i> upvote</a>
           </div>
+            </div>
+          </div>
+          
+          
         </div>
       </div>
       <div class="row ">
-        <div class="col-12 single-game">
-          <div class="row">
+        <div class="col-12">
+          <div class="row single-game">
             <div class="col d-flex align-items-center justify-content-center">
               <div class="text-center">
                 <img src="{{render_team_logo game.away_team_id}}" alt="{{render_team_name game.away_team_id}}"
