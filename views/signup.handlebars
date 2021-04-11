@@ -1,66 +1,30 @@
-<<<<<<< HEAD
 <div class="sign-up-form container">
     <div class="row d-flex justify-content-center">
-        {{!-- LEAVE THIS IN HERE WE NEED AN ALERT HOWARD HATES WINDOW ALERTS --}}
-        <section id="messageAlert" style="visibility: collapse;">
-            <div class="col-12 d-flex justify-content-center">
-                <div id="blank-field-alert"
-                    class="alert alert-dark bg-dark text-white col-4 d-flex justify-content-center border-success shadow"
-                    role="alert">
-
-                </div>
-            </div>
-        </section>
-        {{!-- LEAVE THE MESSAGE IN CAN BE REUSED ANYWHERE FOR AN ALERT --}}
-        <div class="col">
+        <div class="col-md">
             <!-- <div class="row">
-=======
-        <div class="sign-up-form container">
-            <div class="row d-flex justify-content-center">
-                <div class="col-md">
-                    <!-- <div class="row">
->>>>>>> feature/codys-front-end
                         <div class="col-12">
                             <h1 class="section-title">FEATURE GAME</h1>
                         </div>
                     </div> -->
-<<<<<<< HEAD
             <div class="row">
-                <div class="col-12">
+                <div class="col">
                     <div id="sign-up-container" class="container d-flex flex-wrap justify-content-center">
-                        <div class="col-sm-12 d-flex flex-wrap justify-content-center">
+                        <div class="col-12 col-sm-12 col-xs-12 d-flex flex-wrap justify-content-center">
                             <div id="sign-up-card" class="card">
                                 <div class="card-header">
                                     <h3>Sign Up</h3>
-                                    <div class="d-flex justify-content-end social_icon">
+
+                                    {{!-- If you want to add social media icons to the top of the login and signup; add
+                                    these --}}
+                                    {{!-- You will also need to change everything over to passport instead of sessions
+                                    then you will need to follow passport docs for instrustions for implementation --}}
+
+                                    {{!-- <div class="d-flex justify-content-end social_icon">
                                         <span><i class="fab fa-facebook-square"></i></span>
-                                        <!-- <a href="#" target="_blank" class="icon-facebook">
-=======
-                    <div class="row">
-                        <div class="col">
-                            <div id="sign-up-container" class="container d-flex flex-wrap justify-content-center">
-                                <div class="col-12 col-sm-12 col-xs-12 d-flex flex-wrap justify-content-center">
-                                    <div id="sign-up-card" class="card">
-                                        <div class="card-header">
-                                            <h3>Sign Up</h3>
-                                            <div class="d-flex justify-content-end social_icon">
-                                                <span><i class="fab fa-facebook-square"></i></span>
-                                                <!-- <a href="#" target="_blank" class="icon-facebook">
->>>>>>> feature/codys-front-end
-                                        <i class="fab fa-facebook-f">
-                                        </i>
-                                        </a> -->
                                         <span><i class="fab fa-google-plus-square"></i></span>
-                                        <!-- <a href="#" target="_blank" class="icon-google_plus">
-                                        <i class="fab fa-google-plus-g">
-                                        </i>
-                                        </a> -->
                                         <span><i class="fab fa-twitter-square"></i></span>
-                                        <!-- <a href="#" target="_blank" class="icon-google_plus">
-                                        <i class="fab fa-google-plus-g">
-                                        </i>
-                                        </a> -->
-                                    </div>
+                                    </div> --}}
+
                                 </div>
                                 <div id="sign-up-body" class="card-body">
                                     <form>
@@ -85,12 +49,17 @@
                                             <input id="password-signup" type="password" class="form-control"
                                                 placeholder="Password" />
                                         </div>
-                                        <div class="row align-items-center remember mt-3">
+                                        {{!-- removed remember me checkbox from here for now; left it on the login --}}
+                                        {{!-- <div class="row align-items-center remember mt-3">
                                             <input type="checkbox" />Remember Me
-                                        </div>
+                                        </div> --}}
+
+                                        {{!-- <div class="d-flex justify-content-end form-group mt-3">
+                                            <input id="signup" type="submit" value="SignUp"
+                                                class="btn float-right btn-primary text-center login_btn" />
+                                        </div> --}}
                                         <div class="d-flex justify-content-end form-group mt-3">
-                                            <input id="signup" type="submit" value="Login"
-                                                class="btn float-right btn-primary login_btn" />
+                                            <button id="signup" type="submit" class="btn btn-primary">SIGN UP</button>
                                         </div>
                                     </form>
                                 </div>

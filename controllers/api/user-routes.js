@@ -70,6 +70,7 @@ router.post('/', (req, res) => {
 });
 
 router.post('/login', (req, res) => {
+  console.log(req.body);
     User.findOne({
       where: {
         email: req.body.email,
@@ -91,6 +92,7 @@ router.post('/login', (req, res) => {
         req.session.user_id = dbUserData.id;
         req.session.username = dbUserData.username;
         req.session.loggedIn = true;
+        req.body.checkbox ? req.session.cookie.expires= false : req.session.cookie.maxAge = 1 * 24 * 60 * 60 * 1000;
   
         res.json({ user: dbUserData, message: 'You are now logged in!' });
       });
