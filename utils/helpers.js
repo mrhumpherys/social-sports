@@ -17,8 +17,8 @@ module.exports = {
 
         return word;
     },
-    format_time: (date) => {
-        let newDate = date.split('T')[1];
+    format_time: (gameTime) => {
+        let newDate = gameTime.split('T')[1];
         let time = newDate.split(":")[0];
         let mins = newDate.split(":")[1];
         
