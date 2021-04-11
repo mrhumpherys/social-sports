@@ -239,6 +239,10 @@ input.form-control {
   transition: all 0.2s;
 } 
 
+.card-body {
+  padding: 2rem 1rem !important;
+}
+
 .input-group-text {
   padding: 0.65rem 1rem;
 }

@@ -24,23 +24,19 @@
               <div id="login-card" class="card">
                 <div class="card-header">
                   <h3>Login</h3>
-                  <div class="d-flex justify-content-end social_icon">
+
+                  {{!-- If you want to add social media icons to the top of the login and signup; add these --}}
+                  {{!-- You will also need to change everything over to passport instead of sessions
+                  then you will need to follow passport docs for instrustions for implementation --}}
+
+                  {{!-- <div class="d-flex justify-content-end social_icon">
                     <span><i class="fab fa-facebook-square"></i></span>
-                    <!-- <a href="#" target="_blank" class="icon-facebook">
-                                      <i class="fab fa-facebook-f">
-                                      </i>
-                                    </a> -->
+
                     <span><i class="fab fa-google-plus-square"></i></span>
-                    <!-- <a href="#" target="_blank" class="icon-google_plus">
-                                      <i class="fab fa-google-plus-g">
-                                      </i>
-                                    </a> -->
+
                     <span><i class="fab fa-twitter-square"></i></span>
-                    <!-- <a href="#" target="_blank" class="icon-google_plus">
-                                      <i class="fab fa-google-plus-g">
-                                      </i>
-                                    </a> -->
-                  </div>
+                  </div> --}}
+
                 </div>
                 <div id="login-body" class="card-body">
                   <form>
@@ -57,7 +53,7 @@
                       <input id="password-login" type="password" class="form-control" placeholder="Password" />
                     </div>
                     <div class="row align-items-center remember mt-3">
-                      <input type="checkbox" />Remember Me
+                      <input id="remember-box" type="checkbox" />Remember Me
                     </div>
                     <div class="d-flex justify-content-end form-group mt-3">
                       <button id="login" type="submit" class="btn btn-primary">LOGIN</button>
