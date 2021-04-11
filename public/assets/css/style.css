@@ -159,7 +159,7 @@ nav {
     border-radius: var(--bradius);
 }
 .team-content img {
-  height: 85px;
+  height: 85px;       
   min-width: 50px;
 }
 .game-detail h3{
