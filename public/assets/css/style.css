@@ -84,6 +84,7 @@ a:hover {
   cursor: pointer;
   transition: all ease 0.3s;
   border: 1px solid rgba(0, 0, 0, 0);
+  margin-bottom: 1rem;
 }
 .game-card:hover {
   border: 1px solid rgba(78, 220, 22, 0.35);
@@ -158,7 +159,7 @@ nav {
     border-radius: var(--bradius);
 }
 .team-content img {
-  max-height: 96px;
+  height: 85px;
   min-width: 50px;
 }
 .game-detail h3{
@@ -254,7 +255,12 @@ SLICK SLIDE
 .vote-count {
   padding-right: 20px;
 }
-
+.mobile-game {
+  padding: 2rem 0;
+}
+.mobile-game img {
+  height: 200px;
+}
 @media only screen and (max-width: 600px) {
   .vs {
     padding: 1rem 0;
@@ -269,5 +275,6 @@ SLICK SLIDE
     flex-wrap: nowrap;
     justify-content: space-between;
   }
+  
 }
 
