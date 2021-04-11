@@ -13,6 +13,13 @@ async function upvoteHandler(event) {
         headers: {
             'Content-Type': 'application/json'
         }
+    }).catch(function (err) {
+        console.log(err);
+        return new Response(JSON.strigify({
+            code: 400,
+            message: 'You can only vote once!'
+        }))
+        //err.json();
     });
 
     if (response.ok) {

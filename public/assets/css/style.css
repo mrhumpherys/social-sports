@@ -1,7 +1,7 @@
 :root {
   --blue: #1e90ff;
   --white: #d9d9d9;
-  --darkbg: #1b1b1b;
+  --darkbg: #363636;
   --bradius: 6px;
   --green: #4edc16;
   
@@ -106,9 +106,10 @@ height: 650px;
 }
 .news-container {
 background: var(--darkbg);
+border-radius: var(--bradius);
 }
 .news-article {
-padding: 2rem;
+padding: 1.5rem;
 border-radius: var(--bradius);
 }
 .news-footer {
@@ -136,6 +137,7 @@ margin-bottom: 50px;
 }
 .hero-text {
 padding: 2rem;
+max-width: 635px;
 }
 .hero-text h1 {
 font-size: 4rem;
@@ -163,7 +165,7 @@ height: 85px;
 min-width: 50px;
 }
 .game-detail h3{
-font-size: 1.5rem;
+font-size: 1rem;
 font-weight: 800;
 }
 /*------------
@@ -206,7 +208,14 @@ padding-right: 5px;
 .comment-img {
   width: 50px;
 }
+#messageAlert {
+transition: all ease .3s;
+}
+.hide {
+display: none;
+height: 0;
 
+}
 /*------------
 =============
 PROFILE
@@ -261,11 +270,47 @@ padding: 2rem 0;
 .mobile-game img {
 height: 200px;
 }
-@media only screen and (max-width: 600px) {
+.news-body p {
+margin:20px 0;
+overflow: hidden;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-line-clamp: 2;
+-webkit-box-orient: vertical;
+}
+.game-matchup {
+  display: block;
+}
+@media only screen and (max-width: 992px) and (min-width:769px) {
+  .team-img {
+    height: 120px !important;
+  }
+}
+@media only screen and (max-width: 992px) {
+  .game-matchup {
+    display: none;
+  }
+}
+@media only screen and (max-width: 768px) {
+.hero-text {
+  width: auto;
+}
 .vs {
   padding: 1rem 0;
   display: block;
 }
+#blank-field-alert {
+  width: 100%;
+}
+.team-content img {
+  height: auto;
+}
+.game-detail h3 {
+  font-size: 1.5rem;
+}
+}
+@media only screen and (max-width: 600px) {
+
 .page-title {
   text-align: center;
   display: block;
@@ -274,7 +319,9 @@ height: 200px;
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
+  margin: 0 1rem;
 }
 
 }
+
 

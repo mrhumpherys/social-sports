@@ -1,7 +1,7 @@
 :root {
   --blue: #1e90ff;
   --white: #d9d9d9;
-  --darkbg: #1b1b1b;
+  --darkbg: #363636;
   --bradius: 6px;
   --green: #4edc16;
 }
@@ -289,13 +289,11 @@ input.form-control {
   transition: all ease 0.3s;
   border: 1px solid rgba(0, 0, 0, 0);
 }
-
 #login-card:hover {
   border: 1px solid rgba(78, 220, 22, 0.35);
   -webkit-box-shadow: 0px 0px 15px -3px rgba(78, 220, 22, 0.3);
   box-shadow: 0px 0px 15px -3px rgba(78, 220, 22, 0.3);
 } 
 */
-
 
 

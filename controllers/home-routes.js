@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
 
   const NBA = require('../nba');
   new NBA().create();
-  new NBA().updateScores()
+  new NBA().updateScores();
 
 
 
@@ -101,7 +101,7 @@ router.get('/', (req, res) => {
             style: "style.css",
             games, news,
             loggedIn: req.session.loggedIn,
-
+            username: req.session.username
           });
           // ==============================================
         })
@@ -135,7 +135,7 @@ router.get('/signup', (req, res) => {
 });
 
 router.get('/game/:id', withAuth, (req, res) => {
-  
+  new NBA().create();
  new NBA().updateScores()
   Games.findOne({
     where: {
