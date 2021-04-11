@@ -14,9 +14,8 @@ for (var i = 0; i < previewText.length; i++) {
     let previewTextContent = previewText[i].innerText;
     // console.log(previewTextContent);
     let updatedpreviewTextContent = previewTextContent.slice(0, 140);
-    previewText.innerText = updatedpreviewTextContent;
+    //previewText = updatedpreviewTextContent;
     console.log(updatedpreviewTextContent);
-    //
-    previewText[i] = updatedpreviewTextContent;
+    //previewText[i] = updatedpreviewTextContent;
 }
 

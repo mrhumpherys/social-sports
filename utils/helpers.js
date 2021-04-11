@@ -17,20 +17,25 @@ module.exports = {
 
         return word;
     },
-    format_time: (date) => {
-        let newDate = date.split('T')[1];
-        let time = newDate.split(":")[0];
-        let mins = newDate.split(":")[1];
+    // format_time: (date) => {
+    //     let newDate = date.split('T')[1];
+    //     let time = newDate.split(":")[0];
+    //     let mins = newDate.split(":")[1];
         
-        if (time > 12) {
-            let formatted_time = time -= 12
-            let newTime = formatted_time + ":" + mins
-            return newTime;
-        } else {
-            let formatted_time = time.split("0");
-            let newTime = formatted_time + ":" + mins;
-            return newTime
-        }
+    //     if (time > 12) {
+    //         let formatted_time = time -= 12
+    //         let newTime = formatted_time + ":" + mins
+    //         return newTime;
+    //     } else {
+    //         let formatted_time = time.split("0");
+    //         let newTime = formatted_time + ":" + mins;
+    //         return newTime
+    //     }
+    // },
+    format_time: gameTime => {
+        const moment = require ("moment")
+        let newDate = moment(gameTime).tz("America/New_York").format("hh:mm")
+        return(newDate)
     },
     format_min: (time) => {
         if (time === null) {
