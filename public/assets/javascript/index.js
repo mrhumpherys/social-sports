@@ -19,8 +19,8 @@
 //     //previewText[i] = updatedpreviewTextContent;
 // }
 
-let gameCardHeight = document.querySelectorAll('.game-card')[0].offsetHeight;
-let newsCardEl = document.querySelector('.news-container');
+// let gameCardHeight = document.querySelectorAll('.game-card')[0].offsetHeight;
+// let newsCardEl = document.querySelector('.news-container');
 // let heightCheck = function () {
 //     newsCardEl.style.height(gameCardHeight);
 // }
