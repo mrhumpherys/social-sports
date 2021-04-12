@@ -1,25 +1,19 @@
 # social-sports
 
-**## Description**
+## Description
 
 Your best source for quality NBA news, rumors, analysis, stats and scores from the fan perspective.
 
+## Table of Contents
 
+* [Usage](#usage)
 
-**## Table of Contents**
+* [Questions](#questions)
 
-\* [Usage](#usage)
-
-\* [Questions](#questions)
-
-
-
-**## Usage**
+## Usage
 
 Sign up now and start interacting on our social sports platform!
 
-
-
-**## Questions**
+## Questions
 
 Visit my [Github](http://www.github.com/mrhumpherys) at github.com/mrhumpherys
