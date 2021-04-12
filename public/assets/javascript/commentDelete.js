@@ -21,9 +21,9 @@ async function commentDelete(event) {
             }
             deleteComment().then(res => {
                 if (res.ok) {
-                    document.getElementById('deleteAlert').classList.remove("hide")
-                    document.getElementById("blank-field-alert").innerHTML = 'Successfully deleted your comment';
-                    setTimeout(function () { document.getElementById('deleteAlert').classList.add("hide")}, 4000)
+                    // document.getElementById('deleteAlert').classList.remove("hide")
+                    // document.getElementById("blank-field-alert").innerHTML = 'Successfully deleted your comment';
+                    // setTimeout(function () { document.getElementById('deleteAlert').classList.add("hide")}, 4000)
                     document.location.reload()
                 } else {
                     document.getElementById('deleteAlert').classList.remove("hide")
@@ -33,7 +33,7 @@ async function commentDelete(event) {
                 }
             })
         } else {
-            document.getElementById('deleteAlert').setAttribute("style", "visibility:visible")
+            document.getElementById('deleteAlert').classList.remove("hide")
             document.getElementById("blank-field-alert").innerText = 'You can only delete your own comments';
             setTimeout(function () { document.getElementById('deleteAlert').classList.add("hide")}, 4000)
             return
