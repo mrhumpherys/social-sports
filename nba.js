@@ -317,9 +317,9 @@ class NBA {
                 }
             })
 
-        
+
     }
-    
+
     updateScores() {
 
         // CHECK OUR CURRENT LIST OF GAMES, IF ANY GAME OF THE GAMES 'status' property or key shows a value === 'InProgress' then run the function to update the scores
@@ -339,7 +339,7 @@ class NBA {
                 for (let i = 0; i < dataTWO.length; i++) {
                     newRecordNumber = dataTWO[i].new_record_number
                     dateTimes = moment(dataTWO[i].date_time).format()
-                
+
                     if (dateTimes <= currentDate) {
                         // IF GAME TIME CHECK STATUS TO MAKE SURE NO POSTPONEMENTS
                         if (dataTWO[i].status === "InProgress") {

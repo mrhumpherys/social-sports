@@ -90,7 +90,6 @@ margin-bottom: 1rem;
 border: 1px solid rgba(78, 220, 22, 0.35);
 -webkit-box-shadow: 0px 0px 15px -3px rgba(78, 220, 22, 0.3);
 box-shadow: 0px 0px 15px -3px rgba(78, 220, 22, 0.3);
-
 }
 
 .game-social {
@@ -101,7 +100,6 @@ box-shadow: 0px 0px 15px -3px rgba(78, 220, 22, 0.3);
 
 .social span {
   padding: 0 .5rem;
-
 }
 footer {
 margin-top: 3rem;
@@ -220,14 +218,12 @@ padding-right: 5px;
 .comment-img {
   width: 50px;
 }
-
 .comment-footer {
   padding: 2rem 0;
 }
 #messageAlert {
 transition: all ease .3s;
 }
-
 .hide {
 display: none;
 height: 0;

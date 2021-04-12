@@ -34,7 +34,7 @@ module.exports = {
     // },
     format_time: gameTime => {
         const moment = require ("moment")
-        let newDate = moment(gameTime).tz("America/New_York").format("hh:mm")
+        let newDate = moment(gameTime).format("hh:mm")
         return(newDate)
     },
     format_min: (time) => {
