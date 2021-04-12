@@ -16,8 +16,10 @@ router.get('/', (req, res) => {
 
   const NBA = require('../nba');
   new NBA().create();
+
   new NBA().isLive();
   new NBA().updateScores();
+
 
 
 
@@ -124,8 +126,10 @@ router.get('/signup', (req, res) => {
 
 router.get('/game/:id', withAuth, (req, res) => {
   new NBA().create();
+
   new NBA().isLive();
   new NBA().updateScores();
+
 
   Games.findOne({
     where: {

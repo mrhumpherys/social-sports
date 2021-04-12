@@ -18,9 +18,11 @@ router.get('/', withAuth, (req, res) => {
 
 
     // CHECK FOR LIVE GAMES
+
     
     new NBA().create();
     new NBA().isLive();
+
     new NBA().updateScores();
 
     // CHECK IF WE HAVE GAME DATA
