@@ -44,7 +44,7 @@ router.get(`/:id`, withAuth, (req, res) => {
         })
         .catch(err => {
             console.log(err);
-            res.status(500).json({ message: false });
+            res.status(404).json({ message: false });
         });
 });
 

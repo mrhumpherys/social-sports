@@ -79,6 +79,13 @@
                                 <div class="row mt-3">
                                     <div class="col-lg-12 col-md-12 game-detail text-center">
                                         <h3>{{nice_format_date date_time}} <br>{{format_time date_time}} PM EST</h3>
+
+                                    </div>
+                                </div>
+                                <div class="game-social text-center mt-2">
+                                    <div class="social">
+                                        <span>{{vote_count}} {{format_plural "vote" vote_count}}</span> | <span>{{comments.length}} {{format_plural "comment" comments.length}}</span>
+
                                     </div>
                                 </div>
                             </div>

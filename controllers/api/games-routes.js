@@ -147,6 +147,7 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', withAuth, (req, res) => {
+
   // expects {game_id: 16241, user_id: 1}
   Games.create({
     game_id: req.body.game_id,
@@ -160,6 +161,7 @@ router.post('/', withAuth, (req, res) => {
 });
 
 router.put('/upvote', withAuth, (req, res) => {
+
   // custom static method created in models/Post.js
    const body = req.body
    console.log(body);
