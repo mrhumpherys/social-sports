@@ -4,7 +4,8 @@
 
 ## Description
 
-Your best source for quality NBA news, rumors, analysis, stats and scores from the fan perspective.  Web application live at sports-buzz.herokuapp.com
+Your best source for quality NBA news, rumors, analysis, stats and scores from the fan perspective.  
+Web application live at **[sports-buzz.herokuapp.com](sports-buzz.herokuapp.com)**
 
 ## Table of Contents
 
