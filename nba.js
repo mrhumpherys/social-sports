@@ -325,7 +325,7 @@ class NBA {
         // CHECK OUR CURRENT LIST OF GAMES, IF ANY GAME OF THE GAMES 'status' property or key shows a value === 'InProgress' then run the function to update the scores
         new NBA().getGamesDb()
             .then(inProgress => {
-                let runUpdate = false
+                let runUpdate = true
                 let data = JSON.stringify(inProgress)
                 let dataTWO = JSON.parse(data)
                 console.log("+++++++++++++++++++ \nDATA FROM OUR DB",)
@@ -339,6 +339,8 @@ class NBA {
                 for (let i = 0; i < dataTWO.length; i++) {
                     newRecordNumber = dataTWO[i].new_record_number
                     dateTimes = moment(dataTWO[i].date_time).format()
+                    console.log("game start", dateTimes)
+                    console.log("current", currentDate)
 
                     if (dateTimes <= currentDate) {
                         // IF GAME TIME CHECK STATUS TO MAKE SURE NO POSTPONEMENTS

@@ -16,27 +16,15 @@ router.get('/', (req, res) => {
 
   const NBA = require('../nba');
   new NBA().create();
+  new NBA().isLive();
   new NBA().updateScores();
 
 
 
 
+
   // CHECK IF WE HAVE GAME DATA
-  // ==========================
-  async function create() {
-    // check for game data
-    let data = new NBA().needGames();
-    console.log('============================================================================================');
-    console.log("CREATE GAMES?", data)
-    console.log('============================================================================================');
-    // if no game data, run api call and create games in database
-    if (data === false) {
-      return
-    } else {
-      new NBA().createGames(date);
-    }
-  }
-  create()
+  
 
   // GETS NEWS STORIES 
   // ===============================================
@@ -136,7 +124,9 @@ router.get('/signup', (req, res) => {
 
 router.get('/game/:id', withAuth, (req, res) => {
   new NBA().create();
- new NBA().updateScores()
+  new NBA().isLive();
+  new NBA().updateScores();
+
   Games.findOne({
     where: {
       id: req.params.id

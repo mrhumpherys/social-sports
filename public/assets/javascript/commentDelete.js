@@ -16,6 +16,8 @@ async function commentDelete(event) {
             async function deleteComment() {
                 const responseDelete = await fetch(`https://sports-buzz.herokuapp.com/api/comments/${comment_id}`, {
                     method: 'DELETE',
+                }).catch(e =>{
+                    console.log(e)
                 })
                 return responseDelete
             }
@@ -38,6 +40,8 @@ async function commentDelete(event) {
             setTimeout(function () { document.getElementById('messageAlert').setAttribute("class", "hide") }, 4000)
             return
         }
+    }).catch(e =>{
+        console.log(e)
     })
     return
 }
