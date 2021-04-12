@@ -28,10 +28,8 @@ async function upvoteHandler(event) {
     } else {
 
         // CAN NOT USE WINDOW ALERTS HOWARD HAS SAID A BUNCH OF TIMES HOW MUCH HE HATES THEM
-        document.getElementById('messageAlert').setAttribute("class", "")
-                    document.getElementById("blank-field-alert").innerText = "YOU CAN ONLY VOTE ONCE!"
-                    setTimeout(function () { document.getElementById('messageAlert').setAttribute("class", "hide") }, 4000)
-                    return
+        document.getElementById('messageAlert').classList.remove("hide")
+        setTimeout(function(){document.getElementById('messageAlert').classList.add("hide")},4000)
     }
 }
 
