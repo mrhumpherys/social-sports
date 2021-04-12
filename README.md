@@ -38,7 +38,7 @@ This application uses Express-Session and cookies for authentification.
 
 # DEMO  
 
-For the latest in NBA news, scores and chatter, check out [Sports Buzz](https://sports-buzz.herokuapp.com/api/games)
+For the latest in NBA news, scores and chatter, check out [Sports Buzz](https://sports-buzz.herokuapp.com/)
 
 
 # Technology Stack
