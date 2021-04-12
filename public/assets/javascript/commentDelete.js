@@ -21,21 +21,21 @@ async function commentDelete(event) {
             }
             deleteComment().then(res => {
                 if (res.ok) {
-                    document.getElementById('messageAlert').setAttribute("style", "visibility:visible")
+                    document.getElementById('deleteAlert').classList.remove("hide")
                     document.getElementById("blank-field-alert").innerHTML = 'Successfully deleted your comment';
-                    setTimeout(function () { document.getElementById('messageAlert').setAttribute("style", "visibility:collapse") }, 4000)
+                    setTimeout(function () { document.getElementById('deleteAlert').classList.add("hide")}, 4000)
                     document.location.reload()
                 } else {
-                    document.getElementById('messageAlert').setAttribute("style", "visibility:visible")
+                    document.getElementById('deleteAlert').classList.remove("hide")
                     document.getElementById("blank-field-alert").innerText = response.statusText;
-                    setTimeout(function () { document.getElementById('messageAlert').setAttribute("style", "visibility:collapse") }, 4000)
+                    setTimeout(function () { document.getElementById('deleteAlert').classList.add("hide")}, 4000)
                     return
                 }
             })
         } else {
-            document.getElementById('messageAlert').setAttribute("style", "visibility:visible")
+            document.getElementById('deleteAlert').setAttribute("style", "visibility:visible")
             document.getElementById("blank-field-alert").innerText = 'You can only delete your own comments';
-            setTimeout(function () { document.getElementById('deleteAlert').setAttribute("style", "visibility:collapse") }, 4000)
+            setTimeout(function () { document.getElementById('deleteAlert').classList.add("hide")}, 4000)
             return
         }
     })
@@ -47,6 +47,5 @@ async function commentDelete(event) {
 const cbox = document.querySelectorAll('#delete-btn');
 
 for (let i = 0; i < cbox.length; i++) {
-    cbox[i].addEventListener("click", commentDelete
-    );
+    cbox[i].addEventListener("click", commentDelete);
 }
